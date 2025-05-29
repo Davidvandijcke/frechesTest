@@ -1,0 +1,6 @@
+"country","iso2c","iso3c","year","status","lastupdated","gni_per_capita","gdp_per_capita","population","trade_gdp","region","capital","longitude","latitude","income","lending","high_income_threshold","running_var","treatment","running_var_centered","lagged_treatment","first_time_above","first_time_below"
+"Argentina","AR","ARG",2019,"","2025-04-15",11210,9955.97478680428,44973465,32.6306150458499,"Latin America & Caribbean","Buenos Aires","-58.4173","-34.6118","Upper middle income","IBRD",12536,-1326,0,-1.326,1,FALSE,TRUE
+"Bulgaria","BG","BGR",2023,"","2025-04-15",14280,15885.5391311331,6446596,119.668120344213,"Europe & Central Asia","Sofia","23.3238","42.7105","High income","IBRD",14005,275,1,0.275,0,TRUE,FALSE
+"Costa Rica","CR","CRI",2023,"","2025-04-15",14260,16942.0268119375,5105525,72.4719990801769,"Latin America & Caribbean","San Jose","-84.0089","9.63701","Upper middle income","IBRD",14005,255,1,0.255,0,TRUE,FALSE
+"Romania","RO","ROU",2019,"","2025-04-15",12700,12992.0326104674,19371648,84.3677121619338,"Europe & Central Asia","Bucharest","26.0979","44.4479","High income","IBRD",12536,164,1,0.164,0,TRUE,FALSE
+"Russian Federation","RU","RUS",2023,"","2025-04-15",14250,13817.0458984375,143826130,41.8285251825076,"Europe & Central Asia","Moscow","37.6176","55.7558","High income","IBRD",14005,245,1,0.245,0,TRUE,FALSE

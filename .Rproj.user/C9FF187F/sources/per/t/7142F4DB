@@ -1,0 +1,27 @@
+{
+    "id": "7142F4DB",
+    "path": "~/frechet_anova/code/frechetANOVA_simulations.R",
+    "project_path": null,
+    "type": "r_source",
+    "hash": "3995519364",
+    "contents": "",
+    "dirty": false,
+    "created": 1747498892606.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "tempName": "Untitled2",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "369,1",
+        "scrollLine": "343"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1747504010,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1747504010402,
+    "read_only": false,
+    "read_only_alternatives": []
+}

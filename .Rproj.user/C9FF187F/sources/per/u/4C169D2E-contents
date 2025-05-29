@@ -1,0 +1,18 @@
+Y_obj = data$Y_obj
+X_scalar = data$X_scalar
+c_val = CUTOFF_C_iter # Use CUTOFF_C_iter
+metric_space_type = tolower(metric_val_iter) # This will be "network"
+h_frechet = 0.7 #"CV",
+kernel_frechet_char = "epan"
+frechet_optns = frechet_opts_sim
+cv_K_folds = 5
+cv_n_bw_candidates = 10
+min_bw_cv_factor = 0.005
+verbose = TRUE # Set to TRUE for detailed debugging of frechesTest
+h_fx = NULL
+kernel_fx_char = "gauss"
+undersmooth_factor = 0.9
+min_eff_points_cv_fold = 5
+
+
+

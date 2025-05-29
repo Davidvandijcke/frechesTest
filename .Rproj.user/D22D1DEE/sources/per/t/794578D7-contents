@@ -1,0 +1,553 @@
+# Needed libraries (ensure they are installed)
+# install.packages(c("MASS", "Matrix", "pracma", "osqp", "dplyr", "knitr", "ggplot2", "mvtnorm", "foreach", "doParallel", "igraph"))
+library(MASS)      # For mvrnorm
+library(Matrix)    # For nearPD
+library(pracma)    # For trapz (if not using your own for Wasserstein)
+library(osqp)      # For Frechet mean projection in density space
+library(dplyr)     # For data manipulation for table
+library(knitr)     # For table formatting
+library(ggplot2)   # For potential plotting of power curves (optional)
+library(mvtnorm)   # For rmvnorm (alternative to MASS::mvrnorm, sometimes more stable)
+library(foreach)   # For parallel loops
+library(doParallel) # For parallel backend
+library(igraph)    # For network generation
+
+
+# --- Simulation Parameters ---
+parallel <- TRUE
+metric_spaces_to_run <- c("Density")
+N_SIMULATIONS <- 200 # Number of Monte Carlo repetitions (REDUCED FOR QUICK TESTING, increase for real runs)
+ALPHA_LEVEL <- 0.05  # Significance level for the test
+CUTOFF_C <- 0.5      # Cutoff point for X
+SAMPLE_SIZES <- c(200) #, 1000) # Sample sizes to test
+
+# Parameters for DGPs
+# Density Space
+DENSITY_BASE_SD <- 1
+DENSITY_MU_SLOPE_H0 <- 0.8
+DENSITY_MU_JUMP_H1 <- 2
+
+# Covariance Space
+COV_DIM <- 3
+COV_BASE_DIAG_H0 <- 1.5
+COV_DIAG_SLOPE_H0 <- 0.6
+COV_OFFDIAG_BASE_H0 <- 0.2
+COV_OFFDIAG_SLOPE_H0 <- 0.3
+COV_JUMP_FACTOR_H1 <- 1.8
+COV_SAMPLES_PER_MATRIX <- 500 # Increased for better estimates
+
+# Correlation Space
+CORR_DIM <- 3
+CORR_BASE_RHO12_H0 <- 0.2
+CORR_RHO12_SLOPE_H0 <- 0.5
+CORR_JUMP_RHO12_H1 <- 0.7
+CORR_SAMPLES_PER_MATRIX <- 1000 # Increased for better estimates
+
+# Parameters for Network DGP
+# New Parameters in your simulation setup:
+NET_M_FIXED <- 1 # Or 2. Keep m constant.
+NET_N_NODES <- 10 # Or Dubey & Muller's 10 if you want to replicate closely for testing
+
+NET_POWER_BASE_H0 <- 1.0   # Corresponds to standard BA, gamma_eff approx 3
+NET_POWER_SLOPE_H0 <- 5 # 1  #1  # Slope for power under H0
+NET_POWER_JUMP_H1 <- 2   # Jump in power for H1 (e.g., to 1.5, making hubs stronger)
+# Adjust so power stays reasonable (e.g., 0 to 2 range often used)
+
+
+
+ZM_NET_N_NODES <- 10 # As in Z&M
+ZM_BETA_BASE_MEAN_H0 <- 0.3 # Base mean for beta RVs (between 0 and 1)
+ZM_BETA_SLOPE_FACTOR_H0 <- 0.4 # To make mean vary, e.g., 0.3 + 0.4*(sin(pi*x)-0.5)
+# This factor will make sin(pi*x) range from 0 to 1.
+# So mean_beta will range from 0.3 - 0.4*0.5 = 0.1
+# to 0.3 + 0.4*0.5 = 0.5
+ZM_BETA_JUMP_MEAN_H1 <- 0.3 # Additive jump to the mean for H1
+ZM_BETA_CONCENTRATION <- 1 # Concentration parameter for Beta (nu = a+b). Higher means less variance.
+# Beta(alpha, beta) has mean alpha/(alpha+beta)
+# and variance alpha*beta / ((alpha+beta)^2 * (alpha+beta+1))
+# Let mean = p. Then alpha = p * nu, beta = (1-p) * nu
+
+
+# old parameters
+# At the top of your script, ensure these exist even if unused by ZM-style DGP
+NET_M_BASE_H0 <- 1 # Dummy value
+NET_M_SLOPE_H0 <- 0 # Dummy value
+NET_M_JUMP_H1 <- 0  # Dummy value
+
+# --- Helper Functions for Data Generation ---
+
+
+
+generate_network_data <- function(N, X_vals, has_jump = FALSE) {
+  if (!requireNamespace("igraph", quietly = TRUE)) { # igraph not strictly needed here but good practice
+    stop("Package 'igraph' needed for this function to work. Please install it.", call. = FALSE)
+  }
+  
+  Y_obj_list <- vector("list", N)
+  true_beta_means <- numeric(N) # Store the target mean of beta
+  
+  m <- ZM_NET_N_NODES # Number of nodes
+  
+  for (i in 1:N) {
+    x_i <- X_vals[i]
+    
+    # Target mean for beta_ij, p(x_i)
+    # Let's use a form like sin(pi*x) which varies from 0 to 1, then scale it
+    # ZM_BETA_BASE_MEAN_H0 is the center of the mean's range.
+    # ZM_BETA_SLOPE_FACTOR_H0 is half the total range of the mean.
+    # Example: mean_beta_smooth = 0.3 + 0.2 * sin(pi * (x_i - 0.5))
+    # This makes mean vary from 0.1 to 0.5 if x_i from 0 to 1.
+    # Let's simplify: make mean vary around 0.5 based on sin(pi*x_i) which is 0 to 1
+    # then adjust.
+    
+    # Simpler: mean_base + slope_factor * (transformed x_i)
+    # Transformed x_i could be (x_i - CUTOFF_C) or sin function
+    # Let's use sin(pi*x_i) to mimic their local scenario which is non-linear
+    
+    mean_beta_smooth_component <- ZM_BETA_SLOPE_FACTOR_H0 * (sin(pi * x_i)) 
+    # sin(pi*x_i) is [0,1] for x_i in [0,1]
+    # So smooth component is [0, ZM_BETA_SLOPE_FACTOR_H0]
+    # We want the overall mean_beta to be bounded in (epsilon, 1-epsilon)
+    # Let target_mean_p be between 0.1 and 0.9 for Beta params to be > 0
+    
+    # Let's define target mean p(x) that varies between, say, 0.2 and 0.8
+    # p_smooth(x) = 0.5 + 0.3 * sin(pi * (x_i - 0.5))  -- this varies from 0.2 to 0.8
+    # Or using your slope structure:
+    p_smooth <- ZM_BETA_BASE_MEAN_H0 + ZM_BETA_SLOPE_FACTOR_H0 * (x_i - CUTOFF_C)
+    # Ensure p_smooth is in (0,1) for Beta parameters
+    p_smooth <- pmax(0.05, pmin(0.95, p_smooth))
+    
+    
+    current_target_p <- p_smooth
+    if (has_jump && x_i >= CUTOFF_C) {
+      current_target_p <- p_smooth + ZM_BETA_JUMP_MEAN_H1
+      current_target_p <- pmax(0.05, pmin(0.95, current_target_p)) # Ensure still valid
+    }
+    true_beta_means[i] <- current_target_p
+    
+    # Beta parameters: alpha = p * nu, beta = (1-p) * nu
+    # nu is ZM_BETA_CONCENTRATION
+    beta_shape1 <- current_target_p * ZM_BETA_CONCENTRATION
+    beta_shape2 <- (1 - current_target_p) * ZM_BETA_CONCENTRATION
+    
+    if(beta_shape1 <=0 || beta_shape2 <=0){
+      warning(paste("Invalid Beta shapes for x_i=", x_i, "p=", current_target_p, "s1=", beta_shape1, "s2=", beta_shape2))
+      # Fallback to a generic Beta if params are bad
+      beta_shape1 <- 1
+      beta_shape2 <- 1
+    }
+    
+    L_matrix <- matrix(0, nrow = m, ncol = m)
+    
+    # Generate off-diagonal elements (-w_ij)
+    num_off_diag_upper <- m * (m - 1) / 2
+    beta_samples <- rbeta(num_off_diag_upper, shape1 = beta_shape1, shape2 = beta_shape2)
+    
+    k_sample <- 1
+    for (r in 1:(m - 1)) {
+      for (c_idx in (r + 1):m) {
+        wij <- beta_samples[k_sample] # This is the edge weight w_ij in (0,1)
+        L_matrix[r, c_idx] <- -wij
+        L_matrix[c_idx, r] <- -wij # Symmetric
+        k_sample <- k_sample + 1
+      }
+    }
+    
+    # Calculate diagonal elements (degrees)
+    for (r in 1:m) {
+      L_matrix[r, r] <- sum(-L_matrix[r, -r]) # Sum of absolute values of off-diagonals in that row
+    }
+    
+    Y_obj_list[[i]] <- L_matrix
+  }
+  return(list(Y_obj = Y_obj_list, X_scalar = X_vals, true_beta_means = true_beta_means))
+}
+
+
+generate_network_data_fart <- function(N, X_vals, has_jump = FALSE) {
+  if (!requireNamespace("igraph", quietly = TRUE)) {
+    stop("Package 'igraph' needed for this function to work. Please install it.", call. = FALSE)
+  }
+  Y_obj_list <- vector("list", N)
+  true_power_params <- numeric(N) # Store the actual power used
+  
+  for (i in 1:N) {
+    x_i <- X_vals[i]
+    power_val_smooth <- NET_POWER_BASE_H0 + NET_POWER_SLOPE_H0 * (x_i - CUTOFF_C)
+    # Ensure power_val_smooth is within a reasonable range, e.g., [0.1, 2.5]
+    # igraph's sample_pa power must be non-negative. Power=0 is no preferential attachment.
+    power_val_smooth <- pmax(0.1, pmin(power_val_smooth, 2.5)) # Example bounds
+    
+    current_power <- power_val_smooth
+    if (has_jump && x_i >= CUTOFF_C) {
+      current_power <- power_val_smooth + NET_POWER_JUMP_H1
+      current_power <- pmax(0.1, pmin(current_power, 2.5)) # Bound again
+    }
+    true_power_params[i] <- current_power
+    
+    # Use a fixed m
+    current_m_fixed <- NET_M_FIXED
+    if (current_m_fixed >= NET_N_NODES && NET_N_NODES > 0) {
+      current_m_fixed = max(1, NET_N_NODES - 1)
+    }
+    if (NET_N_NODES < 2 && current_m_fixed > 0) {
+      # warning("NET_N_NODES < 2, BA model not well-defined for m > 0. Returning empty graph's Laplacian.")
+      Y_obj_list[[i]] <- matrix(0, nrow=NET_N_NODES, ncol=NET_N_NODES)
+      next
+    }
+    
+    # Generate graph using current_power and fixed m
+    g <- igraph::sample_pa(n = NET_N_NODES, 
+                           power = current_power, # Varying this
+                           m = current_m_fixed,   # Fixed
+                           directed = FALSE)
+    Y_obj_list[[i]] <- as.matrix(igraph::laplacian_matrix(g, sparse = FALSE, normalized = FALSE)) # Standard Laplacian
+  }
+  return(list(Y_obj = Y_obj_list, X_scalar = X_vals, true_power_params = true_power_params))
+}
+
+generate_density_data <- function(N, X_vals, has_jump = FALSE) {
+  Y_obj_list <- vector("list", N)
+  true_mus <- numeric(N)
+  for (i in 1:N) {
+    x_i <- X_vals[i]
+    mu_smooth <- DENSITY_MU_SLOPE_H0 * (x_i - CUTOFF_C)
+    current_mu <- mu_smooth
+    if (has_jump && x_i >= CUTOFF_C) {
+      current_mu <- mu_smooth + DENSITY_MU_JUMP_H1
+    }
+    true_mus[i] <- current_mu
+    Y_obj_list[[i]] <- rnorm(100, mean = current_mu, sd = DENSITY_BASE_SD)
+  }
+  return(list(Y_obj = Y_obj_list, X_scalar = X_vals, true_mus = true_mus))
+}
+
+generate_covariance_data <- function(N, X_vals, has_jump = FALSE) {
+  Y_obj_list <- vector("list", N)
+  true_sigmas <- vector("list", N)
+  for (i in 1:N) {
+    x_i <- X_vals[i]
+    diag_val_smooth <- COV_BASE_DIAG_H0 + COV_DIAG_SLOPE_H0 * (x_i - CUTOFF_C)
+    offdiag_val_smooth <- COV_OFFDIAG_BASE_H0 + COV_OFFDIAG_SLOPE_H0 * (x_i - CUTOFF_C)
+    Sigma_base <- matrix(0, nrow = COV_DIM, ncol = COV_DIM)
+    diag(Sigma_base) <- diag_val_smooth
+    Sigma_base[1,2] <- Sigma_base[2,1] <- offdiag_val_smooth
+    Sigma_base[1,3] <- Sigma_base[3,1] <- offdiag_val_smooth * 0.5
+    Sigma_base[2,3] <- Sigma_base[3,2] <- offdiag_val_smooth * 0.25
+    #diag(Sigma_base) <- diag(Sigma_base) + abs(rnorm(COV_DIM, 0, 0.1)) # Keep or remove based on desired noise
+    current_Sigma <- Sigma_base
+    if (has_jump && x_i >= CUTOFF_C) {
+      jump_matrix <- diag(COV_JUMP_FACTOR_H1, COV_DIM)
+      # Ensure current_Sigma is numeric before matrix multiplication
+      if(is.numeric(current_Sigma) && is.numeric(jump_matrix)){
+        current_Sigma <- current_Sigma %*% jump_matrix %*% t(jump_matrix)
+      } else {
+        # Handle cases where current_Sigma or jump_matrix might not be setup correctly
+        # This might happen if COV_DIM is not set or previous steps failed
+        warning("Skipping jump application for covariance due to non-numeric matrix.")
+      }
+    }
+    current_Sigma_pd <- try(as.matrix(Matrix::nearPD(current_Sigma, ensureSymmetry = TRUE, base.matrix=TRUE)$mat), silent=TRUE)
+    if(inherits(current_Sigma_pd, "try-error")){
+      # Fallback if nearPD fails: create a simple PD matrix
+      warning("nearPD failed in covariance DGP. Using a default PD matrix.")
+      current_Sigma_pd <- diag(COV_DIM)
+    }
+    true_sigmas[[i]] <- current_Sigma_pd
+    sample_data <- MASS::mvrnorm(n = COV_SAMPLES_PER_MATRIX, mu = rep(0, COV_DIM), Sigma = current_Sigma_pd)
+    Y_obj_list[[i]] <- stats::cov(sample_data)
+  }
+  return(list(Y_obj = Y_obj_list, X_scalar = X_vals, true_sigmas = true_sigmas))
+}
+
+generate_correlation_data <- function(N, X_vals, has_jump = FALSE) {
+  Y_obj_list <- vector("list", N)
+  true_corrs <- vector("list",N)
+  for (i in 1:N) {
+    x_i <- X_vals[i]
+    rho12_smooth <- CORR_BASE_RHO12_H0 + CORR_RHO12_SLOPE_H0 * (x_i - CUTOFF_C)
+    rho12_smooth <- pmin(0.95, pmax(-0.95, rho12_smooth))
+    rho13 <- 0.1 + 0.1 * sin(2*pi*x_i)
+    rho23 <- -0.2 + 0.15 * cos(pi*x_i)
+    current_rho12 <- rho12_smooth
+    if (has_jump && x_i >= CUTOFF_C) {
+      current_rho12 <- CORR_JUMP_RHO12_H1
+    }
+    temp_sigma <- diag(CORR_DIM)
+    temp_sigma[1,2] <- temp_sigma[2,1] <- current_rho12
+    temp_sigma[1,3] <- temp_sigma[3,1] <- rho13
+    temp_sigma[2,3] <- temp_sigma[3,2] <- rho23
+    #diag(temp_sigma) <- diag(temp_sigma) + 0.01 # Small nudge for PD
+    temp_sigma_pd <- try(as.matrix(Matrix::nearPD(temp_sigma, corr = FALSE, ensureSymmetry=TRUE, base.matrix=TRUE)$mat), silent=TRUE)
+    if(inherits(temp_sigma_pd, "try-error")){
+      warning("nearPD failed for correlation base sigma. Using a default PD matrix.")
+      temp_sigma_pd <- diag(CORR_DIM) # Fallback
+    }
+    current_Corr_pd <- stats::cov2cor(temp_sigma_pd)
+    true_corrs[[i]] <- current_Corr_pd
+    sample_data <- try(MASS::mvrnorm(n = CORR_SAMPLES_PER_MATRIX, mu = rep(0, CORR_DIM), Sigma = current_Corr_pd), silent=TRUE)
+    if(inherits(sample_data, "try-error")){
+      warning("mvrnorm failed in correlation DGP. Generating from diag matrix.")
+      sample_data <- MASS::mvrnorm(n = CORR_SAMPLES_PER_MATRIX, mu = rep(0, CORR_DIM), Sigma = diag(CORR_DIM))
+    }
+    Y_obj_list[[i]] <- stats::cov2cor(stats::cov(sample_data))
+  }
+  return(list(Y_obj = Y_obj_list, X_scalar = X_vals, true_corrs=true_corrs))
+}
+
+
+# --- Main Simulation Loop ---
+run_single_simulation <- function(N_val_iter, metric_val_iter, has_jump_iter, sim_params_iter,
+                                  CUTOFF_C_iter,
+                                  DENSITY_MU_SLOPE_H0_iter, DENSITY_MU_JUMP_H1_iter, DENSITY_BASE_SD_iter,
+                                  COV_DIM_iter, COV_BASE_DIAG_H0_iter, COV_DIAG_SLOPE_H0_iter,
+                                  COV_OFFDIAG_BASE_H0_iter, COV_OFFDIAG_SLOPE_H0_iter,
+                                  COV_JUMP_FACTOR_H1_iter, COV_SAMPLES_PER_MATRIX_iter,
+                                  CORR_DIM_iter, CORR_BASE_RHO12_H0_iter, CORR_RHO12_SLOPE_H0_iter,
+                                  CORR_JUMP_RHO12_H1_iter, CORR_SAMPLES_PER_MATRIX_iter,
+                                  NET_N_NODES_iter, NET_M_BASE_H0_iter, NET_M_SLOPE_H0_iter, NET_M_JUMP_H1_iter # Added Network params
+) {
+  # Make global constants available within this function's environment (for the generate_* functions)
+  CUTOFF_C <<- CUTOFF_C_iter # Note: using <<- to assign to global for generate_* functions
+  # This is generally not ideal but matches the original structure.
+  # A better way would be to pass these as arguments to generate_*
+  DENSITY_MU_SLOPE_H0 <<- DENSITY_MU_SLOPE_H0_iter; DENSITY_MU_JUMP_H1 <<- DENSITY_MU_JUMP_H1_iter; DENSITY_BASE_SD <<- DENSITY_BASE_SD_iter
+  COV_DIM <<- COV_DIM_iter; COV_BASE_DIAG_H0 <<- COV_BASE_DIAG_H0_iter; COV_DIAG_SLOPE_H0 <<- COV_DIAG_SLOPE_H0_iter
+  COV_OFFDIAG_BASE_H0 <<- COV_OFFDIAG_BASE_H0_iter; COV_OFFDIAG_SLOPE_H0 <<- COV_OFFDIAG_SLOPE_H0_iter
+  COV_JUMP_FACTOR_H1 <<- COV_JUMP_FACTOR_H1_iter; COV_SAMPLES_PER_MATRIX <<- COV_SAMPLES_PER_MATRIX_iter
+  CORR_DIM <<- CORR_DIM_iter; CORR_BASE_RHO12_H0 <<- CORR_BASE_RHO12_H0_iter; CORR_RHO12_SLOPE_H0 <<- CORR_RHO12_SLOPE_H0_iter
+  CORR_JUMP_RHO12_H1 <<- CORR_JUMP_RHO12_H1_iter; CORR_SAMPLES_PER_MATRIX <<- CORR_SAMPLES_PER_MATRIX_iter
+  NET_N_NODES <<- NET_N_NODES_iter; NET_M_BASE_H0 <<- NET_M_BASE_H0_iter
+  NET_M_SLOPE_H0 <<- NET_M_SLOPE_H0_iter; NET_M_JUMP_H1 <<- NET_M_JUMP_H1_iter
+  
+  
+  if (has_jump_iter && metric_val_iter %in% c("Correlation", "Covariance", "Network")) { # Added Network
+    n_half <- N_val_iter / 2
+    X_vals <- c(runif(ceiling(n_half), 0, CUTOFF_C_iter), # Use CUTOFF_C_iter
+                runif(floor(n_half), CUTOFF_C_iter, 1))
+  } else {
+    X_vals <- runif(N_val_iter, 0, 1)
+  }
+  
+  data <- NULL
+  frechet_opts_sim <- list()
+  
+  if (metric_val_iter == "Density") {
+    data <- generate_density_data(N_val_iter, X_vals, has_jump_iter)
+    qSup_sim <- seq(0, 1, length.out = 100)
+    frechet_opts_sim <- list(qSup = qSup_sim, den_opts_for_create_density = list(kernel = "gauss"))
+  } else if (metric_val_iter == "Covariance") {
+    data <- generate_covariance_data(N_val_iter, X_vals, has_jump_iter)
+    frechet_opts_sim <- list(metric = "frobenius")
+  } else if (metric_val_iter == "Correlation") {
+    data <- generate_correlation_data(N_val_iter, X_vals, has_jump_iter)
+    frechet_opts_sim <- list(metric = "frobenius")
+  } else if (metric_val_iter == "Network") {
+    data <- generate_network_data(N_val_iter, X_vals, has_jump_iter)
+    frechet_opts_sim <- list(metric = "frobenius")
+  } else {
+    stop("Unknown metric space for simulation")
+  }
+  
+  # Basic check for data generation
+  if (is.null(data) || is.null(data$Y_obj) || length(data$Y_obj) == 0) {
+    warning(paste("Data generation failed for metric:", metric_val_iter))
+    return(NA_real_)
+  }
+  if (any(sapply(data$Y_obj, function(y) any(is.na(y) | is.infinite(y))))) {
+    warning(paste("NA/Inf found in Y_obj for metric:", metric_val_iter, " Check DGP parameters."))
+    # Optionally, remove problematic Y_obj and corresponding X_scalar
+    # valid_idx <- !sapply(data$Y_obj, function(y) any(is.na(y) | is.infinite(y)))
+    # data$Y_obj <- data$Y_obj[valid_idx]
+    # data$X_scalar <- data$X_scalar[valid_idx]
+    # if(length(data$Y_obj) < 10) return(NA_real_) # Not enough valid points
+  }
+  
+  
+  result <- tryCatch({
+    frechesTest(
+      Y_obj = data$Y_obj,
+      X_scalar = data$X_scalar,
+      c_val = CUTOFF_C_iter, # Use CUTOFF_C_iter
+      metric_space_type = tolower(metric_val_iter), # This will be "network"
+      h_frechet = "CV",
+      kernel_frechet_char = "epan",
+      frechet_optns = frechet_opts_sim,
+      cv_K_folds = 10,
+      cv_n_bw_candidates = 20,
+      min_bw_cv_factor = 0.001,
+      undersmooth_factor=0.8,
+      verbose = TRUE # Set to TRUE for detailed debugging of frechesTest
+    )
+  }, error = function(e) {
+    warning(paste("Error in frechesTest for", metric_val_iter, ":", e$message))
+    return(list(p_value = NA_real_)) # Return NA p-value on error
+  })
+  
+
+  return(result$p_value)
+}
+
+# --- Storing Results ---
+results_list <- list()
+
+
+if (parallel) {
+  # --- Setup Parallel Backend ---
+  num_cores <- detectCores() - 1
+  if (num_cores < 1) num_cores <- 1
+  # num_cores <- 1 # FOR DEBUGGING - RUN SERIALLY
+  
+  cl <- makeCluster(num_cores)
+  registerDoParallel(cl)
+  
+  clusterEvalQ(cl, {
+    library(frechesTest) # Make sure this sources your R files or loads the package
+    library(igraph)      # Needed for generate_network_data on workers
+    # Make global constants available on workers if using <<- inside run_single_simulation
+    # This is an alternative to passing every single one.
+    # However, explicitly passing them to run_single_simulation is safer.
+    # The current run_single_simulation uses <<- so they MUST be on the global env of workers.
+    CUTOFF_C <- 0.5 # Example
+    DENSITY_MU_SLOPE_H0 <- 0.8; DENSITY_MU_JUMP_H1 <- 2; DENSITY_BASE_SD <- 1
+    COV_DIM <- 3; COV_BASE_DIAG_H0 <- 1.5; COV_DIAG_SLOPE_H0 <- 0.6
+    COV_OFFDIAG_BASE_H0 <- 0.2; COV_OFFDIAG_SLOPE_H0 <- 0.3
+    COV_JUMP_FACTOR_H1 <- 1.8; COV_SAMPLES_PER_MATRIX <- 500
+    CORR_DIM <- 3; CORR_BASE_RHO12_H0 <- 0.2; CORR_RHO12_SLOPE_H0 <- 0.5
+    CORR_JUMP_RHO12_H1 <- 0.7; CORR_SAMPLES_PER_MATRIX <- 500
+    NET_N_NODES <- 20; NET_M_BASE_H0 <- 2
+    NET_M_SLOPE_H0 <- 1; NET_M_JUMP_H1 <- 2
+  })
+} else {
+  registerDoSEQ()
+}
+
+cat(paste("Running simulations in parallel on", getDoParWorkers(), "workers.\n"))
+
+# --- Iterate Over Scenarios ---
+for (N_val in SAMPLE_SIZES) {
+  for (metric_val in metric_spaces_to_run) { # Added "Network"
+    
+    functions_to_export <- c("run_single_simulation",
+                             "generate_density_data", "generate_covariance_data",
+                             "generate_correlation_data", "generate_network_data", # Added
+                             "frechesTest") # Assuming frechesTest is self-contained or its helpers are in the frechesTest package
+    
+    # H0: No Jump
+    cat(paste0("Running H0: N=", N_val, ", Metric=", metric_val, "...\n"))
+    p_values_h0 <- foreach(
+      i = 1:N_SIMULATIONS,
+      .combine = 'c',
+      .packages = c("MASS", "Matrix", "stats", "pracma", "osqp", "igraph"), # Added igraph
+      .export = functions_to_export, # frechesTest needs to be available
+      .errorhandling = 'pass'
+    ) %dopar% {
+      run_single_simulation(
+        N_val_iter = N_val, metric_val_iter = metric_val, has_jump_iter = FALSE, sim_params_iter = list(),
+        CUTOFF_C_iter = CUTOFF_C,
+        DENSITY_MU_SLOPE_H0_iter = DENSITY_MU_SLOPE_H0, DENSITY_MU_JUMP_H1_iter = DENSITY_MU_JUMP_H1, DENSITY_BASE_SD_iter = DENSITY_BASE_SD,
+        COV_DIM_iter = COV_DIM, COV_BASE_DIAG_H0_iter = COV_BASE_DIAG_H0, COV_DIAG_SLOPE_H0_iter = COV_DIAG_SLOPE_H0,
+        COV_OFFDIAG_BASE_H0_iter = COV_OFFDIAG_BASE_H0, COV_OFFDIAG_SLOPE_H0_iter = COV_OFFDIAG_SLOPE_H0,
+        COV_JUMP_FACTOR_H1_iter = COV_JUMP_FACTOR_H1, COV_SAMPLES_PER_MATRIX_iter = COV_SAMPLES_PER_MATRIX,
+        CORR_DIM_iter = CORR_DIM, CORR_BASE_RHO12_H0_iter = CORR_BASE_RHO12_H0, CORR_RHO12_SLOPE_H0_iter = CORR_RHO12_SLOPE_H0,
+        CORR_JUMP_RHO12_H1_iter = CORR_JUMP_RHO12_H1, CORR_SAMPLES_PER_MATRIX_iter = CORR_SAMPLES_PER_MATRIX,
+        NET_N_NODES_iter = NET_N_NODES, NET_M_BASE_H0_iter = NET_M_BASE_H0,
+        NET_M_SLOPE_H0_iter = NET_M_SLOPE_H0, NET_M_JUMP_H1_iter = NET_M_JUMP_H1
+      )
+    }
+    num_errors_h0 <- sum(sapply(p_values_h0, function(x) inherits(x, "error") || inherits(x, "simpleError")))
+    p_values_h0_clean <- p_values_h0[!sapply(p_values_h0, function(x) inherits(x, "error") || inherits(x, "simpleError"))]
+    p_values_h0_clean <- as.numeric(unlist(p_values_h0_clean))
+    
+    
+    rejection_rate_h0 <- mean(p_values_h0_clean < ALPHA_LEVEL, na.rm = TRUE)
+    num_na_h0 <- sum(is.na(p_values_h0_clean)) + num_errors_h0
+    
+    results_list[[length(results_list) + 1]] <- data.frame(
+      SampleSize = N_val, MetricSpace = metric_val, Hypothesis = "H0 (No Jump)",
+      RejectionRate = rejection_rate_h0, NumNA = num_na_h0, NumErrors = num_errors_h0
+    )
+    
+    # H1: Jump
+    cat(paste0("Running H1: N=", N_val, ", Metric=", metric_val, "...\n"))
+    p_values_h1 <- foreach(
+      i = 1:N_SIMULATIONS,
+      .combine = 'c',
+      .packages = c("MASS", "Matrix", "stats", "pracma", "osqp", "igraph"), # Added igraph
+      .export = functions_to_export,
+      .errorhandling = 'pass'
+    ) %dopar% {
+      run_single_simulation(
+        N_val_iter = N_val, metric_val_iter = metric_val, has_jump_iter = TRUE, sim_params_iter = list(),
+        CUTOFF_C_iter = CUTOFF_C,
+        DENSITY_MU_SLOPE_H0_iter = DENSITY_MU_SLOPE_H0, DENSITY_MU_JUMP_H1_iter = DENSITY_MU_JUMP_H1, DENSITY_BASE_SD_iter = DENSITY_BASE_SD,
+        COV_DIM_iter = COV_DIM, COV_BASE_DIAG_H0_iter = COV_BASE_DIAG_H0, COV_DIAG_SLOPE_H0_iter = COV_DIAG_SLOPE_H0,
+        COV_OFFDIAG_BASE_H0_iter = COV_OFFDIAG_BASE_H0, COV_OFFDIAG_SLOPE_H0_iter = COV_OFFDIAG_SLOPE_H0,
+        COV_JUMP_FACTOR_H1_iter = COV_JUMP_FACTOR_H1, COV_SAMPLES_PER_MATRIX_iter = COV_SAMPLES_PER_MATRIX,
+        CORR_DIM_iter = CORR_DIM, CORR_BASE_RHO12_H0_iter = CORR_BASE_RHO12_H0, CORR_RHO12_SLOPE_H0_iter = CORR_RHO12_SLOPE_H0,
+        CORR_JUMP_RHO12_H1_iter = CORR_JUMP_RHO12_H1, CORR_SAMPLES_PER_MATRIX_iter = CORR_SAMPLES_PER_MATRIX,
+        NET_N_NODES_iter = NET_N_NODES, NET_M_BASE_H0_iter = NET_M_BASE_H0,
+        NET_M_SLOPE_H0_iter = NET_M_SLOPE_H0, NET_M_JUMP_H1_iter = NET_M_JUMP_H1
+      )
+    }
+    num_errors_h1 <- sum(sapply(p_values_h1, function(x) inherits(x, "error") || inherits(x, "simpleError")))
+    p_values_h1_clean <- p_values_h1[!sapply(p_values_h1, function(x) inherits(x, "error") || inherits(x, "simpleError"))]
+    p_values_h1_clean <- as.numeric(unlist(p_values_h1_clean))
+    
+    rejection_rate_h1 <- mean(p_values_h1_clean < ALPHA_LEVEL, na.rm = TRUE)
+    num_na_h1 <- sum(is.na(p_values_h1_clean)) + num_errors_h1
+    
+    results_list[[length(results_list) + 1]] <- data.frame(
+      SampleSize = N_val, MetricSpace = metric_val, Hypothesis = "H1 (With Jump)",
+      RejectionRate = rejection_rate_h1, NumNA = num_na_h1, NumErrors = num_errors_h1
+    )
+  }
+}
+
+# --- Stop Parallel Backend ---
+if (parallel) stopCluster(cl)
+
+# Combine results
+final_results_df <- do.call(rbind, results_list)
+
+# Display Results
+cat("\n\n--- Simulation Results ---\n")
+cat("Nominal Alpha Level:", ALPHA_LEVEL, "\n")
+cat("Number of Simulations per Scenario:", N_SIMULATIONS, "\n\n")
+
+table_df <- final_results_df %>%
+  mutate(
+    Value = ifelse(Hypothesis == "H0 (No Jump)", "Empirical Size", "Empirical Power"),
+    `Rejection Rate` = sprintf("%.3f", RejectionRate) # Changed column name
+  ) %>%
+  select(MetricSpace, SampleSize, Value, `Rejection Rate`, NumNA, NumErrors) %>%
+  arrange(MetricSpace, Value, SampleSize)
+
+print(knitr::kable(table_df, format = "pipe", caption = "Simulation Study: Rejection Probabilities"))
+
+if (requireNamespace("tidyr", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)) {
+  compact_table_prep <- final_results_df %>%
+    mutate(
+      RateType = ifelse(Hypothesis == "H0 (No Jump)", "Empirical_Size", "Empirical_Power"),
+      NumNA_col = ifelse(Hypothesis == "H0 (No Jump)", "NumNA_H0", "NumNA_H1"),
+      NumErrors_col = ifelse(Hypothesis == "H0 (No Jump)", "NumErrors_H0", "NumErrors_H1")
+    )
+  rates_wide <- compact_table_prep %>%
+    select(MetricSpace, SampleSize, RateType, RejectionRate) %>%
+    tidyr::pivot_wider(names_from = RateType, values_from = RejectionRate)
+  na_wide <- compact_table_prep %>%
+    select(MetricSpace, SampleSize, NumNA_col, NumNA) %>% distinct() %>%
+    tidyr::pivot_wider(names_from = NumNA_col, values_from = NumNA)
+  errors_wide <- compact_table_prep %>%
+    select(MetricSpace, SampleSize, NumErrors_col, NumErrors) %>% distinct() %>%
+    tidyr::pivot_wider(names_from = NumErrors_col, values_from = NumErrors)
+  compact_table <- rates_wide %>%
+    left_join(na_wide, by = c("MetricSpace", "SampleSize")) %>%
+    left_join(errors_wide, by = c("MetricSpace", "SampleSize")) %>%
+    arrange(MetricSpace, SampleSize)
+  cat("\n\n--- Compact Simulation Results Table ---\n")
+  print(knitr::kable(compact_table, format="pipe", digits=3,
+                     caption="Simulation Study: Empirical Size and Power"))
+}
+
+

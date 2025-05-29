@@ -1,0 +1,7 @@
+"Outcome","Coefficient","Std Error","P-value","Bandwidth","N Left","N Right"
+"Upstream Centrality",-0.0366,0.0042,0,9.97,58,21
+"Downstream Centrality",-0.0366,0.0042,0,9.97,58,21
+"Multiplier Effect",-0.1008,0.0531,0.0576,9.97,58,21
+"Manufacturing Intensity",0.015,0.0052,0.0036,1.25,58,21
+"Services Intensity",5e-04,0.0047,0.9122,1.02,58,21
+"Economic Complexity",0.4374,0.2544,0.0855,3.72,58,21

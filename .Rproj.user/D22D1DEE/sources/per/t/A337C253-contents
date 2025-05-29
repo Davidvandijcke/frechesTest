@@ -1,0 +1,66 @@
+
+#****************************************************************************************************************************************************
+
+# MASTER SCRIPT: DISTRIBUTIONAL REGRESSION DISCONTINUITY DESIGN
+
+# David Van Dijcke
+
+#****************************************************************************************************************************************************
+
+#****************************************************************************************************************************************************
+#****************************************************************************************************************************************************
+#****************************************************************************************************************************************************
+#****************************************************************************************************************************************************
+
+#### SET OVERALL PARAMETERS ####
+
+
+#### SET PATHS ####
+
+if (!require("here", character.only=T)) {install.packages("here", dependencies=TRUE)}; require("here")
+codeDir <- here::here()
+setwd(codeDir) # sets cd to program directory
+
+dir <- sub("/[^/]+$", "", codeDir)# get main directory
+dataIn <- file.path(dir, "data", "in")
+dataBy <- file.path(dir, "data", "by")
+dataOut <- file.path(dir, "data", "out")
+overleaf <- "/Users/davidvandijcke/Dropbox (University of Michigan)/Apps/Overleaf/r3d"
+tabs <- file.path(overleaf, "tabs")
+figs <- file.path(overleaf, "figs")
+
+
+
+#### USER-WRITTEN FUNCTIONS ####
+source("utils.R")
+
+
+#### LOAD LIBRARIES AND OTHER REQS ####
+source("00_prep.R")
+
+source("r3d_simulation_scenarios.R")
+
+## generate citations for online appendix
+
+# Extract package names
+packages <- names(sessionInfo()$otherPkgs)
+citations <- lapply(packages, citation)
+
+# Path for saving citations
+bibfile <- file.path(tabs, "package_citations.bib")
+
+# Remove existing file
+if (file.exists(bibfile)) {
+  file.remove(bibfile)
+}
+
+# Write clean BibTeX entries with proper keys
+for(i in seq_along(citations)) {
+  cite <- citations[[i]][[1]]  # use the first citation for simplicity
+  key <- packages[i]           # use the package name as key
+  bib_entry <- toBibtex(cite)
+  # Replace empty keys with package name keys
+  bib_entry <- sub("@[A-Za-z]+\\{,", paste0("@Manual{", key, ","), bib_entry)
+  # Write to file neatly separated
+  cat(bib_entry, file=bibfile, sep="\n\n", append=TRUE)
+}

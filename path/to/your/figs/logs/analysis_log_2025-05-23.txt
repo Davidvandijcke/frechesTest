@@ -1,0 +1,36 @@
+
+=== STEP 1: Loading World Bank Data ===
+
+=== STEP 2: Preparing Analysis Data ===
+
+=== Preparing Analysis Data ===
+Mode: pooled_years 
+Using pooled years: 2018, 2019, 2020, 2021 
+Final analysis sample: 500 observations
+Countries: 129 
+Years represented: 2018, 2019, 2020, 2021 
+
+=== STEP 3: Loading EORA I-O Data ===
+
+=== Processing EORA Data for Year 2021 ===
+
+!!! ERROR IN MAIN ANALYSIS !!!
+Error message: Zip file not found for year 2021 : path/to/your/dataIn/Eora26_2021_bp.zip 
+Traceback:
+2: frechet_result_A_network$test_statistic %||% NA
+1: data.frame(`Network Type` = c("Direct Requirements (A) - Covariance", 
+       "Leontief Inverse (L) - Covariance", "Direct Requirements (A) - Network", 
+       "Leontief Inverse (L) - Network"), `Test Statistic` = c(round(frechet_result_A$test_statistic %||% 
+       NA, 4), round(frechet_result_L$test_statistic %||% NA, 4), 
+       round(frechet_result_A_network$test_statistic %||% NA, 4), 
+       round(frechet_result_L_network$test_statistic %||% NA, 4)), 
+       `P-value` = c(round(frechet_result_A$p_value %||% NA, 4), 
+           round(frechet_result_L$p_value %||% NA, 4), round(frechet_result_A_network$p_value %||% 
+               NA, 4), round(frechet_result_L_network$p_value %||% 
+               NA, 4)), Bandwidth = c(frechet_result_A$bandwidth %||% 
+           NA, frechet_result_L$bandwidth %||% NA, frechet_result_A_network$bandwidth %||% 
+           NA, frechet_result_L_network$bandwidth %||% NA), `N Left` = c(frechet_result_A$n_left %||% 
+           NA, frechet_result_L$n_left %||% NA, frechet_result_A_network$n_left %||% 
+           NA, frechet_result_L_network$n_left %||% NA), `N Right` = c(frechet_result_A$n_right %||% 
+           NA, frechet_result_L$n_right %||% NA, frechet_result_A_network$n_right %||% 
+           NA, frechet_result_L_network$n_right %||% NA), check.names = FALSE)

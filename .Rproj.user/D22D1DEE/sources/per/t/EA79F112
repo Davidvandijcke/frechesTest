@@ -1,0 +1,26 @@
+{
+    "id": "EA79F112",
+    "path": "~/University of Michigan Dropbox/David Van Dijcke/frechet_anova/code/frechesTest/tests/testthat/test-density_space.R",
+    "project_path": "tests/testthat/test-density_space.R",
+    "type": "r_source",
+    "hash": "1277650347",
+    "contents": "",
+    "dirty": false,
+    "created": 1747161373674.0,
+    "source_on_save": false,
+    "relative_order": 13,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "81,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1747512231,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1747512231,
+    "read_only": false,
+    "read_only_alternatives": []
+}

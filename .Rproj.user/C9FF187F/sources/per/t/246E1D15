@@ -1,0 +1,26 @@
+{
+    "id": "246E1D15",
+    "path": "~/frechet_anova/code/frechesTest/R/frechesTest_helpers.R",
+    "project_path": "R/frechesTest_helpers.R",
+    "type": "r_source",
+    "hash": "4203380889",
+    "contents": "",
+    "dirty": false,
+    "created": 1747410385289.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "693,1",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1747498271,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1747498271207,
+    "read_only": false,
+    "read_only_alternatives": []
+}

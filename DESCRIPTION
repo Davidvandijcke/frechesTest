@@ -1,0 +1,37 @@
+Package: frechesTest
+Type: Package
+Title: ANOVA-Style Test for Jumps in Conditional Frechet Means
+Version: 0.1.0
+Date: 2023-10-27
+Authors@R: person("David", "Van Dijcke", 
+                  email = "dvdijcke@umich.edu", 
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0001-5825-3447"))
+Description: Implements an ANOVA-style test for detecting discontinuities (jumps)
+    in the conditional Frechet mean of random objects valued in arbitrary metric 
+    spaces. Supports probability distributions (Wasserstein distance), covariance/
+    correlation matrices, spherical data (geodesic distance), and network Laplacians.
+    The methodology is based on "A Test for Jumps in Metric-Space Conditional Means" 
+    by David Van Dijcke. Includes automatic bandwidth selection via cross-validation
+    and handles various metric space geometries through the Frechet mean framework.
+License: MIT + file LICENSE
+URL: https://github.com/dvdijcke/frechesTest
+BugReports: https://github.com/dvdijcke/frechesTest/issues
+Depends: R (>= 3.5.0)
+Imports:
+    stats,
+    pracma,
+    Matrix,
+    osqp,
+    trust,
+    fdadensity, 
+    frechet
+Suggests:
+    MASS,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
+VignetteBuilder: knitr

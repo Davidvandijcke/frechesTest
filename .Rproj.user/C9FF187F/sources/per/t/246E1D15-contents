@@ -1,0 +1,694 @@
+# FrechetJumpTest_helpers.R
+
+# NULL-coalescing operator (if R version < 4.0.0)
+`%||%` <- function(a, b) if (is.null(a)) b else a
+
+.project_to_laplacian_space_osqp <- function(target_matrix_B, 
+                                             M_nodes, 
+                                             W_upper_edge_abs_val = 1.0,
+                                             osqp_model_cache = NULL, 
+                                             osqp_settings = NULL) {
+  
+  q_osqp_target <- -as.vector(target_matrix_B) 
+  
+  model_to_solve <- NULL # Initialize
+  
+  if (is.null(osqp_model_cache) || is.null(osqp_model_cache$model) || M_nodes != osqp_model_cache$M_nodes) {
+    # Build model if not cached, or if M_nodes changed
+    P_osqp_sparse <- Matrix::Matrix(diag(M_nodes^2), sparse = TRUE)
+    
+    num_off_diag_pairs <- M_nodes * (M_nodes - 1) / 2
+    num_constraints_sym <- num_off_diag_pairs
+    num_constraints_rowsum <- M_nodes
+    num_constraints_offdiag_bounds <- num_off_diag_pairs
+    num_total_constraints <- num_constraints_sym + num_constraints_rowsum + num_constraints_offdiag_bounds
+    
+    const_matrix_A <- matrix(0, nrow = num_total_constraints, ncol = M_nodes^2)
+    l_bounds <- numeric(num_total_constraints)
+    u_bounds <- numeric(num_total_constraints)
+    
+    current_row <- 0
+    
+    # Symmetry: B_rc - B_cr = 0
+    if (M_nodes > 1) {
+      for (c_node in 2:M_nodes) { 
+        for (r_node in 1:(c_node - 1)) { 
+          current_row <- current_row + 1
+          idx_rc_in_vec <- (c_node - 1) * M_nodes + r_node 
+          idx_cr_in_vec <- (r_node - 1) * M_nodes + c_node 
+          const_matrix_A[current_row, idx_rc_in_vec] <- 1  
+          const_matrix_A[current_row, idx_cr_in_vec] <- -1 
+          l_bounds[current_row] <- 0
+          u_bounds[current_row] <- 0
+        }
+      }
+    }
+    
+    # Zero row sums: sum_c B_rc = 0
+    for (r_node in 1:M_nodes) {
+      current_row <- current_row + 1
+      for (c_node in 1:M_nodes) {
+        idx_rc_in_vec <- (c_node - 1) * M_nodes + r_node
+        const_matrix_A[current_row, idx_rc_in_vec] <- 1 
+      }
+      l_bounds[current_row] <- 0
+      u_bounds[current_row] <- 0
+    }
+    
+    # Off-diagonal bounds: -W_upper_edge_abs_val <= B_rc <= 0 for r < c
+    if (M_nodes > 1) {
+      for (c_node in 2:M_nodes) { 
+        for (r_node in 1:(c_node - 1)) { 
+          current_row <- current_row + 1
+          idx_rc_in_vec <- (c_node - 1) * M_nodes + r_node # This is B_rc
+          const_matrix_A[current_row, idx_rc_in_vec] <- 1 
+          l_bounds[current_row] <- -W_upper_edge_abs_val
+          u_bounds[current_row] <- 0 # Graph Laplacians have L_ij <= 0 for i != j
+        }
+      }
+    }
+    
+    const_matrix_A_sparse <- Matrix::Matrix(const_matrix_A, sparse = TRUE)
+    
+    # Use provided osqp_settings or default
+    current_osqp_settings <- osqp_settings %||% osqp::osqpSettings(verbose = FALSE, eps_abs = 1e-8, eps_rel = 1e-8, max_iter = 20000, polish = TRUE)
+    
+    # Build the OSQP model object
+    model_to_solve <- osqp::osqp(P = P_osqp_sparse, q = q_osqp_target, 
+                                 A = const_matrix_A_sparse, l = l_bounds, u = u_bounds, 
+                                 pars = current_osqp_settings)
+    # NOTE: The cache (osqp_model_cache) is typically prepared *outside* this function
+    # and passed in. If we build it here, it's not truly a cache unless this function
+    # returns the model to be cached by the caller.
+    # The current structure in frechesTest pre-builds this model and passes it.
+  } else {
+    model_to_solve <- osqp_model_cache$model # Expecting list(model=..., M_nodes=...)
+    ## CORRECTION: Use Update method for osqp object
+    model_to_solve$Update(q = q_osqp_target) 
+  }
+  
+  solution <- model_to_solve$Solve()
+  
+  if (solution$info$status_val != 1 && solution$info$status_val != 2 ) { # 1 = solved, 2 = solved inaccurate
+    warning(paste("OSQP projection did not solve optimally. Status:", solution$info$status, 
+                  "(Val:", solution$info$status_val, "). Applying fallback constraints to symmetrized input."))
+    # Fallback (simplified projection)
+    projected_L_matrix <- (target_matrix_B + t(target_matrix_B)) / 2
+    for(r_idx in 1:M_nodes) {
+      for(c_idx in 1:M_nodes) {
+        if (r_idx != c_idx) {
+          projected_L_matrix[r_idx, c_idx] <- min(0, max(-W_upper_edge_abs_val, projected_L_matrix[r_idx, c_idx]))
+        }
+      }
+    }
+    diag(projected_L_matrix) <- 0 
+    diag(projected_L_matrix) <- -rowSums(projected_L_matrix) 
+    return(projected_L_matrix)
+  }
+  
+  projected_L_vector <- solution$x
+  projected_L_matrix <- matrix(projected_L_vector, nrow = M_nodes, ncol = M_nodes, byrow = FALSE) 
+  
+  return(projected_L_matrix)
+}
+
+
+# .get_quantiles_for_obs_jump_test
+.get_quantiles_for_obs_jump_test <- function(obs, qSup_target, den_opts) {
+  # This function will be called less for its expensive branches due to pre-computation
+  if (is.list(obs) && !is.null(obs$type) && obs$type == "quantile" && !is.null(obs$q) && !is.null(obs$qSup)) {
+    # If obs is already a pre-computed quantile object
+    if (length(obs$qSup) == length(qSup_target) && all(abs(obs$qSup - qSup_target) < 1e-9)) {
+      return(obs$q) # Already on the target qSup grid
+    } else {
+      # Interpolate if on a different qSup grid (should ideally be avoided by consistent qSup)
+      warning("Interpolating pre-computed quantiles to a new qSup_target. Ensure qSup is consistent for best performance.")
+      return(stats::approx(x = obs$qSup, y = obs$q, xout = qSup_target, rule = 2)$y)
+    }
+  } else if (is.numeric(obs)) {
+    # Raw numeric data: perform density estimation
+    current_den_opts <- den_opts %||% list()
+    # Rename options for frechet::CreateDensity if old names are used
+    if (!is.null(current_den_opts$kernelDen)) { names(current_den_opts)[names(current_den_opts) == "kernelDen"] <- "kernel" }
+    if (!is.null(current_den_opts$bwDen)) { names(current_den_opts)[names(current_den_opts) == "bwDen"] <- "userBwMu" }
+    if (!is.null(current_den_opts$ndSup)) { names(current_den_opts)[names(current_den_opts) == "ndSup"] <- "nRegGrid" }
+    if (!is.null(current_den_opts$dSup)) { names(current_den_opts)[names(current_den_opts) == "dSup"] <- "outputGrid" }
+    
+    density_obj <- frechet::CreateDensity(y = obs, optns = current_den_opts)
+    quantiles <- fdadensity::dens2quantile(dens = density_obj$y, dSup = density_obj$x, qSup = qSup_target)
+    return(quantiles)
+  } else if (is.list(obs) && !is.null(obs$mids) && !is.null(obs$counts) && !is.null(obs$breaks)) {
+    # Histogram object: perform density estimation from histogram
+    current_den_opts <- den_opts %||% list()
+    if (!is.null(current_den_opts$kernelDen)) { names(current_den_opts)[names(current_den_opts) == "kernelDen"] <- "kernel" }
+    if (!is.null(current_den_opts$bwDen)) { names(current_den_opts)[names(current_den_opts) == "bwDen"] <- "userBwMu" }
+    if (!is.null(current_den_opts$ndSup)) { names(current_den_opts)[names(current_den_opts) == "ndSup"] <- "nRegGrid" }
+    if (!is.null(current_den_opts$dSup)) { names(current_den_opts)[names(current_den_opts) == "dSup"] <- "outputGrid" }
+    
+    density_obj <- frechet::CreateDensity(histogram = obs, optns = current_den_opts)
+    quantiles <- fdadensity::dens2quantile(dens = density_obj$y, dSup = density_obj$x, qSup = qSup_target)
+    return(quantiles)
+  }
+  else {
+    stop("Unsupported observation type for .get_quantiles_for_obs_jump_test. Expected numeric vector, specific quantile list, or histogram list.")
+  }
+}
+
+# .calculate_one_sided_locpoly_weights (original function - no changes needed for this optimization)
+.calculate_one_sided_locpoly_weights <- function(x_obs, c_val, h_val, K_fun, side, n) {
+  Kh_X_minus_c_all <- K_fun((x_obs - c_val) / h_val) / h_val
+  mu_hat_j <- numeric(3)
+  indicator <- if (side == "+") {
+    x_obs >= c_val
+  } else {
+    x_obs < c_val
+  }
+  active_indices_side <- which(indicator)
+  if (length(active_indices_side) < 2) {
+    warning(paste("Too few points on side", side, "for local polynomial regression (need at least 2). Weights will be zero."))
+    return(rep(0, length(x_obs)))
+  }
+  x_obs_side <- x_obs[active_indices_side]
+  Kh_X_minus_c_side <- Kh_X_minus_c_all[active_indices_side]
+  for (j_idx in 0:2) {
+    mu_hat_j[j_idx + 1] <- sum(Kh_X_minus_c_side * (x_obs_side - c_val)^j_idx)
+  }
+  sigma_0_sq_hat <- mu_hat_j[1] * mu_hat_j[3] - mu_hat_j[2]^2
+  s_in <- rep(0, length(x_obs))
+  if (abs(sigma_0_sq_hat) < 1e-20) { 
+    warning(paste("sigma_0_sq_hat is close to zero for side", side, "(value:", sigma_0_sq_hat, "). Weights might be unstable or zero."))
+  } else {
+    s_in[active_indices_side] <- (Kh_X_minus_c_side / sigma_0_sq_hat) * (mu_hat_j[3] - mu_hat_j[2] * (x_obs_side - c_val))
+  }
+  return(s_in)
+}
+
+# .estimate_weighted_frechet_mean (MODIFIED for density optimization and OSQP caching)
+.estimate_weighted_frechet_mean <- function(Y_obj_list, active_idx, s_in_weights_active,
+                                            metric_space_type, frechet_optns) {
+  if (length(active_idx) == 0) {
+    warning("No active samples for weighted Frechet mean estimation.")
+    return(NULL)
+  }
+  Y_active <- Y_obj_list[active_idx]
+  l_hat_mean <- NULL
+  sum_s_in_active <- sum(s_in_weights_active)
+  
+  use_fallback_unweighted_mean <- abs(sum_s_in_active) < 1e-9 && metric_space_type != "sphere"
+  
+  if (use_fallback_unweighted_mean) {
+    warning("Sum of active weights is close to zero. Using unweighted Frechet mean of active samples as fallback.")
+    if (metric_space_type == "density") {
+      qSup <- frechet_optns$qSup %||% stop("qSup missing for density fallback mean")
+      den_opts_cfd <- frechet_optns$den_opts_for_create_density %||% list()
+      ## OPTIMIZATION: Use pre-computed quantiles if Y_active elements are lists
+      if(is.list(Y_active[[1]]) && Y_active[[1]]$type == "quantile"){
+        qin_active_fallback <- do.call(rbind, lapply(Y_active, `[[`, "q"))
+      } else { # Fallback if not precomputed (should ideally not happen with main optimization)
+        qin_active_fallback <- t(sapply(Y_active, .get_quantiles_for_obs_jump_test, qSup_target = qSup, den_opts = den_opts_cfd))
+      }
+      l_hat_q_unprojected <- colMeans(qin_active_fallback, na.rm = TRUE)
+    } else if (metric_space_type %in% c("covariance", "correlation", "network")) {
+      l_hat_mat_unproj <- Reduce("+", Y_active) / length(Y_active)
+    } else {
+      stop("Fallback for zero sum of weights not implemented for this space type. Sphere is handled by trust.")
+    }
+  } else { 
+    if (metric_space_type == "density") {
+      qSup <- frechet_optns$qSup %||% stop("qSup missing for density mean")
+      den_opts_cfd <- frechet_optns$den_opts_for_create_density %||% list()
+      
+      ## OPTIMIZATION: Construct matrix of quantiles efficiently
+      # Assumes Y_active elements are pre-computed: list(q=..., qSup=..., type="quantile")
+      # and their qSup matches the target qSup.
+      # The .get_quantiles_for_obs_jump_test call is now primarily for safety or if pre-computation failed/skipped.
+      qin_matrix_list <- lapply(Y_active, function(obs_item) {
+        .get_quantiles_for_obs_jump_test(obs_item, qSup_target = qSup, den_opts = den_opts_cfd)
+      })
+      qin_active_matrix <- do.call(rbind, qin_matrix_list)
+      
+      # Weighted sum of quantile vectors
+      # l_hat_q_unprojected <- colSums(qin_active_matrix * s_in_weights_active, na.rm=TRUE) / sum_s_in_active
+      ## OPTIMIZATION: Potentially faster using crossprod
+      l_hat_q_unprojected <- as.vector(crossprod(qin_active_matrix, s_in_weights_active) / sum_s_in_active)
+      
+    } else if (metric_space_type %in% c("covariance", "correlation", "network")) {
+      # ... (matrix space code remains largely the same)
+      M_active_list <- Y_active
+      metric <- frechet_optns$metric %||% "frobenius"; alpha <- frechet_optns$alpha %||% 1
+      if (metric %in% c("frobenius", "power")) {
+        if (metric_space_type == "network" || (metric_space_type %in% c("covariance", "correlation") && metric == "frobenius") || (metric_space_type %in% c("covariance", "correlation") && alpha == 1) ) {
+          l_hat_mat_unproj <- Reduce("+", mapply("*", M_active_list, s_in_weights_active, SIMPLIFY = FALSE)) / sum_s_in_active
+        } else { 
+          if (alpha == 0) { 
+            log_M_active <- lapply(M_active_list, function(mat) {eig <- eigen(mat, symmetric = TRUE); P <- eig$vectors; Lambda_log <- diag(log(pmax(1e-30, eig$values)), nrow=length(eig$values)); P %*% Lambda_log %*% t(P) })
+            mean_log_M <- Reduce("+", mapply("*", log_M_active, s_in_weights_active, SIMPLIFY = FALSE)) / sum_s_in_active
+            eig_mean_log <- eigen(mean_log_M, symmetric = TRUE); l_hat_mat_unproj <- eig_mean_log$vectors %*% diag(exp(eig_mean_log$values), nrow=length(eig_mean_log$values)) %*% t(eig_mean_log$vectors)
+          } else { 
+            M_alpha_active <- lapply(M_active_list, function(mat) {eig <- eigen(mat, symmetric = TRUE); P <- eig$vectors; Lambda_alpha <- diag(pmax(0, eig$values)^alpha, nrow=length(eig$values)); P %*% Lambda_alpha %*% t(P) })
+            mean_M_alpha <- Reduce("+", mapply("*", M_alpha_active, s_in_weights_active, SIMPLIFY = FALSE)) / sum_s_in_active
+            eig_mean_alpha <- eigen(mean_M_alpha, symmetric = TRUE); l_hat_mat_unproj <- eig_mean_alpha$vectors %*% diag(pmax(0, eig_mean_alpha$values)^(1/alpha), nrow=length(eig_mean_alpha$values)) %*% t(eig_mean_alpha$vectors)
+          }
+        }
+      } else if (metric == "log_cholesky") {
+        chol_parts_active <- lapply(M_active_list, function(mat) {LL <- chol(mat); L_part <- LL - diag(diag(LL)); D_diag_part <- diag(LL); list(L = L_part, D_log_diag = log(pmax(1e-30,D_diag_part)))})
+        mean_L <- Reduce("+", mapply("*", lapply(chol_parts_active, `[[`, "L"), s_in_weights_active, SIMPLIFY = FALSE)) / sum_s_in_active
+        mean_D_log_diag <- Reduce("+", mapply("*", lapply(chol_parts_active, `[[`, "D_log_diag"), s_in_weights_active, SIMPLIFY = FALSE)) / sum_s_in_active
+        SS <- mean_L + diag(exp(mean_D_log_diag))
+        l_hat_mat_unproj <- t(SS) %*% SS
+      } else if (metric == "cholesky") {
+        L_chol_active <- lapply(M_active_list, chol)
+        mean_L_chol <- Reduce("+", mapply("*", L_chol_active, s_in_weights_active, SIMPLIFY = FALSE)) / sum_s_in_active
+        l_hat_mat_unproj <- t(mean_L_chol) %*% (mean_L_chol)
+      } else { stop(paste("Unsupported metric:", metric)) }
+    } else if (metric_space_type == "sphere") {
+      # ... (sphere code remains the same)
+      yin_active_mat <- do.call(rbind, Y_active)
+      y0_unnorm <- colSums(yin_active_mat * s_in_weights_active, na.rm=TRUE)
+      norm_y0_unnorm <- frechet:::l2norm(y0_unnorm) # Ensure frechet is loaded or use sqrt(sum(y^2))
+      if (any(is.na(y0_unnorm)) || norm_y0_unnorm < 1e-9) {
+        y0 <- yin_active_mat[1,]
+        if(is.null(y0)) {
+          warning("Cannot form initial guess y0 for spherical mean.")
+          return(NULL)
+        }
+      } else {
+        y0 <- y0_unnorm / norm_y0_unnorm
+      }
+      objFctn_sphere = function(y_sphere){
+        if (!isTRUE(all.equal(frechet:::l2norm(y_sphere),1))) {return(list(value = Inf, gradient=rep(Inf, length(y_sphere)), hessian=diag(Inf, length(y_sphere))))}
+        dists_sq_vals <- sapply(1:nrow(yin_active_mat), function(i) frechet::SpheGeoDist(yin_active_mat[i,], y_sphere)^2)
+        f_val <- sum(s_in_weights_active * dists_sq_vals, na.rm=TRUE)
+        g_val_terms <- matrix(0, nrow=nrow(yin_active_mat), ncol=ncol(yin_active_mat))
+        h_val_sum <- matrix(0, ncol=ncol(yin_active_mat), nrow=ncol(yin_active_mat))
+        for(i_s in 1:nrow(yin_active_mat)) {
+          dist_val <- frechet::SpheGeoDist(yin_active_mat[i_s,], y_sphere)
+          if (abs(dist_val) > 1e-8 && abs(dist_val - pi) > 1e-8) { # Avoid poles and antipodes where gradient/Hessian are ill-defined
+            grad_i_val_unscaled <- frechet::SpheGeoGrad(yin_active_mat[i_s,], y_sphere)
+            hess_i_val_unscaled <- frechet::SpheGeoHess(yin_active_mat[i_s,], y_sphere)
+            g_val_terms[i_s,] <- s_in_weights_active[i_s] * 2 * dist_val * grad_i_val_unscaled
+            h_val_sum <- h_val_sum + s_in_weights_active[i_s] * 2 * (grad_i_val_unscaled %*% t(grad_i_val_unscaled) + dist_val * hess_i_val_unscaled)
+          }
+        }
+        g_val <- colSums(g_val_terms, na.rm=TRUE)
+        h_val <- h_val_sum
+        return(list(value=f_val, gradient=g_val, hessian=h_val))
+      }
+      res_trust <- try(trust::trust(objFctn_sphere, y0, rinit=0.1, rmax=100, iterlim=100), silent=TRUE)
+      if (inherits(res_trust, "try-error") || !res_trust$converged) {
+        warning("Trust algorithm failed for weighted spherical mean. Using initial guess y0.")
+        l_hat_mean <- y0
+      } else {
+        l_hat_mean <- res_trust$argument / frechet:::l2norm(res_trust$argument)
+      }
+    } else { stop(paste("Unsupported metric space type:", metric_space_type)) }
+  } 
+  
+  # Final projection/formatting step
+  if (metric_space_type == "density") {
+    m_dim <- length(l_hat_q_unprojected)
+    
+    ## OPTIMIZATION: OSQP Model Caching for Density Projection
+    # Requires 'digest' package for robust key generation if bounds can change.
+    # If 'digest' is not available, simplify key or ensure bounds are fixed.
+    cache_key_density <- paste(
+      "density_proj", m_dim,
+      if (!is.null(frechet_optns$lower)) digest::digest(frechet_optns$lower) else "NULL_L",
+      if (!is.null(frechet_optns$upper)) digest::digest(frechet_optns$upper) else "NULL_U"
+    )
+    
+    model_obj_density_proj <- NULL
+    # Check if frechet_optns is a list and contains the cache
+    if (is.list(frechet_optns) && !is.null(frechet_optns$osqp_model_for_density_proj) &&
+        !is.null(frechet_optns$osqp_model_for_density_proj$key) &&
+        frechet_optns$osqp_model_for_density_proj$key == cache_key_density) {
+      model_obj_density_proj <- frechet_optns$osqp_model_for_density_proj$model
+    }
+    
+    if (is.null(model_obj_density_proj)) {
+      Pmat_qp <- as(diag(m_dim), "sparseMatrix")
+      A_mono_i <- rep(1:(m_dim - 1), each = 2)
+      A_mono_j <- unlist(lapply(1:(m_dim - 1), function(k) c(k, k + 1)))
+      A_mono_vals <- rep(c(-1, 1), m_dim - 1)
+      Amat_qp_mono <- Matrix::sparseMatrix(i = A_mono_i, j = A_mono_j, x = A_mono_vals, dims = c(m_dim - 1, m_dim))
+      l_bounds_mono <- rep(0, m_dim - 1); u_bounds_mono <- rep(Inf, m_dim - 1)
+      Final_Amat_qp <- Amat_qp_mono; Final_l_bounds_qp <- l_bounds_mono; Final_u_bounds_qp <- u_bounds_mono
+      if (!is.null(frechet_optns$lower)) {
+        Final_Amat_qp <- rbind(Final_Amat_qp, Matrix::sparseMatrix(i=1,j=1,x=1, dims=c(1,m_dim)))
+        Final_l_bounds_qp <- c(Final_l_bounds_qp, frechet_optns$lower); Final_u_bounds_qp <- c(Final_u_bounds_qp, Inf)
+      }
+      if (!is.null(frechet_optns$upper)) {
+        Final_Amat_qp <- rbind(Final_Amat_qp, Matrix::sparseMatrix(i=1,j=m_dim,x=1, dims=c(1,m_dim)))
+        Final_l_bounds_qp <- c(Final_l_bounds_qp, -Inf); Final_u_bounds_qp <- c(Final_u_bounds_qp, frechet_optns$upper)
+      }
+      
+      current_osqp_settings_density <- frechet_optns$osqp_settings_density_proj %||% 
+        frechet_optns$osqp_settings %||% 
+        osqp::osqpSettings(verbose = FALSE, eps_abs=1e-8, eps_rel=1e-8)
+      
+      q_placeholder_density <- rep(0, m_dim) # Placeholder q for model setup
+      model_obj_density_proj <- osqp::osqp(P=Pmat_qp, q = q_placeholder_density, A=Final_Amat_qp, 
+                                           l=Final_l_bounds_qp, u=Final_u_bounds_qp, 
+                                           pars = current_osqp_settings_density)
+      
+      # Store the built model in frechet_optns (modifies frechet_optns by side-effect)
+      if (is.list(frechet_optns)) {
+        # This creates/updates the field in the frechet_optns list object
+        # that was passed into this function.
+        frechet_optns[['osqp_model_for_density_proj']] <- list(model = model_obj_density_proj, key = cache_key_density)
+      } else {
+        warning("frechet_optns is not a list or is NULL; cannot cache OSQP model for density projection.")
+      }
+    }
+    
+    model_obj_density_proj$Update(q = -l_hat_q_unprojected)
+    osqp_sol <- model_obj_density_proj$Solve()
+    
+    if (osqp_sol$info$status_val != 1 && osqp_sol$info$status_val != 2 ) {
+      warning(paste("OSQP for density projection did not solve optimally. Status:", osqp_sol$info$status,
+                    "Using unprojected quantiles."))
+      l_hat_q_projected <- l_hat_q_unprojected # Fallback to unprojected
+    } else {
+      l_hat_q_projected <- osqp_sol$x
+    }
+    
+    l_hat_mean <- list(q = l_hat_q_projected, qSup = frechet_optns$qSup, type="quantile")
+    
+  } else if (metric_space_type %in% c("covariance", "correlation", "network")) {
+    is_corr <- (metric_space_type == "correlation")
+    l_hat_mat_unproj_sym <- (l_hat_mat_unproj + t(l_hat_mat_unproj)) / 2
+    
+    if (metric_space_type == "network") {
+      num_nodes_in_data <- ncol(Y_obj_list[[1]]) 
+      W_for_projection <- frechet_optns$W_laplacian_bound %||% 1.0 
+      
+      # Use the pre-built OSQP model for Laplacian projection if available in frechet_optns
+      # The model itself is built/cached in the main frechesTest function
+      # and passed via frechet_optns$osqp_model_for_laplacian_proj
+      l_hat_mean <- .project_to_laplacian_space_osqp(
+        target_matrix_B = l_hat_mat_unproj_sym,
+        M_nodes = num_nodes_in_data,
+        W_upper_edge_abs_val = W_for_projection,
+        osqp_model_cache = frechet_optns$osqp_model_for_laplacian_proj, 
+        osqp_settings = frechet_optns$osqp_settings_laplacian_proj 
+      )
+    } else { 
+      # For covariance/correlation (non-network)
+      l_hat_mat_pd <- try(Matrix::nearPD(l_hat_mat_unproj_sym, corr = is_corr, ensureSymmetry = TRUE, keepDiag = is_corr, maxit=100)$mat, silent = TRUE)
+      if (inherits(l_hat_mat_pd, "try-error")) {
+        warning(paste("nearPD failed for", metric_space_type, "mean. Using unprojected, symmetrized matrix."))
+        l_hat_mat <- l_hat_mat_unproj_sym
+      } else {
+        l_hat_mat <- as.matrix(l_hat_mat_pd)
+      }
+      if (is_corr) {
+        diag(l_hat_mat) <- 1 
+        l_hat_mat <- (l_hat_mat + t(l_hat_mat))/2 # Ensure symmetry again after diag tweak
+      }
+      l_hat_mean <- l_hat_mat
+    }
+  }
+  return(l_hat_mean)
+}
+
+# .estimate_one_sided_frechet_quantities (original function, ensure it calls modified .estimate_weighted_frechet_mean)
+.estimate_one_sided_frechet_quantities <- function(Y_obj_list, X_scalar, metric_space_type,
+                                                   c_val, h_frechet, K_frechet_fun, side,
+                                                   frechet_optns, dist_fun_sq_calculator) {
+  n_total <- length(Y_obj_list)
+  
+  s_in_weights <- .calculate_one_sided_locpoly_weights(X_scalar, c_val, h_frechet, K_frechet_fun, side, n_total)
+  active_indices <- which(s_in_weights != 0)
+  if (length(active_indices) == 0) {
+    warning(paste("No data points have non-zero weight for side", side, ". Cannot estimate Frechet mean/variance."))
+    return(list(l_hat = NULL, V_hat = NA, sigma_V_sq_hat = NA, num_active_weights = 0, debug_info = "No active weights"))
+  }
+  s_in_weights_active <- s_in_weights[active_indices]
+  
+  # This call now uses the modified .estimate_weighted_frechet_mean
+  l_hat <- .estimate_weighted_frechet_mean(Y_obj_list, active_indices, s_in_weights_active,
+                                           metric_space_type, frechet_optns) 
+  if (is.null(l_hat)) {
+    return(list(l_hat = NULL, V_hat = NA, sigma_V_sq_hat = NA, num_active_weights = length(active_indices), debug_info = "Frechet mean estimation failed"))
+  }
+  d_sq_vals_active <- sapply(active_indices, function(i_act) {
+    dist_fun_sq_calculator(Y_obj_list[[i_act]], l_hat, frechet_optns)
+  })
+  
+  # Variance estimation (using the corrected version from user's code)
+  sum_w_sq_abs <- sum(abs(s_in_weights_active)) # Use absolute weights for the sum of squares part of variance
+  sum_w_signed <- sum(s_in_weights_active)     # Use signed weights for the mean
+  
+  V_hat      <- sum(s_in_weights_active * d_sq_vals_active, na.rm=TRUE) / sum_w_signed  
+  center     <- d_sq_vals_active - V_hat # d_sq_vals_active are deviations from this V_hat
+  
+  sigma_V_sq_hat <- if (sum_w_sq_abs > 1e-12) { # Avoid division by zero if all weights are tiny
+    sum(abs(s_in_weights_active) * center^2, na.rm = TRUE) / sum_w_sq_abs
+  } else {
+    NA # Or some other indicator of failure / small sample
+  }
+  
+  if (is.na(sigma_V_sq_hat) || sigma_V_sq_hat < 1e-12) { # Keep a floor
+    sigma_V_sq_hat <- 1e-12
+  }
+  
+  return(list(l_hat = l_hat, V_hat = V_hat, sigma_V_sq_hat = sigma_V_sq_hat, num_active_weights = length(active_indices), debug_info = NULL))
+}
+
+# .set_bw_range_frechet_style (original function - no changes)
+.set_bw_range_frechet_style <- function(xin_side, c_val_target, kernel_type, X_scalar_global = NULL) {
+  if (length(xin_side) < 2) {
+    warning("Too few points to determine CV bandwidth range robustly for one side. Using wide heuristic.")
+    sd_global_val <- NA
+    if(!is.null(X_scalar_global)) sd_global_val <- stats::sd(X_scalar_global, na.rm=TRUE)
+    if(is.na(sd_global_val) || sd_global_val == 0) sd_global_val <- 1
+    min_bw <- 0.01 * sd_global_val
+    max_bw <- 0.5 * sd_global_val
+    return(list(min = max(1e-5, min_bw), max = max(max_bw, min_bw * 1.5)))
+  }
+  xinSt <- unique(sort(xin_side))
+  xout_eff_min <- max(min(xinSt), c_val_target - 0.01 * diff(range(xinSt, na.rm=TRUE)))
+  xout_eff_max <- min(max(xinSt), c_val_target + 0.01 * diff(range(xinSt, na.rm=TRUE)))
+  if(xout_eff_min > xout_eff_max) {xout_eff_min <- min(xinSt); xout_eff_max <- max(xinSt)}
+  min_spacing <- if(length(xinSt) > 1) min(diff(xinSt)) else 0.001
+  bw_min_heuristic <- min_spacing * 1.5
+  if(is.na(bw_min_heuristic) || bw_min_heuristic == 0) bw_min_heuristic <- 0.001
+  kernel_scale_factor <- (ifelse(tolower(kernel_type) == "gauss", 3, 1) *
+                            ifelse(tolower(kernel_type) == "gausvar", 2.5, 1))
+  bw.min <- max(1e-5, bw_min_heuristic / kernel_scale_factor)
+  range_xin_side <- diff(range(xin_side, na.rm=TRUE))
+  sd_xin_side <- stats::sd(xin_side, na.rm=TRUE)
+  if(is.na(range_xin_side) || range_xin_side == 0) {
+    if(!is.na(sd_xin_side) && sd_xin_side > 0) range_xin_side <- sd_xin_side * 2
+    else {
+      if(!is.null(X_scalar_global)) {
+        sd_global_val_inner <- stats::sd(X_scalar_global, na.rm=TRUE)
+        if(!is.na(sd_global_val_inner) && sd_global_val_inner > 0) range_xin_side <- sd_global_val_inner * 2
+        else range_xin_side <- 1
+      } else {
+        range_xin_side <- 1
+      }
+    }
+  }
+  if(is.na(range_xin_side) || range_xin_side == 0) range_xin_side <- 1
+  bw.max <- max(bw.min * 1.5, range_xin_side / 3, na.rm=TRUE)
+  if (bw.max < bw.min) {
+    if (bw.min > bw.max * 1.5 && is.finite(bw.min) && is.finite(bw.max)) {
+      bw.max <- bw.min * 1.01
+    } else {
+      bw.max <- (bw.min %||% 0.001) * 1.5
+    }
+  }
+  bw.min <- if(is.finite(bw.min)) bw.min else 1e-5
+  bw.max <- if(is.finite(bw.max)) bw.max else bw.min * 2
+  if (bw.max <= bw.min) bw.max <- bw.min * 1.5
+  return(list(min = bw.min, max = bw.max))
+}
+
+# ._cv_for_frechet_jump_h (original function, ensure it calls modified .estimate_weighted_frechet_mean)
+._cv_for_frechet_jump_h <- function(Y_obj_list, X_scalar, c_val,
+                                    metric_space_type, kernel_frechet_char,
+                                    actual_kernel_function,
+                                    frechet_optns, dist_fun_sq_calculator,
+                                    K_folds = 5, n_bw_candidates = 10,
+                                    min_eff_points_cv_fold = 3,
+                                    min_bw_heuristic_factor = 0.001) { 
+  
+  n_total <- length(X_scalar)
+  X_scalar_range <- diff(range(X_scalar, na.rm = TRUE))
+  if(!is.finite(X_scalar_range) || X_scalar_range == 0) X_scalar_range <- 1 
+  
+  indices_left_all <- which(X_scalar < c_val)
+  indices_right_all <- which(X_scalar >= c_val)
+  n_on_left_side <- length(indices_left_all)
+  n_on_right_side <- length(indices_right_all)
+  min_points_for_side_in_cv <- max(K_folds, ceiling(min_eff_points_cv_fold * K_folds / (K_folds - 1)) , 5)
+  
+  if (n_on_left_side < min_points_for_side_in_cv || n_on_right_side < min_points_for_side_in_cv) {
+    warning(paste("Not enough points for robust CV on at least one side (left:", n_on_left_side,
+                  ", right:", n_on_right_side, "; need >=", round(min_points_for_side_in_cv,1),
+                  " on each side). Using heuristic bandwidth for the jump."))
+    X_around_c <- X_scalar[c(indices_left_all, indices_right_all)]
+    if (length(X_around_c) < 2) {
+      sd_X_global_fallback <- stats::sd(X_scalar, na.rm=TRUE); if(is.na(sd_X_global_fallback) || sd_X_global_fallback == 0) sd_X_global_fallback <-1
+      return(max(1e-5, 0.1 * sd_X_global_fallback, min_bw_heuristic_factor * X_scalar_range))
+    }
+    h_heuristic <- tryCatch(stats::bw.nrd0(X_around_c), error = function(e) NA)
+    if(is.na(h_heuristic) || h_heuristic <= 0) {
+      h_heur_left <- NA; h_heur_right <- NA
+      if(n_on_left_side >= 2) h_heur_left <- tryCatch(stats::bw.nrd0(X_scalar[indices_left_all]), error = function(e) NA)
+      if(n_on_right_side >= 2) h_heur_right <- tryCatch(stats::bw.nrd0(X_scalar[indices_right_all]), error = function(e) NA)
+      valid_heur <- c(h_heur_left, h_heur_right)[is.finite(c(h_heur_left, h_heur_right)) & (c(h_heur_left, h_heur_right) > 0)]
+      if(length(valid_heur) > 0) {
+        h_heuristic <- mean(valid_heur, na.rm = TRUE)
+      } else {
+        h_heuristic <- 0.1 * stats::sd(X_scalar, na.rm=TRUE)
+        if(is.na(h_heuristic) || h_heuristic <=0) h_heuristic <- 0.1
+      }
+    }
+    return(max(1e-5, h_heuristic, min_bw_heuristic_factor * X_scalar_range, na.rm=TRUE))
+  }
+  
+  bw_range_left <- .set_bw_range_frechet_style(xin_side = X_scalar[indices_left_all],
+                                               c_val_target = c_val,
+                                               kernel_type = kernel_frechet_char,
+                                               X_scalar_global = X_scalar)
+  bw_range_right <- .set_bw_range_frechet_style(xin_side = X_scalar[indices_right_all],
+                                                c_val_target = c_val,
+                                                kernel_type = kernel_frechet_char,
+                                                X_scalar_global = X_scalar)
+  min_h_cand <- max(bw_range_left$min, bw_range_right$min, min_bw_heuristic_factor * X_scalar_range, na.rm = TRUE) 
+  max_h_cand <- min(bw_range_left$max, bw_range_right$max, na.rm = TRUE)
+  
+  if (!is.finite(min_h_cand) || !is.finite(max_h_cand) || min_h_cand >= max_h_cand) {
+    warning(paste("Combined CV: Invalid bandwidth range derived (min:",
+                  signif(min_h_cand,3), "max:", signif(max_h_cand,3), "). Using global fallback range."))
+    sd_X_global_fallback <- stats::sd(X_scalar, na.rm=TRUE); if(is.na(sd_X_global_fallback) || sd_X_global_fallback == 0) sd_X_global_fallback <-1
+    min_h_cand <- max(1e-5, 0.05 * sd_X_global_fallback, min_bw_heuristic_factor * X_scalar_range)
+    max_h_cand <- max(min_h_cand * 1.5, 0.5 * sd_X_global_fallback)
+  }
+  
+  bw_candidates <- seq(min_h_cand, max_h_cand, length.out = n_bw_candidates)
+  bw_candidates <- unique(pmax(1e-5, bw_candidates))
+  
+  shuffled_indices_left_within_side <- sample(1:n_on_left_side)
+  folds_left <- cut(shuffled_indices_left_within_side, breaks = K_folds, labels = FALSE)
+  shuffled_indices_right_within_side <- sample(1:n_on_right_side)
+  folds_right <- cut(shuffled_indices_right_within_side, breaks = K_folds, labels = FALSE)
+  
+  cv_errors <- sapply(bw_candidates, function(h_cand) {
+    fold_errors_h_sum <- 0
+    num_valid_folds_for_h_cand <- 0
+    
+    suppressWarnings({ # Suppress warnings from inner estimations during CV
+      for (k_fold_idx in 1:K_folds) {
+        validation_idx_left_in_shuffled <- which(folds_left == k_fold_idx)
+        training_idx_left_in_shuffled <- which(folds_left != k_fold_idx)
+        original_indices_train_left_fold <- indices_left_all[shuffled_indices_left_within_side[training_idx_left_in_shuffled]]
+        original_indices_val_left_fold <- indices_left_all[shuffled_indices_left_within_side[validation_idx_left_in_shuffled]]
+        
+        validation_idx_right_in_shuffled <- which(folds_right == k_fold_idx)
+        training_idx_right_in_shuffled <- which(folds_right != k_fold_idx)
+        original_indices_train_right_fold <- indices_right_all[shuffled_indices_right_within_side[training_idx_right_in_shuffled]]
+        original_indices_val_right_fold <- indices_right_all[shuffled_indices_right_within_side[validation_idx_right_in_shuffled]]
+        
+        if (length(original_indices_train_left_fold) < min_eff_points_cv_fold ||
+            length(original_indices_train_right_fold) < min_eff_points_cv_fold) {
+          next 
+        }
+        
+        l_hat_train_left_at_c <- NULL
+        if (length(original_indices_train_left_fold) > 0) {
+          s_in_train_weights_left <- .calculate_one_sided_locpoly_weights(
+            x_obs = X_scalar[original_indices_train_left_fold], # Pass subset of X_scalar
+            c_val = c_val, h_val = h_cand, K_fun = actual_kernel_function, side = "-", 
+            n = length(original_indices_train_left_fold) # n for local poly is size of this subset
+          )
+          active_train_left_indices_in_subset <- which(s_in_train_weights_left != 0)
+          if (length(active_train_left_indices_in_subset) >= min_eff_points_cv_fold) {
+            # original_indices_actively_weighted_train_left <- original_indices_train_left_fold[active_train_left_indices_in_subset] # Not directly needed if passing subset of Y_obj
+            l_hat_train_left_at_c <- .estimate_weighted_frechet_mean(
+              Y_obj_list = Y_obj_list[original_indices_train_left_fold], # Pass subset of Y_obj_list
+              active_idx = active_train_left_indices_in_subset, # Indices relative to this Y_obj_list subset
+              s_in_weights_active = s_in_train_weights_left[active_train_left_indices_in_subset],
+              metric_space_type = metric_space_type, frechet_optns = frechet_optns
+            )
+          }
+          if (is.null(l_hat_train_left_at_c)) { next }
+        }
+        
+        l_hat_train_right_at_c <- NULL
+        if (length(original_indices_train_right_fold) > 0) {
+          s_in_train_weights_right <- .calculate_one_sided_locpoly_weights(
+            x_obs = X_scalar[original_indices_train_right_fold], # Pass subset of X_scalar
+            c_val = c_val, h_val = h_cand, K_fun = actual_kernel_function, side = "+", 
+            n = length(original_indices_train_right_fold) # n for local poly is size of this subset
+          )
+          active_train_right_indices_in_subset <- which(s_in_train_weights_right != 0)
+          if (length(active_train_right_indices_in_subset) >= min_eff_points_cv_fold) {
+            l_hat_train_right_at_c <- .estimate_weighted_frechet_mean(
+              Y_obj_list = Y_obj_list[original_indices_train_right_fold], # Pass subset of Y_obj_list
+              active_idx = active_train_right_indices_in_subset, # Indices relative to this Y_obj_list subset
+              s_in_weights_active = s_in_train_weights_right[active_train_right_indices_in_subset],
+              metric_space_type = metric_space_type, frechet_optns = frechet_optns
+            )
+          }
+          if (is.null(l_hat_train_right_at_c)) { next }
+        }
+        
+        if (is.null(l_hat_train_left_at_c) || is.null(l_hat_train_right_at_c)) {
+          next 
+        }
+        
+        current_fold_error_sum <- 0
+        if (length(original_indices_val_left_fold) > 0) {
+          errors_this_fold_val_left <- sapply(original_indices_val_left_fold, function(val_idx) {
+            dist_fun_sq_calculator(Y_obj_list[[val_idx]], l_hat_train_left_at_c, frechet_optns)
+          })
+          current_fold_error_sum <- current_fold_error_sum + sum(errors_this_fold_val_left, na.rm = TRUE)
+        }
+        if (length(original_indices_val_right_fold) > 0) {
+          errors_this_fold_val_right <- sapply(original_indices_val_right_fold, function(val_idx) {
+            dist_fun_sq_calculator(Y_obj_list[[val_idx]], l_hat_train_right_at_c, frechet_optns)
+          })
+          current_fold_error_sum <- current_fold_error_sum + sum(errors_this_fold_val_right, na.rm = TRUE)
+        }
+        
+        if (length(original_indices_val_left_fold) > 0 || length(original_indices_val_right_fold) > 0) {
+          fold_errors_h_sum <- fold_errors_h_sum + current_fold_error_sum
+          num_valid_folds_for_h_cand <- num_valid_folds_for_h_cand + 1
+        }
+      } 
+    }) # End suppressWarnings
+    
+    if (num_valid_folds_for_h_cand == 0) return(Inf)
+    return(fold_errors_h_sum / num_valid_folds_for_h_cand)
+  })
+  
+  best_bw_idx <- which.min(cv_errors)
+  if (length(best_bw_idx) == 0 || !is.finite(cv_errors[best_bw_idx[1]]) || cv_errors[best_bw_idx[1]] == Inf) {
+    warning(paste("Combined K-Fold CV failed to find a valid minimum error. Min error found:",
+                  if(length(best_bw_idx)>0 && length(cv_errors) >= best_bw_idx[1]) signif(cv_errors[best_bw_idx[1]],3) else "NA",
+                  ". Using heuristic fallback."))
+    X_around_c <- X_scalar[c(indices_left_all, indices_right_all)]
+    if (length(X_around_c) < 2) {
+      sd_X_global_fallback <- stats::sd(X_scalar, na.rm=TRUE); if(is.na(sd_X_global_fallback) || sd_X_global_fallback == 0) sd_X_global_fallback <-1
+      return(max(1e-5, 0.1 * sd_X_global_fallback, min_bw_heuristic_factor * X_scalar_range))
+    }
+    h_heuristic <- tryCatch(stats::bw.nrd0(X_around_c), error = function(e) NA)
+    if(is.na(h_heuristic) || h_heuristic <= 0) {
+      h_heur_left <- NA; h_heur_right <- NA
+      if(n_on_left_side >= 2) h_heur_left <- tryCatch(stats::bw.nrd0(X_scalar[indices_left_all]), error = function(e) NA)
+      if(n_on_right_side >= 2) h_heur_right <- tryCatch(stats::bw.nrd0(X_scalar[indices_right_all]), error = function(e) NA)
+      valid_heur <- c(h_heur_left, h_heur_right)[is.finite(c(h_heur_left, h_heur_right)) & (c(h_heur_left, h_heur_right) > 0)]
+      if(length(valid_heur) > 0) {
+        h_heuristic <- mean(valid_heur, na.rm = TRUE)
+      } else {
+        h_heuristic <- 0.1 * stats::sd(X_scalar, na.rm=TRUE)
+        if(is.na(h_heuristic) || h_heuristic <=0) h_heuristic <- 0.1
+      }
+    }
+    return(max(1e-5, h_heuristic, min_bw_heuristic_factor * X_scalar_range, na.rm=TRUE))
+  }
+  return(bw_candidates[best_bw_idx[1]])
+}

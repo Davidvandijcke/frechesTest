@@ -1,0 +1,548 @@
+"country","iso2c","iso3c","year","status","lastupdated","gni_per_capita","gdp_per_capita","population","trade_gdp","region","capital","longitude","latitude","income","lending","high_income_threshold","running_var","treatment","running_var_centered"
+"Albania","AL","ALB",2019,"","2025-04-15",5280,5460.42823730592,2854191,75.3821602848745,"Europe & Central Asia","Tirane","19.8172","41.3317","Upper middle income","IBRD",12536,-7256,0,-7.256
+"Albania","AL","ALB",2020,"","2025-04-15",5320,5370.77862312929,2837849,59.5206994403142,"Europe & Central Asia","Tirane","19.8172","41.3317","Upper middle income","IBRD",12696,-7376,0,-7.376
+"Albania","AL","ALB",2021,"","2025-04-15",6150,6413.28328605026,2811666,75.5903160937554,"Europe & Central Asia","Tirane","19.8172","41.3317","Upper middle income","IBRD",13205,-7055,0,-7.055
+"Albania","AL","ALB",2022,"","2025-04-15",6820,6846.42614266044,2777689,84.6980639208685,"Europe & Central Asia","Tirane","19.8172","41.3317","Upper middle income","IBRD",13845,-7025,0,-7.025
+"Albania","AL","ALB",2018,"","2025-04-15",4880,5365.48934672897,2866376,75.6940706898154,"Europe & Central Asia","Tirane","19.8172","41.3317","Upper middle income","IBRD",12376,-7496,0,-7.496
+"Albania","AL","ALB",2023,"","2025-04-15",7680,8575.17113446213,2745972,82.4936845982876,"Europe & Central Asia","Tirane","19.8172","41.3317","Upper middle income","IBRD",14005,-6325,0,-6.325
+"Algeria","DZ","DZA",2021,"","2025-04-15",4120,4160.55926736925,44761099,46.8370592599607,"Middle East & North Africa","Algiers","3.05097","36.7397","Upper middle income","IBRD",13205,-9085,0,-9.085
+"Algeria","DZ","DZA",2019,"","2025-04-15",4480,4468.45341883656,43294546,46.5068426081672,"Middle East & North Africa","Algiers","3.05097","36.7397","Upper middle income","IBRD",12536,-8056,0,-8.056
+"Algeria","DZ","DZA",2022,"","2025-04-15",4430,4961.55257664733,45477389,51.2023757404409,"Middle East & North Africa","Algiers","3.05097","36.7397","Upper middle income","IBRD",13845,-9415,0,-9.415
+"Algeria","DZ","DZA",2020,"","2025-04-15",4020,3743.5419522929,44042091,40.3897565625388,"Middle East & North Africa","Algiers","3.05097","36.7397","Upper middle income","IBRD",12696,-8676,0,-8.676
+"Algeria","DZ","DZA",2023,"","2025-04-15",4950,5364.02795022731,46164219,43.682914195572,"Middle East & North Africa","Algiers","3.05097","36.7397","Upper middle income","IBRD",14005,-9055,0,-9.055
+"Algeria","DZ","DZA",2018,"","2025-04-15",4450,4577.21029180491,42505035,52.4361676779223,"Middle East & North Africa","Algiers","3.05097","36.7397","Upper middle income","IBRD",12376,-7926,0,-7.926
+"Antigua and Barbuda","AG","ATG",2019,"","2025-04-15",18240,18884.3729680383,91364,137.625175755884,"Latin America & Caribbean","Saint John's","-61.8456","17.1175","High income","IBRD",12536,5704,1,5.704
+"Antigua and Barbuda","AG","ATG",2023,"","2025-04-15",20200,21787.1017315914,93316,NA,"Latin America & Caribbean","Saint John's","-61.8456","17.1175","High income","IBRD",14005,6195,1,6.195
+"Antigua and Barbuda","AG","ATG",2020,"","2025-04-15",15370,15360.4544160475,91846,94.3457201737921,"Latin America & Caribbean","Saint John's","-61.8456","17.1175","High income","IBRD",12696,2674,1,2.674
+"Antigua and Barbuda","AG","ATG",2022,"","2025-04-15",18900,20117.7653310355,92840,117.630005076464,"Latin America & Caribbean","Saint John's","-61.8456","17.1175","High income","IBRD",13845,5055,1,5.055
+"Antigua and Barbuda","AG","ATG",2018,"","2025-04-15",17460,18273.4270684912,90926,130.655152659419,"Latin America & Caribbean","Saint John's","-61.8456","17.1175","High income","IBRD",12376,5084,1,5.084
+"Antigua and Barbuda","AG","ATG",2021,"","2025-04-15",16670,17340.3790692554,92349,101.122883462968,"Latin America & Caribbean","Saint John's","-61.8456","17.1175","High income","IBRD",13205,3465,1,3.465
+"Argentina","AR","ARG",2020,"","2025-04-15",9040,8535.59938004389,45191965,30.203698807416,"Latin America & Caribbean","Buenos Aires","-58.4173","-34.6118","Upper middle income","IBRD",12696,-3656,0,-3.656
+"Argentina","AR","ARG",2021,"","2025-04-15",10070,10738.0179223384,45312281,33.078689567466,"Latin America & Caribbean","Buenos Aires","-58.4173","-34.6118","Upper middle income","IBRD",13205,-3135,0,-3.135
+"Argentina","AR","ARG",2019,"","2025-04-15",11210,9955.97478680428,44973465,32.6306150458499,"Latin America & Caribbean","Buenos Aires","-58.4173","-34.6118","Upper middle income","IBRD",12536,-1326,0,-1.326
+"Argentina","AR","ARG",2018,"","2025-04-15",12390,11752.7998922979,44654882,30.7625359549926,"Latin America & Caribbean","Buenos Aires","-58.4173","-34.6118","Upper middle income","IBRD",12376,14,1,0.014
+"Argentina","AR","ARG",2023,"","2025-04-15",12890,14187.4827252965,45538401,26.6405121334437,"Latin America & Caribbean","Buenos Aires","-58.4173","-34.6118","Upper middle income","IBRD",14005,-1115,0,-1.115
+"Argentina","AR","ARG",2022,"","2025-04-15",11820,13935.6811110049,45407904,31.5477080051071,"Latin America & Caribbean","Buenos Aires","-58.4173","-34.6118","Upper middle income","IBRD",13845,-2025,0,-2.025
+"Armenia","AM","ARM",2021,"","2025-04-15",4580,4685.17997128509,2962300,79.6698888228399,"Europe & Central Asia","Yerevan","44.509","40.1596","Upper middle income","IBRD",13205,-8625,0,-8.625
+"Armenia","AM","ARM",2019,"","2025-04-15",4650,4597.22887399548,2962500,96.1141541288708,"Europe & Central Asia","Yerevan","44.509","40.1596","Upper middle income","IBRD",12536,-7886,0,-7.886
+"Armenia","AM","ARM",2020,"","2025-04-15",4230,4268.68093304583,2961500,69.4888075396076,"Europe & Central Asia","Yerevan","44.509","40.1596","Upper middle income","IBRD",12696,-8466,0,-8.466
+"Armenia","AM","ARM",2023,"","2025-04-15",6780,8053.01066312345,2990900,119.714642963872,"Europe & Central Asia","Yerevan","44.509","40.1596","Upper middle income","IBRD",14005,-7225,0,-7.225
+"Armenia","AM","ARM",2018,"","2025-04-15",4220,4196.00562301769,2969000,92.473107021212,"Europe & Central Asia","Yerevan","44.509","40.1596","Upper middle income","IBRD",12376,-8156,0,-8.156
+"Armenia","AM","ARM",2022,"","2025-04-15",5680,6571.97445545099,2969200,101.41077826094,"Europe & Central Asia","Yerevan","44.509","40.1596","Upper middle income","IBRD",13845,-8165,0,-8.165
+"Aruba","AW","ABW",2020,"","2025-04-15",22220,22855.9323200761,108587,124.137265493419,"Latin America & Caribbean","Oranjestad","-70.0167","12.5167","High income","Not classified",12696,9524,1,9.524
+"Azerbaijan","AZ","AZE",2018,"","2025-04-15",4080,4739.7943123408,9939771,91.6725765369825,"Europe & Central Asia","Baku","49.8932","40.3834","Upper middle income","IBRD",12376,-8296,0,-8.296
+"Azerbaijan","AZ","AZE",2019,"","2025-04-15",4510,4805.75371765917,10024283,85.8181454084561,"Europe & Central Asia","Baku","49.8932","40.3834","Upper middle income","IBRD",12536,-8026,0,-8.026
+"Azerbaijan","AZ","AZE",2021,"","2025-04-15",4910,5408.04535175023,10137750,76.286865687015,"Europe & Central Asia","Baku","49.8932","40.3834","Upper middle income","IBRD",13205,-8295,0,-8.295
+"Azerbaijan","AZ","AZE",2023,"","2025-04-15",6660,7125.90858368611,10153958,83.6193503542524,"Europe & Central Asia","Baku","49.8932","40.3834","Upper middle income","IBRD",14005,-7345,0,-7.345
+"Azerbaijan","AZ","AZE",2020,"","2025-04-15",4480,4229.91064904503,10093121,72.0178676487811,"Europe & Central Asia","Baku","49.8932","40.3834","Upper middle income","IBRD",12696,-8216,0,-8.216
+"Azerbaijan","AZ","AZE",2022,"","2025-04-15",5670,7770.594223351,10141756,86.9822732541779,"Europe & Central Asia","Baku","49.8932","40.3834","Upper middle income","IBRD",13845,-8175,0,-8.175
+"Barbados","BB","BRB",2021,"","2025-04-15",18320,18696.7858952957,282147,NA,"Latin America & Caribbean","Bridgetown","-59.6105","13.0935","High income","IBRD",13205,5115,1,5.115
+"Barbados","BB","BRB",2022,"","2025-04-15",22290,22164.0260273876,282318,NA,"Latin America & Caribbean","Bridgetown","-59.6105","13.0935","High income","IBRD",13845,8445,1,8.445
+"Barbados","BB","BRB",2020,"","2025-04-15",17610,18347.1109131055,281698,NA,"Latin America & Caribbean","Bridgetown","-59.6105","13.0935","High income","IBRD",12696,4914,1,4.914
+"Barbados","BB","BRB",2019,"","2025-04-15",19490,20583.7265786414,281207,NA,"Latin America & Caribbean","Bridgetown","-59.6105","13.0935","High income","IBRD",12536,6954,1,6.954
+"Barbados","BB","BRB",2023,"","2025-04-15",22870,23804.0249914995,282336,NA,"Latin America & Caribbean","Bridgetown","-59.6105","13.0935","High income","IBRD",14005,8865,1,8.865
+"Barbados","BB","BRB",2018,"","2025-04-15",18820,20055.915870771,280711,NA,"Latin America & Caribbean","Bridgetown","-59.6105","13.0935","High income","IBRD",12376,6444,1,6.444
+"Belarus","BY","BLR",2019,"","2025-04-15",6370,6837.76832136779,9419758,130.850132114123,"Europe & Central Asia","Minsk","27.5766","53.9678","Upper middle income","IBRD",12536,-6166,0,-6.166
+"Belarus","BY","BLR",2018,"","2025-04-15",5730,6360.05310087258,9438785,139.393394375409,"Europe & Central Asia","Minsk","27.5766","53.9678","Upper middle income","IBRD",12376,-6646,0,-6.646
+"Belarus","BY","BLR",2023,"","2025-04-15",7790,7829.05313660622,9178298,132.998797317727,"Europe & Central Asia","Minsk","27.5766","53.9678","Upper middle income","IBRD",14005,-6215,0,-6.215
+"Belarus","BY","BLR",2020,"","2025-04-15",6410,6542.8645398436,9379952,118.933883690331,"Europe & Central Asia","Minsk","27.5766","53.9678","Upper middle income","IBRD",12696,-6286,0,-6.286
+"Belarus","BY","BLR",2021,"","2025-04-15",7040,7489.71894713888,9302585,136.014450556595,"Europe & Central Asia","Minsk","27.5766","53.9678","Upper middle income","IBRD",13205,-6165,0,-6.165
+"Belarus","BY","BLR",2022,"","2025-04-15",7210,7994.64806074889,9228071,120.024207576094,"Europe & Central Asia","Minsk","27.5766","53.9678","Upper middle income","IBRD",13845,-6635,0,-6.635
+"Belize","BZ","BLZ",2021,"","2025-04-15",6090,6122.61158580079,395346,99.3162710954122,"Latin America & Caribbean","Belmopan","-88.7713","17.2534","Upper middle income","Blend",13205,-7115,0,-7.115
+"Belize","BZ","BLZ",2019,"","2025-04-15",5870,6190.04792278445,385829,102.122848888331,"Latin America & Caribbean","Belmopan","-88.7713","17.2534","Upper middle income","Blend",12536,-6666,0,-6.666
+"Belize","BZ","BLZ",2020,"","2025-04-15",5170,5227.19363786168,390812,81.821964412463,"Latin America & Caribbean","Belmopan","-88.7713","17.2534","Upper middle income","Blend",12696,-7526,0,-7.526
+"Belize","BZ","BLZ",2018,"","2025-04-15",5630,6031.28139580144,380226,100.664995094298,"Latin America & Caribbean","Belmopan","-88.7713","17.2534","Upper middle income","Blend",12376,-6746,0,-6.746
+"Belize","BZ","BLZ",2022,"","2025-04-15",6710,7068.45478269722,402733,108.52917413145,"Latin America & Caribbean","Belmopan","-88.7713","17.2534","Upper middle income","Blend",13845,-7135,0,-7.135
+"Belize","BZ","BLZ",2023,"","2025-04-15",6890,7459.99815132837,411106,106.531755710256,"Latin America & Caribbean","Belmopan","-88.7713","17.2534","Upper middle income","Blend",14005,-7115,0,-7.115
+"Bhutan","BT","BTN",2018,"","2025-04-15",3150,3400.20417159422,759759,79.7397203478125,"South Asia","Thimphu","89.6177","27.5768","Lower middle income","IDA",12376,-9226,0,-9.226
+"Bhutan","BT","BTN",2020,"","2025-04-15",3040,3191.66907031782,770006,71.8303510017133,"South Asia","Thimphu","89.6177","27.5768","Lower middle income","IDA",12696,-9656,0,-9.656
+"Bhutan","BT","BTN",2019,"","2025-04-15",3370,3576.87987077877,764824,76.123516713179,"South Asia","Thimphu","89.6177","27.5768","Lower middle income","IDA",12536,-9166,0,-9.166
+"Bhutan","BT","BTN",2021,"","2025-04-15",3300,3570.61257915864,775442,77.5824483207755,"South Asia","Thimphu","89.6177","27.5768","Lower middle income","IDA",13205,-9905,0,-9.905
+"Bolivia","BO","BOL",2021,"","2025-04-15",3330,3384.84486479247,11937360,59.0213965631402,"Latin America & Caribbean","La Paz","-66.1936","-13.9908","Lower middle income","IBRD",13205,-9875,0,-9.875
+"Bolivia","BO","BOL",2019,"","2025-04-15",3470,3503.8960106182,11671386,56.3973067329667,"Latin America & Caribbean","La Paz","-66.1936","-13.9908","Lower middle income","IBRD",12536,-9066,0,-9.066
+"Bolivia","BO","BOL",2020,"","2025-04-15",3150,3099.94219044572,11816299,45.5032625935066,"Latin America & Caribbean","La Paz","-66.1936","-13.9908","Lower middle income","IBRD",12696,-9546,0,-9.546
+"Bolivia","BO","BOL",2018,"","2025-04-15",3320,3500.72642189371,11508368,57.1099646333271,"Latin America & Caribbean","La Paz","-66.1936","-13.9908","Lower middle income","IBRD",12376,-9056,0,-9.056
+"Bosnia and Herzegovina","BA","BIH",2018,"","2025-04-15",5720,6047.84584261133,3387000,98.4320911961869,"Europe & Central Asia","Sarajevo","18.4214","43.8607","Upper middle income","IBRD",12376,-6656,0,-6.656
+"Bosnia and Herzegovina","BA","BIH",2019,"","2025-04-15",6180,6122.3753450882,3345533,94.5161278874242,"Europe & Central Asia","Sarajevo","18.4214","43.8607","Upper middle income","IBRD",12536,-6356,0,-6.356
+"Bosnia and Herzegovina","BA","BIH",2023,"","2025-04-15",8280,8638.66620201187,3185073,99.8983684696212,"Europe & Central Asia","Sarajevo","18.4214","43.8607","Upper middle income","IBRD",14005,-5725,0,-5.725
+"Bosnia and Herzegovina","BA","BIH",2022,"","2025-04-15",7710,7655.59421024383,3204802,110.20596766123,"Europe & Central Asia","Sarajevo","18.4214","43.8607","Upper middle income","IBRD",13845,-6135,0,-6.135
+"Bosnia and Herzegovina","BA","BIH",2021,"","2025-04-15",6970,7295.3438240957,3244907,96.4859085777747,"Europe & Central Asia","Sarajevo","18.4214","43.8607","Upper middle income","IBRD",13205,-6235,0,-6.235
+"Bosnia and Herzegovina","BA","BIH",2020,"","2025-04-15",6160,6130.31133245161,3299349,82.1112652572898,"Europe & Central Asia","Sarajevo","18.4214","43.8607","Upper middle income","IBRD",12696,-6536,0,-6.536
+"Botswana","BW","BWA",2020,"","2025-04-15",6600,6323.31419156209,2365894,77.6632128124716,"Sub-Saharan Africa","Gaborone","25.9201","-24.6544","Upper middle income","IBRD",12696,-6096,0,-6.096
+"Botswana","BW","BWA",2023,"","2025-04-15",8340,7820.23240375076,2480244,68.8572126290116,"Sub-Saharan Africa","Gaborone","25.9201","-24.6544","Upper middle income","IBRD",14005,-5665,0,-5.665
+"Botswana","BW","BWA",2021,"","2025-04-15",7530,7808.20623956293,2401441,88.7551314233315,"Sub-Saharan Africa","Gaborone","25.9201","-24.6544","Upper middle income","IBRD",13205,-5675,0,-5.675
+"Botswana","BW","BWA",2022,"","2025-04-15",8250,8329.04032229144,2439892,85.6083027804928,"Sub-Saharan Africa","Gaborone","25.9201","-24.6544","Upper middle income","IBRD",13845,-5595,0,-5.595
+"Botswana","BW","BWA",2018,"","2025-04-15",6680,7407.95940141786,2299141,87.4551039946493,"Sub-Saharan Africa","Gaborone","25.9201","-24.6544","Upper middle income","IBRD",12376,-5696,0,-5.696
+"Botswana","BW","BWA",2019,"","2025-04-15",7520,7172.08956480028,2332083,83.0929813601175,"Sub-Saharan Africa","Gaborone","25.9201","-24.6544","Upper middle income","IBRD",12536,-5016,0,-5.016
+"Brazil","BR","BRA",2018,"","2025-04-15",9320,9300.66164936497,206107261,28.8762033759743,"Latin America & Caribbean","Brasilia","-47.9292","-15.7801","Upper middle income","IBRD",12376,-3056,0,-3.056
+"Brazil","BR","BRA",2020,"","2025-04-15",8080,7074.19378281866,208660842,32.3020785463409,"Latin America & Caribbean","Brasilia","-47.9292","-15.7801","Upper middle income","IBRD",12696,-4616,0,-4.616
+"Brazil","BR","BRA",2019,"","2025-04-15",9410,9029.83326742175,207455459,28.8902578679414,"Latin America & Caribbean","Brasilia","-47.9292","-15.7801","Upper middle income","IBRD",12536,-3126,0,-3.126
+"Brazil","BR","BRA",2022,"","2025-04-15",8450,9281.33334441234,210306415,38.8160659763397,"Latin America & Caribbean","Brasilia","-47.9292","-15.7801","Upper middle income","IBRD",13845,-5395,0,-5.395
+"Brazil","BR","BRA",2021,"","2025-04-15",8060,7972.53665048385,209550294,37.6563307568833,"Latin America & Caribbean","Brasilia","-47.9292","-15.7801","Upper middle income","IBRD",13205,-5145,0,-5.145
+"Brazil","BR","BRA",2023,"","2025-04-15",9280,10294.866680778,211140729,33.8539465938547,"Latin America & Caribbean","Brasilia","-47.9292","-15.7801","Upper middle income","IBRD",14005,-4725,0,-4.725
+"Bulgaria","BG","BGR",2023,"","2025-04-15",14280,15885.5391311331,6446596,119.668120344213,"Europe & Central Asia","Sofia","23.3238","42.7105","High income","IBRD",14005,275,1,0.275
+"Bulgaria","BG","BGR",2020,"","2025-04-15",9550,10198.5388313404,6934015,110.324081132354,"Europe & Central Asia","Sofia","23.3238","42.7105","High income","IBRD",12696,-3146,0,-3.146
+"Bulgaria","BG","BGR",2021,"","2025-04-15",11100,12274.0775950496,6877743,121.157354617771,"Europe & Central Asia","Sofia","23.3238","42.7105","High income","IBRD",13205,-2105,0,-2.105
+"Bulgaria","BG","BGR",2022,"","2025-04-15",12770,13644.201582807,6643324,138.84014681798,"Europe & Central Asia","Sofia","23.3238","42.7105","High income","IBRD",13845,-1075,0,-1.075
+"Bulgaria","BG","BGR",2019,"","2025-04-15",9440,9838.60058985384,6975761,125.029963140694,"Europe & Central Asia","Sofia","23.3238","42.7105","High income","IBRD",12536,-3096,0,-3.096
+"Bulgaria","BG","BGR",2018,"","2025-04-15",8490,9436.14479876055,7025037,128.865565279241,"Europe & Central Asia","Sofia","23.3238","42.7105","High income","IBRD",12376,-3886,0,-3.886
+"Cabo Verde","CV","CPV",2019,"","2025-04-15",4420,4380.7811916403,514104,103.602656463726,"Sub-Saharan Africa","Praia","-23.5087","14.9218","Lower middle income","Blend",12536,-8116,0,-8.116
+"Cabo Verde","CV","CPV",2020,"","2025-04-15",3510,3539.22662027109,514679,78.3934545931901,"Sub-Saharan Africa","Praia","-23.5087","14.9218","Lower middle income","Blend",12696,-9186,0,-9.186
+"Cabo Verde","CV","CPV",2022,"","2025-04-15",4550,4323.31362665974,519741,96.9941368513357,"Sub-Saharan Africa","Praia","-23.5087","14.9218","Lower middle income","Blend",13845,-9295,0,-9.295
+"Cabo Verde","CV","CPV",2021,"","2025-04-15",3870,3971.4440744985,516649,77.4550586265341,"Sub-Saharan Africa","Praia","-23.5087","14.9218","Lower middle income","Blend",13205,-9335,0,-9.335
+"Cabo Verde","CV","CPV",2018,"","2025-04-15",4040,4294.96510456428,513415,105.867524052105,"Sub-Saharan Africa","Praia","-23.5087","14.9218","Lower middle income","Blend",12376,-8336,0,-8.336
+"Cabo Verde","CV","CPV",2023,"","2025-04-15",4780,4850.98415849643,522331,94.7385904946044,"Sub-Saharan Africa","Praia","-23.5087","14.9218","Lower middle income","Blend",14005,-9225,0,-9.225
+"Chile","CL","CHL",2019,"","2025-04-15",14690,14495.716721687,19197744,57.6117545680829,"Latin America & Caribbean","Santiago","-70.6475","-33.475","High income","IBRD",12536,2154,1,2.154
+"Chile","CL","CHL",2023,"","2025-04-15",15800,17067.8136150601,19658835,60.967093994595,"Latin America & Caribbean","Santiago","-70.6475","-33.475","High income","IBRD",14005,1795,1,1.795
+"Chile","CL","CHL",2018,"","2025-04-15",14460,15659.4808675628,18893191,58.1770506331731,"Latin America & Caribbean","Santiago","-70.6475","-33.475","High income","IBRD",12376,2084,1,2.084
+"Chile","CL","CHL",2022,"","2025-04-15",15470,15451.1319576678,19553036,74.9877802139767,"Latin America & Caribbean","Santiago","-70.6475","-33.475","High income","IBRD",13845,1625,1,1.625
+"Chile","CL","CHL",2020,"","2025-04-15",12960,13114.815470545,19370624,58.1828635629748,"Latin America & Caribbean","Santiago","-70.6475","-33.475","High income","IBRD",12696,264,1,0.264
+"Chile","CL","CHL",2021,"","2025-04-15",14790,16216.5706467899,19456334,64.8384472541565,"Latin America & Caribbean","Santiago","-70.6475","-33.475","High income","IBRD",13205,1585,1,1.585
+"China","CN","CHN",2019,"","2025-04-15",10310,10143.8602206165,1407745000,35.8900960342425,"East Asia & Pacific","Beijing","116.286","40.0495","Upper middle income","IBRD",12536,-2226,0,-2.226
+"China","CN","CHN",2022,"","2025-04-15",12860,12662.5826712038,1412175000,38.3514820836722,"East Asia & Pacific","Beijing","116.286","40.0495","Upper middle income","IBRD",13845,-985,0,-0.985
+"China","CN","CHN",2023,"","2025-04-15",13390,12614.0617416421,1410710000,37.3167713639344,"East Asia & Pacific","Beijing","116.286","40.0495","Upper middle income","IBRD",14005,-615,0,-0.615
+"China","CN","CHN",2021,"","2025-04-15",11950,12617.5051041181,1412360000,37.3019908656372,"East Asia & Pacific","Beijing","116.286","40.0495","Upper middle income","IBRD",13205,-1255,0,-1.255
+"China","CN","CHN",2020,"","2025-04-15",10520,10408.7195541075,1411100000,34.7542956996066,"East Asia & Pacific","Beijing","116.286","40.0495","Upper middle income","IBRD",12696,-2176,0,-2.176
+"China","CN","CHN",2018,"","2025-04-15",9540,9905.40638304527,1402760000,37.5657841021374,"East Asia & Pacific","Beijing","116.286","40.0495","Upper middle income","IBRD",12376,-2836,0,-2.836
+"Colombia","CO","COL",2018,"","2025-04-15",6350,6816.96818309544,49024465,36.5347527968973,"Latin America & Caribbean","Bogota","-74.082","4.60987","Upper middle income","IBRD",12376,-6026,0,-6.026
+"Colombia","CO","COL",2019,"","2025-04-15",6630,6472.54544924705,49907985,37.558533980839,"Latin America & Caribbean","Bogota","-74.082","4.60987","Upper middle income","IBRD",12536,-5906,0,-5.906
+"Colombia","CO","COL",2022,"","2025-04-15",6640,6674.59601948063,51737944,48.0739778648801,"Latin America & Caribbean","Bogota","-74.082","4.60987","Upper middle income","IBRD",13845,-7205,0,-7.205
+"Colombia","CO","COL",2021,"","2025-04-15",6260,6222.62164397614,51188173,40.0591463936128,"Latin America & Caribbean","Bogota","-74.082","4.60987","Upper middle income","IBRD",13205,-6945,0,-6.945
+"Colombia","CO","COL",2023,"","2025-04-15",6810,6947.35928681966,52321152,40.4938001523729,"Latin America & Caribbean","Bogota","-74.082","4.60987","Upper middle income","IBRD",14005,-7195,0,-7.195
+"Colombia","CO","COL",2020,"","2025-04-15",5850,5339.68711357943,50629997,34.0555709680101,"Latin America & Caribbean","Bogota","-74.082","4.60987","Upper middle income","IBRD",12696,-6846,0,-6.846
+"Costa Rica","CR","CRI",2019,"","2025-04-15",12240,12884.6859951989,4999553,65.7605300176622,"Latin America & Caribbean","San Jose","-84.0089","9.63701","Upper middle income","IBRD",12536,-296,0,-0.296
+"Costa Rica","CR","CRI",2018,"","2025-04-15",12070,12590.2493781614,4957818,66.945342016636,"Latin America & Caribbean","San Jose","-84.0089","9.63701","Upper middle income","IBRD",12376,-306,0,-0.306
+"Costa Rica","CR","CRI",2021,"","2025-04-15",12630,12838.1185358931,5059988,70.7816423027085,"Latin America & Caribbean","San Jose","-84.0089","9.63701","Upper middle income","IBRD",13205,-575,0,-0.575
+"Costa Rica","CR","CRI",2023,"","2025-04-15",14260,16942.0268119375,5105525,72.4719990801769,"Latin America & Caribbean","San Jose","-84.0089","9.63701","Upper middle income","IBRD",14005,255,1,0.255
+"Costa Rica","CR","CRI",2020,"","2025-04-15",11700,12394.0493969492,5034320,60.1398862509533,"Latin America & Caribbean","San Jose","-84.0089","9.63701","Upper middle income","IBRD",12696,-996,0,-0.996
+"Costa Rica","CR","CRI",2022,"","2025-04-15",13210,13625.9008491328,5081765,82.2275325353143,"Latin America & Caribbean","San Jose","-84.0089","9.63701","Upper middle income","IBRD",13845,-635,0,-0.635
+"Croatia","HR","HRV",2021,"","2025-04-15",17420,17789.9304736722,3878981,102.308430815836,"Europe & Central Asia","Zagreb","15.9614","45.8069","High income","IBRD",13205,4215,1,4.215
+"Croatia","HR","HRV",2019,"","2025-04-15",15800,15563.8167397199,3949390,101.382013330328,"Europe & Central Asia","Zagreb","15.9614","45.8069","High income","IBRD",12536,3264,1,3.264
+"Croatia","HR","HRV",2020,"","2025-04-15",15130,14808.4620188819,3914206,89.5334538008947,"Europe & Central Asia","Zagreb","15.9614","45.8069","High income","IBRD",12696,2434,1,2.434
+"Croatia","HR","HRV",2022,"","2025-04-15",19370,18466.0955472648,3855641,125.213857590974,"Europe & Central Asia","Zagreb","15.9614","45.8069","High income","IBRD",13845,5525,1,5.525
+"Croatia","HR","HRV",2023,"","2025-04-15",20590,21865.4562838641,3859686,107.700919430599,"Europe & Central Asia","Zagreb","15.9614","45.8069","High income","IBRD",14005,6585,1,6.585
+"Croatia","HR","HRV",2018,"","2025-04-15",14670,15460.4183295843,3988775,99.06781797397,"Europe & Central Asia","Zagreb","15.9614","45.8069","High income","IBRD",12376,2294,1,2.294
+"Cuba","CU","CUB",2019,"","2025-04-15",9010,9232.26115935183,11202846,22.8207944494506,"Latin America & Caribbean","Havana","-82.3667","23.1333","Upper middle income","Not classified",12536,-3526,0,-3.526
+"Cuba","CU","CUB",2018,"","2025-04-15",8710,8911.46205964193,11227118,27.0834484996753,"Latin America & Caribbean","Havana","-82.3667","23.1333","Upper middle income","Not classified",12376,-3666,0,-3.666
+"Curacao","CW","CUW",2020,"","2025-04-15",16250,16356.0933594414,154947,NA,"Latin America & Caribbean","Willemstad","","","High income","Not classified",12696,3554,1,3.554
+"Curacao","CW","CUW",2021,"","2025-04-15",18130,17980.0888397547,152369,NA,"Latin America & Caribbean","Willemstad","","","High income","Not classified",13205,4925,1,4.925
+"Curacao","CW","CUW",2022,"","2025-04-15",20450,20501.7522782219,149996,NA,"Latin America & Caribbean","Willemstad","","","High income","Not classified",13845,6605,1,6.605
+"Curacao","CW","CUW",2018,"","2025-04-15",18820,19119.1243941688,159336,155.268858771687,"Latin America & Caribbean","Willemstad","","","High income","Not classified",12376,6444,1,6.444
+"Curacao","CW","CUW",2019,"","2025-04-15",19140,19220.6866958303,157441,NA,"Latin America & Caribbean","Willemstad","","","High income","Not classified",12536,6604,1,6.604
+"Czechia","CZ","CZE",2019,"","2025-04-15",22100,24062.7190013343,10671870,138.154609993871,"Europe & Central Asia","Prague","14.4205","50.0878","High income","Not classified",12536,9564,1,9.564
+"Czechia","CZ","CZE",2018,"","2025-04-15",20500,23705.9329811299,10629928,145.141717890789,"Europe & Central Asia","Prague","14.4205","50.0878","High income","Not classified",12376,8124,1,8.124
+"Czechia","CZ","CZE",2020,"","2025-04-15",21770,23472.8915454417,10697858,128.780430305965,"Europe & Central Asia","Prague","14.4205","50.0878","High income","Not classified",12696,9074,1,9.074
+"Djibouti","DJ","DJI",2019,"","2025-04-15",2780,2837.17103336917,1088709,320.939002998625,"Middle East & North Africa","Djibouti","43.1425","11.5806","Lower middle income","IDA",12536,-9756,0,-9.756
+"Djibouti","DJ","DJI",2020,"","2025-04-15",2790,2881.99924450145,1105188,222.837983303664,"Middle East & North Africa","Djibouti","43.1425","11.5806","Lower middle income","IDA",12696,-9906,0,-9.906
+"Djibouti","DJ","DJI",2018,"","2025-04-15",2720,2718.0853229414,1071882,300.398686676008,"Middle East & North Africa","Djibouti","43.1425","11.5806","Lower middle income","IDA",12376,-9656,0,-9.656
+"Dominica","DM","DMA",2019,"","2025-04-15",8690,9009.09011545429,67880,NA,"Latin America & Caribbean","Roseau","-61.39","15.2976","Upper middle income","Blend",12536,-3846,0,-3.846
+"Dominica","DM","DMA",2018,"","2025-04-15",8200,8137.56520624242,68174,106.96050417924,"Latin America & Caribbean","Roseau","-61.39","15.2976","Upper middle income","Blend",12376,-4176,0,-4.176
+"Dominica","DM","DMA",2022,"","2025-04-15",9220,9085.67412772363,66826,NA,"Latin America & Caribbean","Roseau","-61.39","15.2976","Upper middle income","Blend",13845,-4625,0,-4.625
+"Dominica","DM","DMA",2020,"","2025-04-15",7630,7461.77933220095,67573,NA,"Latin America & Caribbean","Roseau","-61.39","15.2976","Upper middle income","Blend",12696,-5066,0,-5.066
+"Dominica","DM","DMA",2023,"","2025-04-15",9790,9832.99643050057,66510,NA,"Latin America & Caribbean","Roseau","-61.39","15.2976","Upper middle income","Blend",14005,-4215,0,-4.215
+"Dominica","DM","DMA",2021,"","2025-04-15",8390,8262.65091316727,67202,NA,"Latin America & Caribbean","Roseau","-61.39","15.2976","Upper middle income","Blend",13205,-4815,0,-4.815
+"Dominican Republic","DO","DOM",2021,"","2025-04-15",8090,8472.47982000992,11123476,52.7348670680051,"Latin America & Caribbean","Santo Domingo","-69.8908","18.479","Upper middle income","IBRD",13205,-5115,0,-5.115
+"Dominican Republic","DO","DOM",2022,"","2025-04-15",9070,10109.5234003521,11230734,54.2315255592457,"Latin America & Caribbean","Santo Domingo","-69.8908","18.479","Upper middle income","IBRD",13845,-4775,0,-4.775
+"Dominican Republic","DO","DOM",2018,"","2025-04-15",7670,7934.98141208525,10782053,52.0559663874181,"Latin America & Caribbean","Santo Domingo","-69.8908","18.479","Upper middle income","IBRD",12376,-4706,0,-4.706
+"Dominican Republic","DO","DOM",2020,"","2025-04-15",7160,7162.29175242114,11008300,44.2936565524675,"Latin America & Caribbean","Santo Domingo","-69.8908","18.479","Upper middle income","IBRD",12696,-5536,0,-5.536
+"Dominican Republic","DO","DOM",2023,"","2025-04-15",9710,10717.6276712204,11331265,49.6153321918918,"Latin America & Caribbean","Santo Domingo","-69.8908","18.479","Upper middle income","IBRD",14005,-4295,0,-4.295
+"Dominican Republic","DO","DOM",2019,"","2025-04-15",7980,8164.22080932117,10894043,51.0111449209557,"Latin America & Caribbean","Santo Domingo","-69.8908","18.479","Upper middle income","IBRD",12536,-4556,0,-4.556
+"Ecuador","EC","ECU",2019,"","2025-04-15",6100,6205.05759479761,17340021,48.0828499402147,"Latin America & Caribbean","Quito","-78.5243","-0.229498","Upper middle income","IBRD",12536,-6436,0,-6.436
+"Ecuador","EC","ECU",2022,"","2025-04-15",6590,6540.99824522101,17823897,61.6216623941869,"Latin America & Caribbean","Quito","-78.5243","-0.229498","Upper middle income","IBRD",13845,-7255,0,-7.255
+"Ecuador","EC","ECU",2020,"","2025-04-15",5410,5463.64509649315,17546065,43.9893124398324,"Latin America & Caribbean","Quito","-78.5243","-0.229498","Upper middle income","IBRD",12696,-7286,0,-7.286
+"Ecuador","EC","ECU",2018,"","2025-04-15",6120,6303.91892523596,17049547,48.0093480992122,"Latin America & Caribbean","Quito","-78.5243","-0.229498","Upper middle income","IBRD",12376,-6256,0,-6.256
+"Ecuador","EC","ECU",2023,"","2025-04-15",6590,6609.80408154957,17980083,57.8477543481784,"Latin America & Caribbean","Quito","-78.5243","-0.229498","Upper middle income","IBRD",14005,-7415,0,-7.415
+"Ecuador","EC","ECU",2021,"","2025-04-15",6120,6075.8026572556,17682454,53.1511986943634,"Latin America & Caribbean","Quito","-78.5243","-0.229498","Upper middle income","IBRD",13205,-7085,0,-7.085
+"Egypt, Arab Rep.","EG","EGY",2018,"","2025-04-15",2710,2484.70315630508,105682094,45.9110196733959,"Middle East & North Africa","Cairo","31.2461","30.0982","Lower middle income","IBRD",12376,-9666,0,-9.666
+"Egypt, Arab Rep.","EG","EGY",2021,"","2025-04-15",3470,3827.35415374308,110957008,29.8569734808122,"Middle East & North Africa","Cairo","31.2461","30.0982","Lower middle income","IBRD",13205,-9735,0,-9.735
+"Egypt, Arab Rep.","EG","EGY",2019,"","2025-04-15",2640,2962.98892023003,107553158,41.1240171551108,"Middle East & North Africa","Cairo","31.2461","30.0982","Lower middle income","IBRD",12536,-9896,0,-9.896
+"Egypt, Arab Rep.","EG","EGY",2020,"","2025-04-15",2960,3511.11381026379,109315124,32.1262555667523,"Middle East & North Africa","Cairo","31.2461","30.0982","Lower middle income","IBRD",12696,-9736,0,-9.736
+"Egypt, Arab Rep.","EG","EGY",2022,"","2025-04-15",4040,4233.30783744856,112618250,36.9831048772713,"Middle East & North Africa","Cairo","31.2461","30.0982","Lower middle income","IBRD",13845,-9805,0,-9.805
+"El Salvador","SV","SLV",2023,"","2025-04-15",4960,5391.06926181338,6309624,80.9228818995509,"Latin America & Caribbean","San Salvador","-89.2073","13.7034","Upper middle income","IBRD",14005,-9045,0,-9.045
+"El Salvador","SV","SLV",2021,"","2025-04-15",4380,4642.60743101342,6255782,81.8450759800765,"Latin America & Caribbean","San Salvador","-89.2073","13.7034","Upper middle income","IBRD",13205,-8825,0,-8.825
+"El Salvador","SV","SLV",2019,"","2025-04-15",4130,4320.11671534627,6222318,76.0420130991468,"Latin America & Caribbean","San Salvador","-89.2073","13.7034","Upper middle income","IBRD",12536,-8406,0,-8.406
+"El Salvador","SV","SLV",2022,"","2025-04-15",4710,5093.51833879776,6280319,88.1547423295316,"Latin America & Caribbean","San Salvador","-89.2073","13.7034","Upper middle income","IBRD",13845,-9135,0,-9.135
+"El Salvador","SV","SLV",2020,"","2025-04-15",3800,3997.19279583709,6234673,66.4595069497083,"Latin America & Caribbean","San Salvador","-89.2073","13.7034","Upper middle income","IBRD",12696,-8896,0,-8.896
+"El Salvador","SV","SLV",2018,"","2025-04-15",3940,4183.54620971358,6219807,75.6336168879956,"Latin America & Caribbean","San Salvador","-89.2073","13.7034","Upper middle income","IBRD",12376,-8436,0,-8.436
+"Equatorial Guinea","GQ","GNQ",2022,"","2025-04-15",4570,7589.29964909381,1803545,81.8130161368099,"Sub-Saharan Africa","Malabo","8.7741","3.7523","Upper middle income","IBRD",13845,-9275,0,-9.275
+"Equatorial Guinea","GQ","GNQ",2018,"","2025-04-15",5450,8102.47084834031,1616422,103.645681622953,"Sub-Saharan Africa","Malabo","8.7741","3.7523","Upper middle income","IBRD",12376,-6926,0,-6.926
+"Equatorial Guinea","GQ","GNQ",2020,"","2025-04-15",4790,5764.05502912947,1716468,77.9278846441807,"Sub-Saharan Africa","Malabo","8.7741","3.7523","Upper middle income","IBRD",12696,-7906,0,-7.906
+"Equatorial Guinea","GQ","GNQ",2021,"","2025-04-15",4820,6945.63069794539,1758786,76.9666485998527,"Sub-Saharan Africa","Malabo","8.7741","3.7523","Upper middle income","IBRD",13205,-8385,0,-8.385
+"Equatorial Guinea","GQ","GNQ",2023,"","2025-04-15",4840,6677.793435386,1847549,61.443281519042,"Sub-Saharan Africa","Malabo","8.7741","3.7523","Upper middle income","IBRD",14005,-9165,0,-9.165
+"Equatorial Guinea","GQ","GNQ",2019,"","2025-04-15",5130,6804.14923073888,1670177,94.8787924253545,"Sub-Saharan Africa","Malabo","8.7741","3.7523","Upper middle income","IBRD",12536,-7406,0,-7.406
+"Estonia","EE","EST",2018,"","2025-04-15",21160,23618.1361254581,1321977,143.485224864735,"Europe & Central Asia","Tallinn","24.7586","59.4392","High income","Not classified",12376,8784,1,8.784
+"Eswatini","SZ","SWZ",2019,"","2025-04-15",3650,3894.32951592818,1179874,NA,"Sub-Saharan Africa","Mbabane","31.4659","-26.5225","Lower middle income","Blend",12536,-8886,0,-8.886
+"Eswatini","SZ","SWZ",2021,"","2025-04-15",3570,3926.48687364215,1206593,NA,"Sub-Saharan Africa","Mbabane","31.4659","-26.5225","Lower middle income","Blend",13205,-9635,0,-9.635
+"Eswatini","SZ","SWZ",2018,"","2025-04-15",3460,3986.10557163026,1168929,NA,"Sub-Saharan Africa","Mbabane","31.4659","-26.5225","Lower middle income","Blend",12376,-8916,0,-8.916
+"Eswatini","SZ","SWZ",2020,"","2025-04-15",3400,3442.3216527415,1192729,NA,"Sub-Saharan Africa","Mbabane","31.4659","-26.5225","Lower middle income","Blend",12696,-9296,0,-9.296
+"Fiji","FJ","FJI",2020,"","2025-04-15",4680,4844.42129036462,914963,72.3435754996883,"East Asia & Pacific","Suva","178.399","-18.1149","Upper middle income","Blend",12696,-8016,0,-8.016
+"Fiji","FJ","FJI",2019,"","2025-04-15",5620,5950.82868635508,914899,107.411463822998,"East Asia & Pacific","Suva","178.399","-18.1149","Upper middle income","Blend",12536,-6916,0,-6.916
+"Fiji","FJ","FJI",2023,"","2025-04-15",5680,5888.73668639357,924145,NA,"East Asia & Pacific","Suva","178.399","-18.1149","Upper middle income","Blend",14005,-8325,0,-8.325
+"Fiji","FJ","FJI",2021,"","2025-04-15",4520,4696.17101880318,916711,81.7252089564687,"East Asia & Pacific","Suva","178.399","-18.1149","Upper middle income","Blend",13205,-8685,0,-8.685
+"Fiji","FJ","FJI",2022,"","2025-04-15",5440,5405.03007408295,919422,117.506559364173,"East Asia & Pacific","Suva","178.399","-18.1149","Upper middle income","Blend",13845,-8405,0,-8.405
+"Fiji","FJ","FJI",2018,"","2025-04-15",5690,6085.41979209299,917180,103.235419995391,"East Asia & Pacific","Suva","178.399","-18.1149","Upper middle income","Blend",12376,-6686,0,-6.686
+"Gabon","GA","GAB",2022,"","2025-04-15",7480,8409.2074145028,2430747,92.0630888500131,"Sub-Saharan Africa","Libreville","9.45162","0.38832","Upper middle income","IBRD",13845,-6365,0,-6.365
+"Gabon","GA","GAB",2021,"","2025-04-15",6520,8181.40914134656,2376722,85.3483122054007,"Sub-Saharan Africa","Libreville","9.45162","0.38832","Upper middle income","IBRD",13205,-6685,0,-6.685
+"Gabon","GA","GAB",2018,"","2025-04-15",6540,7624.2775233771,2212318,77.0365976973024,"Sub-Saharan Africa","Libreville","9.45162","0.38832","Upper middle income","IBRD",12376,-5836,0,-5.836
+"Gabon","GA","GAB",2019,"","2025-04-15",6870,7441.1786472281,2267706,73.4280894486644,"Sub-Saharan Africa","Libreville","9.45162","0.38832","Upper middle income","IBRD",12536,-5666,0,-5.666
+"Gabon","GA","GAB",2020,"","2025-04-15",6730,6605.80346077565,2322539,70.1140546466314,"Sub-Saharan Africa","Libreville","9.45162","0.38832","Upper middle income","IBRD",12696,-5966,0,-5.966
+"Gabon","GA","GAB",2023,"","2025-04-15",7930,7802.83659565049,2484789,91.4786667108597,"Sub-Saharan Africa","Libreville","9.45162","0.38832","Upper middle income","IBRD",14005,-6075,0,-6.075
+"Georgia","GE","GEO",2019,"","2025-04-15",4780,4741.2832715876,3720161,117.810080239714,"Europe & Central Asia","Tbilisi","44.793","41.71","Upper middle income","IBRD",12536,-7756,0,-7.756
+"Georgia","GE","GEO",2018,"","2025-04-15",4580,4804.0546040444,3726549,109.847740556266,"Europe & Central Asia","Tbilisi","44.793","41.71","Upper middle income","IBRD",12376,-7796,0,-7.796
+"Georgia","GE","GEO",2022,"","2025-04-15",5690,6729.84659930283,3712502,114.695437688718,"Europe & Central Asia","Tbilisi","44.793","41.71","Upper middle income","IBRD",13845,-8155,0,-8.155
+"Georgia","GE","GEO",2020,"","2025-04-15",4330,4300.85701291207,3722716,92.8910841752194,"Europe & Central Asia","Tbilisi","44.793","41.71","Upper middle income","IBRD",12696,-8366,0,-8.366
+"Georgia","GE","GEO",2021,"","2025-04-15",4760,5083.60695484577,3708610,101.60090754891,"Europe & Central Asia","Tbilisi","44.793","41.71","Upper middle income","IBRD",13205,-8445,0,-8.445
+"Georgia","GE","GEO",2023,"","2025-04-15",6710,8283.66960242964,3715483,107.151179168501,"Europe & Central Asia","Tbilisi","44.793","41.71","Upper middle income","IBRD",14005,-7295,0,-7.295
+"Greece","GR","GRC",2019,"","2025-04-15",19690,19335.3602002969,10721582,80.590100891173,"Europe & Central Asia","Athens","23.7166","37.9792","High income","Not classified",12536,7154,1,7.154
+"Greece","GR","GRC",2020,"","2025-04-15",17870,17886.733165236,10698599,70.2937864486395,"Europe & Central Asia","Athens","23.7166","37.9792","High income","Not classified",12696,5174,1,5.174
+"Greece","GR","GRC",2021,"","2025-04-15",20000,20654.7001960815,10569207,88.0126627401059,"Europe & Central Asia","Athens","23.7166","37.9792","High income","Not classified",13205,6795,1,6.795
+"Greece","GR","GRC",2023,"","2025-04-15",22590,23400.7278817691,10405588,92.1562900262242,"Europe & Central Asia","Athens","23.7166","37.9792","High income","Not classified",14005,8585,1,8.585
+"Greece","GR","GRC",2022,"","2025-04-15",21970,20971.8349258283,10436882,107.679207902405,"Europe & Central Asia","Athens","23.7166","37.9792","High income","Not classified",13845,8125,1,8.125
+"Greece","GR","GRC",2018,"","2025-04-15",19100,19873.4015238771,10732882,79.2381636063709,"Europe & Central Asia","Athens","23.7166","37.9792","High income","Not classified",12376,6724,1,6.724
+"Grenada","GD","GRD",2021,"","2025-04-15",8890,9622.24050459345,116688,NA,"Latin America & Caribbean","Saint George's","-61.7449","12.0653","Upper middle income","Blend",13205,-4315,0,-4.315
+"Grenada","GD","GRD",2022,"","2025-04-15",10030,10474.2652893842,116913,NA,"Latin America & Caribbean","Saint George's","-61.7449","12.0653","Upper middle income","Blend",13845,-3815,0,-3.815
+"Grenada","GD","GRD",2023,"","2025-04-15",10470,11246.3451228921,117081,NA,"Latin America & Caribbean","Saint George's","-61.7449","12.0653","Upper middle income","Blend",14005,-3535,0,-3.535
+"Grenada","GD","GRD",2020,"","2025-04-15",8390,8968.55890108484,116341,NA,"Latin America & Caribbean","Saint George's","-61.7449","12.0653","Upper middle income","Blend",12696,-4306,0,-4.306
+"Grenada","GD","GRD",2019,"","2025-04-15",9400,10462.7929159533,115981,NA,"Latin America & Caribbean","Saint George's","-61.7449","12.0653","Upper middle income","Blend",12536,-3136,0,-3.136
+"Grenada","GD","GRD",2018,"","2025-04-15",9220,10083.021279225,115691,NA,"Latin America & Caribbean","Saint George's","-61.7449","12.0653","Upper middle income","Blend",12376,-3156,0,-3.156
+"Guatemala","GT","GTM",2022,"","2025-04-15",5220,5358.08963795,17847877,54.4328380814561,"Latin America & Caribbean","Guatemala City","-90.5328","14.6248","Upper middle income","IBRD",13845,-8625,0,-8.625
+"Guatemala","GT","GTM",2021,"","2025-04-15",4800,4913.94712869347,17598650,49.2478694245442,"Latin America & Caribbean","Guatemala City","-90.5328","14.6248","Upper middle income","IBRD",13205,-8405,0,-8.405
+"Guatemala","GT","GTM",2023,"","2025-04-15",5480,5762.82174615918,18124838,48.1884518248528,"Latin America & Caribbean","Guatemala City","-90.5328","14.6248","Upper middle income","IBRD",14005,-8525,0,-8.525
+"Guatemala","GT","GTM",2020,"","2025-04-15",4360,4477.61761796418,17357325,41.1407616494521,"Latin America & Caribbean","Guatemala City","-90.5328","14.6248","Upper middle income","IBRD",12696,-8336,0,-8.336
+"Guatemala","GT","GTM",2019,"","2025-04-15",4490,4511.99755157656,17103803,45.5167427491815,"Latin America & Caribbean","Guatemala City","-90.5328","14.6248","Upper middle income","IBRD",12536,-8046,0,-8.046
+"Guatemala","GT","GTM",2018,"","2025-04-15",4270,4352.94651790253,16845685,47.011682071395,"Latin America & Caribbean","Guatemala City","-90.5328","14.6248","Upper middle income","IBRD",12376,-8106,0,-8.106
+"Guyana","GY","GUY",2018,"","2025-04-15",6100,6048.38697180418,791556,NA,"Latin America & Caribbean","Georgetown","-58.1548","6.80461","High income","IDA",12376,-6276,0,-6.276
+"Guyana","GY","GUY",2019,"","2025-04-15",6380,6405.82443444562,807665,NA,"Latin America & Caribbean","Georgetown","-58.1548","6.80461","High income","IDA",12536,-6156,0,-6.156
+"Guyana","GY","GUY",2021,"","2025-04-15",7810,9860.87233445443,815482,NA,"Latin America & Caribbean","Georgetown","-58.1548","6.80461","High income","IDA",13205,-5395,0,-5.395
+"Guyana","GY","GUY",2020,"","2025-04-15",8090,6775.70939096303,807481,NA,"Latin America & Caribbean","Georgetown","-58.1548","6.80461","High income","IDA",12696,-4606,0,-4.606
+"Guyana","GY","GUY",2023,"","2025-04-15",13600,20765.3503593109,826353,NA,"Latin America & Caribbean","Georgetown","-58.1548","6.80461","High income","IDA",14005,-405,0,-0.405
+"Guyana","GY","GUY",2022,"","2025-04-15",9780,17913.4910146288,821637,NA,"Latin America & Caribbean","Georgetown","-58.1548","6.80461","High income","IDA",13845,-4065,0,-4.065
+"Hungary","HU","HUN",2019,"","2025-04-15",16570,16786.2136399075,9771141,160.751343279331,"Europe & Central Asia","Budapest","19.0408","47.4984","High income","Not classified",12536,4034,1,4.034
+"Hungary","HU","HUN",2020,"","2025-04-15",16040,16131.9540355923,9750149,155.422663893512,"Europe & Central Asia","Budapest","19.0408","47.4984","High income","Not classified",12696,3344,1,3.344
+"Hungary","HU","HUN",2023,"","2025-04-15",19670,22141.8669799276,9592186,157.296223886147,"Europe & Central Asia","Budapest","19.0408","47.4984","High income","Not classified",14005,5665,1,5.665
+"Hungary","HU","HUN",2021,"","2025-04-15",17740,18755.1023464312,9709891,159.688274120647,"Europe & Central Asia","Budapest","19.0408","47.4984","High income","Not classified",13205,4535,1,4.535
+"Hungary","HU","HUN",2018,"","2025-04-15",14980,16425.2050299693,9775564,163.260512262857,"Europe & Central Asia","Budapest","19.0408","47.4984","High income","Not classified",12376,2604,1,2.604
+"Hungary","HU","HUN",2022,"","2025-04-15",19050,18353.298364905,9644377,185.271113216624,"Europe & Central Asia","Budapest","19.0408","47.4984","High income","Not classified",13845,5205,1,5.205
+"Indonesia","ID","IDN",2019,"","2025-04-15",4020,4106.94856173421,272489381,37.6277775357108,"East Asia & Pacific","Jakarta","106.83","-6.19752","Upper middle income","IBRD",12536,-8516,0,-8.516
+"Indonesia","ID","IDN",2021,"","2025-04-15",4130,4287.17313989405,276758053,40.2047582749671,"East Asia & Pacific","Jakarta","106.83","-6.19752","Upper middle income","IBRD",13205,-9075,0,-9.075
+"Indonesia","ID","IDN",2020,"","2025-04-15",3850,3853.70288778903,274814866,32.9721754002427,"East Asia & Pacific","Jakarta","106.83","-6.19752","Upper middle income","IBRD",12696,-8846,0,-8.846
+"Indonesia","ID","IDN",2023,"","2025-04-15",4810,4876.31432703188,281190067,41.3156667619874,"East Asia & Pacific","Jakarta","106.83","-6.19752","Upper middle income","IBRD",14005,-9195,0,-9.195
+"Indonesia","ID","IDN",2022,"","2025-04-15",4520,4730.74548910499,278830529,45.4658986816744,"East Asia & Pacific","Jakarta","106.83","-6.19752","Upper middle income","IBRD",13845,-9325,0,-9.325
+"Indonesia","ID","IDN",2018,"","2025-04-15",3810,3860.95353077708,269951846,43.0743089552002,"East Asia & Pacific","Jakarta","106.83","-6.19752","Upper middle income","IBRD",12376,-8566,0,-8.566
+"Iran, Islamic Rep.","IR","IRN",2023,"","2025-04-15",4650,4465.63766994952,90608707,52.1801758114434,"Middle East & North Africa","Tehran","51.4447","35.6878","Upper middle income","IBRD",14005,-9355,0,-9.355
+"Iran, Islamic Rep.","IR","IRN",2021,"","2025-04-15",3880,4334.79268631354,88455488,44.3738340508665,"Middle East & North Africa","Tehran","51.4447","35.6878","Upper middle income","IBRD",13205,-9325,0,-9.325
+"Iran, Islamic Rep.","IR","IRN",2022,"","2025-04-15",4110,4405.09291519791,89524246,51.597506811024,"Middle East & North Africa","Tehran","51.4447","35.6878","Upper middle income","IBRD",13845,-9735,0,-9.735
+"Iran, Islamic Rep.","IR","IRN",2020,"","2025-04-15",3740,2988.78122414716,87723443,43.8101646870977,"Middle East & North Africa","Tehran","51.4447","35.6878","Upper middle income","IBRD",12696,-8956,0,-8.956
+"Iran, Islamic Rep.","IR","IRN",2019,"","2025-04-15",4530,3831.27894763337,87051648,50.7543343501077,"Middle East & North Africa","Tehran","51.4447","35.6878","Upper middle income","IBRD",12536,-8006,0,-8.006
+"Iran, Islamic Rep.","IR","IRN",2018,"","2025-04-15",5250,4631.78709016514,86117998,58.5650897152156,"Middle East & North Africa","Tehran","51.4447","35.6878","Upper middle income","IBRD",12376,-7126,0,-7.126
+"Iraq","IQ","IRQ",2018,"","2025-04-15",4820,5646.68932074742,40265624,65.8017917701083,"Middle East & North Africa","Baghdad","44.394","33.3302","Upper middle income","IBRD",12376,-7556,0,-7.556
+"Iraq","IQ","IRQ",2019,"","2025-04-15",5520,5671.8568632942,41192171,68.9899384202806,"Middle East & North Africa","Baghdad","44.394","33.3302","Upper middle income","IBRD",12536,-7016,0,-7.016
+"Iraq","IQ","IRQ",2020,"","2025-04-15",4720,4295.18945121228,42116605,57.742316395146,"Middle East & North Africa","Baghdad","44.394","33.3302","Upper middle income","IBRD",12696,-7976,0,-7.976
+"Iraq","IQ","IRQ",2021,"","2025-04-15",4740,4868.49431080783,43071211,61.5032683117218,"Middle East & North Africa","Baghdad","44.394","33.3302","Upper middle income","IBRD",13205,-8465,0,-8.465
+"Iraq","IQ","IRQ",2022,"","2025-04-15",5490,6504.12428393548,44070551,68.9343588951008,"Middle East & North Africa","Baghdad","44.394","33.3302","Upper middle income","IBRD",13845,-8355,0,-8.355
+"Iraq","IQ","IRQ",2023,"","2025-04-15",5640,5565.12644647176,45074049,NA,"Middle East & North Africa","Baghdad","44.394","33.3302","Upper middle income","IBRD",14005,-8365,0,-8.365
+"Jamaica","JM","JAM",2020,"","2025-04-15",4880,4879.44024631319,2830739,NA,"Latin America & Caribbean","Kingston","-76.792","17.9927","Upper middle income","IBRD",12696,-7816,0,-7.816
+"Jamaica","JM","JAM",2021,"","2025-04-15",5180,5165.33780988607,2837682,NA,"Latin America & Caribbean","Kingston","-76.792","17.9927","Upper middle income","IBRD",13205,-8025,0,-8.025
+"Jamaica","JM","JAM",2023,"","2025-04-15",6200,6839.72503886968,2839786,NA,"Latin America & Caribbean","Kingston","-76.792","17.9927","Upper middle income","IBRD",14005,-7805,0,-7.805
+"Jamaica","JM","JAM",2019,"","2025-04-15",5480,5607.24300668501,2823271,90.1106076335994,"Latin America & Caribbean","Kingston","-76.792","17.9927","Upper middle income","IBRD",12536,-7056,0,-7.056
+"Jamaica","JM","JAM",2018,"","2025-04-15",5210,5578.10346083169,2820097,89.9779060412351,"Latin America & Caribbean","Kingston","-76.792","17.9927","Upper middle income","IBRD",12376,-7166,0,-7.166
+"Jamaica","JM","JAM",2022,"","2025-04-15",5730,6022.15341099999,2839144,NA,"Latin America & Caribbean","Kingston","-76.792","17.9927","Upper middle income","IBRD",13845,-8115,0,-8.115
+"Jordan","JO","JOR",2022,"","2025-04-15",4370,4332.25159897931,11256263,104.095459439189,"Middle East & North Africa","Amman","35.9263","31.9497","Lower middle income","IBRD",13845,-9475,0,-9.475
+"Jordan","JO","JOR",2023,"","2025-04-15",4420,4455.50540514568,11439213,100.276045970494,"Middle East & North Africa","Amman","35.9263","31.9497","Lower middle income","IBRD",14005,-9585,0,-9.585
+"Jordan","JO","JOR",2018,"","2025-04-15",4090,4145.43989673265,10462306,87.6359151906857,"Middle East & North Africa","Amman","35.9263","31.9497","Lower middle income","IBRD",12376,-8286,0,-8.286
+"Jordan","JO","JOR",2019,"","2025-04-15",4190,4170.1144003465,10671891,85.6878334964204,"Middle East & North Africa","Amman","35.9263","31.9497","Lower middle income","IBRD",12536,-8346,0,-8.346
+"Jordan","JO","JOR",2020,"","2025-04-15",4070,4022.0401356135,10865228,66.0599488089059,"Middle East & North Africa","Amman","35.9263","31.9497","Lower middle income","IBRD",12696,-8626,0,-8.626
+"Jordan","JO","JOR",2021,"","2025-04-15",4240,4183.49998326866,11066356,80.3328699444404,"Middle East & North Africa","Amman","35.9263","31.9497","Lower middle income","IBRD",13205,-8965,0,-8.965
+"Kazakhstan","KZ","KAZ",2023,"","2025-04-15",10730,12918.8661346014,20330104,61.773226073185,"Europe & Central Asia","Astana","71.4382","51.1879","Upper middle income","IBRD",14005,-3275,0,-3.275
+"Kazakhstan","KZ","KAZ",2020,"","2025-04-15",8380,8781.50797787648,19482117,57.0264423660931,"Europe & Central Asia","Astana","71.4382","51.1879","Upper middle income","IBRD",12696,-4316,0,-4.316
+"Kazakhstan","KZ","KAZ",2019,"","2025-04-15",8500,9457.12614657136,19209555,64.8586165517565,"Europe & Central Asia","Astana","71.4382","51.1879","Upper middle income","IBRD",12536,-4036,0,-4.036
+"Kazakhstan","KZ","KAZ",2021,"","2025-04-15",8540,9983.60103576902,19743603,58.6686085779207,"Europe & Central Asia","Astana","71.4382","51.1879","Upper middle income","IBRD",13205,-4665,0,-4.665
+"Kazakhstan","KZ","KAZ",2022,"","2025-04-15",9420,11255.3396437881,20034609,68.3343147415612,"Europe & Central Asia","Astana","71.4382","51.1879","Upper middle income","IBRD",13845,-4425,0,-4.425
+"Kazakhstan","KZ","KAZ",2018,"","2025-04-15",7790,9472.48527327758,18932727,63.5279565118188,"Europe & Central Asia","Astana","71.4382","51.1879","Upper middle income","IBRD",12376,-4586,0,-4.586
+"Kiribati","KI","KIR",2019,"","2025-04-15",3610,1750.99750920482,123921,98.3140539567767,"East Asia & Pacific","Tarawa","172.979","1.32905","Lower middle income","IDA",12536,-8926,0,-8.926
+"Kiribati","KI","KIR",2020,"","2025-04-15",3090,1769.43211760217,126099,77.6231417842006,"East Asia & Pacific","Tarawa","172.979","1.32905","Lower middle income","IDA",12696,-9606,0,-9.606
+"Kiribati","KI","KIR",2018,"","2025-04-15",3280,1912.73798131035,122084,83.3664360234057,"East Asia & Pacific","Tarawa","172.979","1.32905","Lower middle income","IDA",12376,-9096,0,-9.096
+"Lao PDR","LA","LAO",2018,"","2025-04-15",2460,2545.1075420815,7128045,NA,"East Asia & Pacific","Vientiane","102.177","18.5826","Lower middle income","IDA",12376,-9916,0,-9.916
+"Latvia","LV","LVA",2018,"","2025-04-15",16590,17252.1710428626,1927174,128.234095559822,"Europe & Central Asia","Riga","24.1048","56.9465","High income","Not classified",12376,4214,1,4.214
+"Latvia","LV","LVA",2020,"","2025-04-15",17860,17564.2321549354,1900449,123.88319804656,"Europe & Central Asia","Riga","24.1048","56.9465","High income","Not classified",12696,5164,1,5.164
+"Latvia","LV","LVA",2023,"","2025-04-15",22630,22502.8429938094,1877445,137.680845622225,"Europe & Central Asia","Riga","24.1048","56.9465","High income","Not classified",14005,8625,1,8.625
+"Latvia","LV","LVA",2019,"","2025-04-15",17580,17294.9751600969,1913822,125.29163170793,"Europe & Central Asia","Riga","24.1048","56.9465","High income","Not classified",12536,5044,1,5.044
+"Latvia","LV","LVA",2021,"","2025-04-15",19950,20262.8433862451,1884490,136.790170758828,"Europe & Central Asia","Riga","24.1048","56.9465","High income","Not classified",13205,6745,1,6.745
+"Latvia","LV","LVA",2022,"","2025-04-15",22260,20229.4613617326,1879383,159.82671948791,"Europe & Central Asia","Riga","24.1048","56.9465","High income","Not classified",13845,8415,1,8.415
+"Lebanon","LB","LBN",2019,"","2025-04-15",8630,8905.88005497437,5794594,62.98091601016,"Middle East & North Africa","Beirut","35.5134","33.8872","Lower middle income","IBRD",12536,-3906,0,-3.906
+"Lebanon","LB","LBN",2021,"","2025-04-15",4770,4045.37391066234,5718122,78.8286204025241,"Middle East & North Africa","Beirut","35.5134","33.8872","Lower middle income","IBRD",13205,-8435,0,-8.435
+"Lebanon","LB","LBN",2022,"","2025-04-15",4170,3654.35845534878,5744489,114.888278265666,"Middle East & North Africa","Beirut","35.5134","33.8872","Lower middle income","IBRD",13845,-9675,0,-9.675
+"Lebanon","LB","LBN",2018,"","2025-04-15",8700,9174.53666204759,5984119,68.2573073043718,"Middle East & North Africa","Beirut","35.5134","33.8872","Lower middle income","IBRD",12376,-3676,0,-3.676
+"Lebanon","LB","LBN",2020,"","2025-04-15",6350,5561.19166950397,5702398,50.1298042879627,"Middle East & North Africa","Beirut","35.5134","33.8872","Lower middle income","IBRD",12696,-6346,0,-6.346
+"Libya","LY","LBY",2019,"","2025-04-15",10100,9963.19489084483,6951033,78.9939691850138,"Middle East & North Africa","Tripoli","13.1072","32.8578","Upper middle income","IBRD",12536,-2436,0,-2.436
+"Libya","LY","LBY",2023,"","2025-04-15",5940,6172.81246940233,7305659,155.655201664179,"Middle East & North Africa","Tripoli","13.1072","32.8578","Upper middle income","IBRD",14005,-8065,0,-8.065
+"Libya","LY","LBY",2018,"","2025-04-15",11000,11196.5854810844,6849055,63.7811335968183,"Middle East & North Africa","Tripoli","13.1072","32.8578","Upper middle income","IBRD",12376,-1376,0,-1.376
+"Libya","LY","LBY",2022,"","2025-04-15",5960,5986.63694851258,7223805,156.321684682347,"Middle East & North Africa","Tripoli","13.1072","32.8578","Upper middle income","IBRD",13845,-7885,0,-7.885
+"Libya","LY","LBY",2021,"","2025-04-15",6930,4935.82787349801,7135175,164.284069967105,"Middle East & North Africa","Tripoli","13.1072","32.8578","Upper middle income","IBRD",13205,-6275,0,-6.275
+"Libya","LY","LBY",2020,"","2025-04-15",7010,6650.33810585348,7045399,50.9757934373319,"Middle East & North Africa","Tripoli","13.1072","32.8578","Upper middle income","IBRD",12696,-5686,0,-5.686
+"Lithuania","LT","LTU",2021,"","2025-04-15",21910,23934.728489916,2800839,154.80672767597,"Europe & Central Asia","Vilnius","25.2799","54.6896","High income","Not classified",13205,8705,1,8.705
+"Lithuania","LT","LTU",2018,"","2025-04-15",17470,19368.5391045353,2801543,147.202132525221,"Europe & Central Asia","Vilnius","25.2799","54.6896","High income","Not classified",12376,5094,1,5.094
+"Lithuania","LT","LTU",2020,"","2025-04-15",19710,20541.824988603,2794885,135.796565563519,"Europe & Central Asia","Vilnius","25.2799","54.6896","High income","Not classified",12696,7014,1,7.014
+"Lithuania","LT","LTU",2019,"","2025-04-15",19130,19727.7607453736,2794137,148.374996011818,"Europe & Central Asia","Vilnius","25.2799","54.6896","High income","Not classified",12536,6594,1,6.594
+"Malaysia","MY","MYS",2021,"","2025-04-15",10520,10903.1116425938,34282399,134.035994690727,"East Asia & Pacific","Kuala Lumpur","101.684","3.12433","Upper middle income","IBRD",13205,-2685,0,-2.685
+"Malaysia","MY","MYS",2019,"","2025-04-15",10750,10920.191763972,33440596,123.028562027943,"East Asia & Pacific","Kuala Lumpur","101.684","3.12433","Upper middle income","IBRD",12536,-1786,0,-1.786
+"Malaysia","MY","MYS",2020,"","2025-04-15",10110,9957.52626697613,33889558,116.788182437638,"East Asia & Pacific","Kuala Lumpur","101.684","3.12433","Upper middle income","IBRD",12696,-2586,0,-2.586
+"Malaysia","MY","MYS",2022,"","2025-04-15",11610,11748.0919307944,34695493,146.505418280787,"East Asia & Pacific","Kuala Lumpur","101.684","3.12433","Upper middle income","IBRD",13845,-2235,0,-2.235
+"Malaysia","MY","MYS",2018,"","2025-04-15",10200,10901.8019954421,32910967,130.402625502126,"East Asia & Pacific","Kuala Lumpur","101.684","3.12433","Upper middle income","IBRD",12376,-2176,0,-2.176
+"Malaysia","MY","MYS",2023,"","2025-04-15",11710,11379.0861000632,35126298,132.064307278667,"East Asia & Pacific","Kuala Lumpur","101.684","3.12433","Upper middle income","IBRD",14005,-2295,0,-2.295
+"Maldives","MV","MDV",2023,"","2025-04-15",11070,12530.3602359683,525994,150.032369927009,"South Asia","Male","73.5109","4.1742","Upper middle income","IDA",14005,-2935,0,-2.935
+"Maldives","MV","MDV",2019,"","2025-04-15",10750,11740.2724029785,487731,137.125230822792,"South Asia","Male","73.5109","4.1742","Upper middle income","IDA",12536,-1786,0,-1.786
+"Maldives","MV","MDV",2020,"","2025-04-15",7060,7393.8886543933,502118,114.361902844174,"South Asia","Male","73.5109","4.1742","Upper middle income","IDA",12696,-5636,0,-5.636
+"Maldives","MV","MDV",2022,"","2025-04-15",10570,11786.0091545343,524106,162.243570470777,"South Asia","Male","73.5109","4.1742","Upper middle income","IDA",13845,-3275,0,-3.275
+"Maldives","MV","MDV",2018,"","2025-04-15",10220,11423.2838427029,473099,142.491128578069,"South Asia","Male","73.5109","4.1742","Upper middle income","IDA",12376,-2156,0,-2.156
+"Maldives","MV","MDV",2021,"","2025-04-15",9350,10176.143882547,516154,142.607296758605,"South Asia","Male","73.5109","4.1742","Upper middle income","IDA",13205,-3855,0,-3.855
+"Marshall Islands","MH","MHL",2022,"","2025-04-15",7500,6322.82855503156,40077,118.835319652723,"East Asia & Pacific","Majuro","171.135","7.11046","Upper middle income","IDA",13845,-6345,0,-6.345
+"Marshall Islands","MH","MHL",2020,"","2025-04-15",6610,5661.96787336674,42706,107.825971877585,"East Asia & Pacific","Majuro","171.135","7.11046","Upper middle income","IDA",12696,-6086,0,-6.086
+"Marshall Islands","MH","MHL",2021,"","2025-04-15",6660,6258.61193705127,41367,117.622325222093,"East Asia & Pacific","Majuro","171.135","7.11046","Upper middle income","IDA",13205,-6545,0,-6.545
+"Marshall Islands","MH","MHL",2019,"","2025-04-15",6770,5292.33985502306,44007,153.007728638901,"East Asia & Pacific","Majuro","171.135","7.11046","Upper middle income","IDA",12536,-5766,0,-5.766
+"Marshall Islands","MH","MHL",2018,"","2025-04-15",6040,4858.12079054875,45285,128.482272727273,"East Asia & Pacific","Majuro","171.135","7.11046","Upper middle income","IDA",12376,-6336,0,-6.336
+"Marshall Islands","MH","MHL",2023,"","2025-04-15",7860,6678.34239060448,38827,110.172232934825,"East Asia & Pacific","Majuro","171.135","7.11046","Upper middle income","IDA",14005,-6145,0,-6.145
+"Mauritius","MU","MUS",2022,"","2025-04-15",11010,10239.7970461095,1262523,118.339828499599,"Sub-Saharan Africa","Port Louis","57.4977","-20.1605","Upper middle income","IBRD",13845,-2835,0,-2.835
+"Mauritius","MU","MUS",2023,"","2025-04-15",11590,11613.0441587588,1261041,107.903855233762,"Sub-Saharan Africa","Port Louis","57.4977","-20.1605","Upper middle income","IBRD",14005,-2415,0,-2.415
+"Mauritius","MU","MUS",2020,"","2025-04-15",10220,9011.04288445023,1266014,85.8305448745082,"Sub-Saharan Africa","Port Louis","57.4977","-20.1605","Upper middle income","IBRD",12696,-2476,0,-2.476
+"Mauritius","MU","MUS",2021,"","2025-04-15",10280,9068.97300226707,1266334,98.0000292393386,"Sub-Saharan Africa","Port Louis","57.4977","-20.1605","Upper middle income","IBRD",13205,-2925,0,-2.925
+"Mauritius","MU","MUS",2018,"","2025-04-15",11910,11643.4605962124,1265577,98.0871798050983,"Sub-Saharan Africa","Port Louis","57.4977","-20.1605","Upper middle income","IBRD",12376,-466,0,-0.466
+"Mauritius","MU","MUS",2019,"","2025-04-15",12440,11403.2527870674,1265985,96.4919509166035,"Sub-Saharan Africa","Port Louis","57.4977","-20.1605","Upper middle income","IBRD",12536,-96,0,-0.096
+"Mexico","MX","MEX",2019,"","2025-04-15",9860,10369.5553568761,125762982,77.4619722694466,"Latin America & Caribbean","Mexico City","-99.1276","19.427","Upper middle income","IBRD",12536,-2676,0,-2.676
+"Mexico","MX","MEX",2020,"","2025-04-15",8920,8841.27075003163,126799054,76.8545557087923,"Latin America & Caribbean","Mexico City","-99.1276","19.427","Upper middle income","IBRD",12696,-3776,0,-3.776
+"Mexico","MX","MEX",2021,"","2025-04-15",9880,10314.0506741437,127648148,83.0692976202276,"Latin America & Caribbean","Mexico City","-99.1276","19.427","Upper middle income","IBRD",13205,-3325,0,-3.325
+"Mexico","MX","MEX",2018,"","2025-04-15",9560,10084.7937562021,124573711,80.2126616568975,"Latin America & Caribbean","Mexico City","-99.1276","19.427","Upper middle income","IBRD",12376,-2816,0,-2.816
+"Mexico","MX","MEX",2023,"","2025-04-15",11980,13790.0243428344,129739759,73.157775633035,"Latin America & Caribbean","Mexico City","-99.1276","19.427","Upper middle income","IBRD",14005,-2025,0,-2.025
+"Mexico","MX","MEX",2022,"","2025-04-15",10720,11385.4070757929,128613117,88.3870894769952,"Latin America & Caribbean","Mexico City","-99.1276","19.427","Upper middle income","IBRD",13845,-3125,0,-3.125
+"Micronesia, Fed. Sts.","FM","FSM",2020,"","2025-04-15",3980,3353.8894298388,110916,85.5168279569892,"East Asia & Pacific","Palikir","158.185","6.91771","Lower middle income","IDA",12696,-8716,0,-8.716
+"Micronesia, Fed. Sts.","FM","FSM",2023,"","2025-04-15",4250,4084.16940424398,112630,94.8821956521739,"East Asia & Pacific","Palikir","158.185","6.91771","Lower middle income","IDA",14005,-9755,0,-9.755
+"Micronesia, Fed. Sts.","FM","FSM",2019,"","2025-04-15",4050,3572.65918282222,110282,95.8493908629442,"East Asia & Pacific","Palikir","158.185","6.91771","Lower middle income","IDA",12536,-8486,0,-8.486
+"Micronesia, Fed. Sts.","FM","FSM",2022,"","2025-04-15",4130,3835.38184348074,112114,84.8371395348837,"East Asia & Pacific","Palikir","158.185","6.91771","Lower middle income","IDA",13845,-9715,0,-9.715
+"Micronesia, Fed. Sts.","FM","FSM",2018,"","2025-04-15",3380,3566.58690371125,109909,103.406785714286,"East Asia & Pacific","Palikir","158.185","6.91771","Lower middle income","IDA",12376,-8996,0,-8.996
+"Micronesia, Fed. Sts.","FM","FSM",2021,"","2025-04-15",4020,3493.87228552999,111624,87.6064871794872,"East Asia & Pacific","Palikir","158.185","6.91771","Lower middle income","IDA",13205,-9185,0,-9.185
+"Moldova","MD","MDA",2023,"","2025-04-15",6200,6729.41286813969,2457783,95.1315748916605,"Europe & Central Asia","Chisinau","28.8497","47.0167","Upper middle income","IBRD",14005,-7805,0,-7.805
+"Moldova","MD","MDA",2018,"","2025-04-15",3850,4156.44981956646,2707203,87.4467874275648,"Europe & Central Asia","Chisinau","28.8497","47.0167","Upper middle income","IBRD",12376,-8526,0,-8.526
+"Moldova","MD","MDA",2019,"","2025-04-15",4490,4405.33418162155,2664224,87.6322371148906,"Europe & Central Asia","Chisinau","28.8497","47.0167","Upper middle income","IBRD",12536,-8046,0,-8.046
+"Moldova","MD","MDA",2020,"","2025-04-15",4360,4375.7788930524,2635130,79.265722119158,"Europe & Central Asia","Chisinau","28.8497","47.0167","Upper middle income","IBRD",12696,-8336,0,-8.336
+"Moldova","MD","MDA",2021,"","2025-04-15",5270,5274.60582195352,2595809,88.4708865399267,"Europe & Central Asia","Chisinau","28.8497","47.0167","Upper middle income","IBRD",13205,-7935,0,-7.935
+"Moldova","MD","MDA",2022,"","2025-04-15",5520,5738.42473515618,2528654,110.733965557959,"Europe & Central Asia","Chisinau","28.8497","47.0167","Upper middle income","IBRD",13845,-8325,0,-8.325
+"Mongolia","MN","MNG",2018,"","2025-04-15",3650,4107.64288528468,3208189,126.355873241513,"East Asia & Pacific","Ulaanbaatar","106.937","47.9129","Upper middle income","IBRD",12376,-8726,0,-8.726
+"Mongolia","MN","MNG",2019,"","2025-04-15",3800,4347.54610314873,3267673,124.396514621165,"East Asia & Pacific","Ulaanbaatar","106.937","47.9129","Upper middle income","IBRD",12536,-8736,0,-8.736
+"Mongolia","MN","MNG",2020,"","2025-04-15",3690,4001.25193077703,3327204,112.838647629317,"East Asia & Pacific","Ulaanbaatar","106.937","47.9129","Upper middle income","IBRD",12696,-9006,0,-9.006
+"Mongolia","MN","MNG",2022,"","2025-04-15",4210,4993.51487463495,3433748,136.327929944516,"East Asia & Pacific","Ulaanbaatar","106.937","47.9129","Upper middle income","IBRD",13845,-9635,0,-9.635
+"Mongolia","MN","MNG",2023,"","2025-04-15",4870,5838.63108083902,3481145,142.864246599181,"East Asia & Pacific","Ulaanbaatar","106.937","47.9129","Upper middle income","IBRD",14005,-9135,0,-9.135
+"Mongolia","MN","MNG",2021,"","2025-04-15",3690,4517.61578018785,3383741,119.098078437771,"East Asia & Pacific","Ulaanbaatar","106.937","47.9129","Upper middle income","IBRD",13205,-9515,0,-9.515
+"Montenegro","ME","MNE",2018,"","2025-04-15",8450,8850.3749248372,622227,109.609296759902,"Europe & Central Asia","Podgorica","19.2595","42.4602","Upper middle income","IBRD",12376,-3926,0,-3.926
+"Montenegro","ME","MNE",2020,"","2025-04-15",7900,7677.37132106817,621306,87.0060180817206,"Europe & Central Asia","Podgorica","19.2595","42.4602","Upper middle income","IBRD",12696,-4796,0,-4.796
+"Montenegro","ME","MNE",2023,"","2025-04-15",11590,12221.4775546967,616177,118.542754014976,"Europe & Central Asia","Podgorica","19.2595","42.4602","Upper middle income","IBRD",14005,-2415,0,-2.415
+"Montenegro","ME","MNE",2021,"","2025-04-15",9370,9465.96153027794,619211,105.029993243347,"Europe & Central Asia","Podgorica","19.2595","42.4602","Upper middle income","IBRD",13205,-3835,0,-3.835
+"Montenegro","ME","MNE",2019,"","2025-04-15",9140,8909.6538759126,622028,108.844577462214,"Europe & Central Asia","Podgorica","19.2595","42.4602","Upper middle income","IBRD",12536,-3396,0,-3.396
+"Montenegro","ME","MNE",2022,"","2025-04-15",10480,10093.4387007266,617213,125.898604629493,"Europe & Central Asia","Podgorica","19.2595","42.4602","Upper middle income","IBRD",13845,-3365,0,-3.365
+"Morocco","MA","MAR",2019,"","2025-04-15",3510,3508.09765625,36210898,75.9981158798422,"Middle East & North Africa","Rabat","-6.8704","33.9905","Lower middle income","IBRD",12536,-9026,0,-9.026
+"Morocco","MA","MAR",2018,"","2025-04-15",3380,3501.69799804688,35839760,77.2548875243989,"Middle East & North Africa","Rabat","-6.8704","33.9905","Lower middle income","IBRD",12376,-8996,0,-8.996
+"Morocco","MA","MAR",2021,"","2025-04-15",3630,3785.93627929688,36954442,75.5234171756506,"Middle East & North Africa","Rabat","-6.8704","33.9905","Lower middle income","IBRD",13205,-9575,0,-9.575
+"Morocco","MA","MAR",2020,"","2025-04-15",3260,3268.0302734375,36584208,68.8438033904364,"Middle East & North Africa","Rabat","-6.8704","33.9905","Lower middle income","IBRD",12696,-9436,0,-9.436
+"Namibia","NA","NAM",2023,"","2025-04-15",4280,4168.28521087347,2963095,109.610472332402,"Sub-Saharan Africa","Windhoek","17.0931","-22.5648","Upper middle income","IBRD",14005,-9725,0,-9.725
+"Namibia","NA","NAM",2018,"","2025-04-15",4670,5308.60813408705,2577327,81.7138652963804,"Sub-Saharan Africa","Windhoek","17.0931","-22.5648","Upper middle income","IBRD",12376,-7706,0,-7.706
+"Namibia","NA","NAM",2022,"","2025-04-15",4300,4349.04532248966,2889662,99.1081598746768,"Sub-Saharan Africa","Windhoek","17.0931","-22.5648","Upper middle income","IBRD",13845,-9545,0,-9.545
+"Namibia","NA","NAM",2021,"","2025-04-15",4140,4412.8355693052,2810548,83.5443030923624,"Sub-Saharan Africa","Windhoek","17.0931","-22.5648","Upper middle income","IBRD",13205,-9065,0,-9.065
+"Namibia","NA","NAM",2019,"","2025-04-15",4870,4731.9210318831,2650494,82.9011507426355,"Sub-Saharan Africa","Windhoek","17.0931","-22.5648","Upper middle income","IBRD",12536,-7666,0,-7.666
+"Namibia","NA","NAM",2020,"","2025-04-15",4240,3878.58982993966,2728762,76.9252424036465,"Sub-Saharan Africa","Windhoek","17.0931","-22.5648","Upper middle income","IBRD",12696,-8456,0,-8.456
+"Nauru","NR","NRU",2020,"","2025-04-15",17210,10695.6993301601,11643,135.114917540724,"East Asia & Pacific","Yaren District","166.920867","-0.5477","High income","IBRD",12696,4514,1,4.514
+"Nauru","NR","NRU",2019,"","2025-04-15",15790,10776.8284610316,11587,156.361049485333,"East Asia & Pacific","Yaren District","166.920867","-0.5477","High income","IBRD",12536,3254,1,3.254
+"Nauru","NR","NRU",2021,"","2025-04-15",19400,14989.6647450751,11709,110.560319021551,"East Asia & Pacific","Yaren District","166.920867","-0.5477","High income","IBRD",13205,6195,1,6.195
+"Nauru","NR","NRU",2018,"","2025-04-15",12690,11408.6947593898,11477,140.298780395247,"East Asia & Pacific","Yaren District","166.920867","-0.5477","High income","IBRD",12376,314,1,0.314
+"Nauru","NR","NRU",2023,"","2025-04-15",23980,12982.7612060515,11875,141.359846842275,"East Asia & Pacific","Yaren District","166.920867","-0.5477","High income","IBRD",14005,9975,1,9.975
+"Nauru","NR","NRU",2022,"","2025-04-15",22520,13287.2711890938,11801,164.734798471964,"East Asia & Pacific","Yaren District","166.920867","-0.5477","High income","IBRD",13845,8675,1,8.675
+"North Macedonia","MK","MKD",2023,"","2025-04-15",7900,8624.29360948531,1827816,148.671596334608,"Europe & Central Asia","Skopje","21.4361","42.0024","Upper middle income","IBRD",14005,-6105,0,-6.105
+"North Macedonia","MK","MKD",2018,"","2025-04-15",6050,6713.98925398989,1889051,133.215207648008,"Europe & Central Asia","Skopje","21.4361","42.0024","Upper middle income","IBRD",12376,-6326,0,-6.326
+"North Macedonia","MK","MKD",2019,"","2025-04-15",6520,6718.85826635458,1876262,138.576231840539,"Europe & Central Asia","Skopje","21.4361","42.0024","Upper middle income","IBRD",12536,-6016,0,-6.016
+"North Macedonia","MK","MKD",2020,"","2025-04-15",6460,6659.59651070776,1856124,128.241244322257,"Europe & Central Asia","Skopje","21.4361","42.0024","Upper middle income","IBRD",12696,-6236,0,-6.236
+"North Macedonia","MK","MKD",2021,"","2025-04-15",7050,7620.80296977508,1837114,146.721411484074,"Europe & Central Asia","Skopje","21.4361","42.0024","Upper middle income","IBRD",13205,-6155,0,-6.155
+"North Macedonia","MK","MKD",2022,"","2025-04-15",7570,7606.2375253797,1831712,166.147357379878,"Europe & Central Asia","Skopje","21.4361","42.0024","Upper middle income","IBRD",13845,-6275,0,-6.275
+"Oman","OM","OMN",2021,"","2025-04-15",17900,19403.4600160211,4500424,92.0240648081963,"Middle East & North Africa","Muscat","58.5874","23.6105","High income","Not classified",13205,4695,1,4.695
+"Oman","OM","OMN",2022,"","2025-04-15",19610,23665.6394740852,4730226,100.584539895545,"Middle East & North Africa","Muscat","58.5874","23.6105","High income","Not classified",13845,5765,1,5.765
+"Oman","OM","OMN",2018,"","2025-04-15",17260,19901.7615642016,4597877,89.2792178262847,"Middle East & North Africa","Muscat","58.5874","23.6105","High income","Not classified",12376,4884,1,4.884
+"Oman","OM","OMN",2020,"","2025-04-15",17100,16784.8630630058,4522497,91.8758908014472,"Middle East & North Africa","Muscat","58.5874","23.6105","High income","Not classified",12696,4404,1,4.404
+"Oman","OM","OMN",2023,"","2025-04-15",20470,21549.8368728192,5049269,NA,"Middle East & North Africa","Muscat","58.5874","23.6105","High income","Not classified",14005,6465,1,6.465
+"Oman","OM","OMN",2019,"","2025-04-15",17810,19180.1864152801,4591241,86.4782010313236,"Middle East & North Africa","Muscat","58.5874","23.6105","High income","Not classified",12536,5274,1,5.274
+"Palau","PW","PLW",2018,"","2025-04-15",15940,16197.7254546986,17814,116.887522701352,"East Asia & Pacific","Koror","134.479","7.34194","High income","IBRD",12376,3564,1,3.564
+"Palau","PW","PLW",2022,"","2025-04-15",14050,14392.1990258461,17759,87.7375749396558,"East Asia & Pacific","Koror","134.479","7.34194","High income","IBRD",13845,205,1,0.205
+"Palau","PW","PLW",2023,"","2025-04-15",14110,15899.4224911152,17727,NA,"East Asia & Pacific","Koror","134.479","7.34194","High income","IBRD",14005,105,1,0.105
+"Palau","PW","PLW",2021,"","2025-04-15",13830,13257.2066721026,17783,80.729821331736,"East Asia & Pacific","Koror","134.479","7.34194","High income","IBRD",13205,625,1,0.625
+"Palau","PW","PLW",2019,"","2025-04-15",16220,15841.1935329812,17798,115.048663674764,"East Asia & Pacific","Koror","134.479","7.34194","High income","IBRD",12536,3684,1,3.684
+"Palau","PW","PLW",2020,"","2025-04-15",15440,14556.5896891862,17792,107.241551855055,"East Asia & Pacific","Koror","134.479","7.34194","High income","IBRD",12696,2744,1,2.744
+"Panama","PA","PAN",2020,"","2025-04-15",13070,13290.5608347594,4293261,68.700423510603,"Latin America & Caribbean","Panama City","-79.5188","8.99427","High income","IBRD",12696,374,1,0.374
+"Panama","PA","PAN",2019,"","2025-04-15",15640,16477.9066285687,4234700,80.4286505649569,"Latin America & Caribbean","Panama City","-79.5188","8.99427","High income","IBRD",12536,3104,1,3.104
+"Panama","PA","PAN",2021,"","2025-04-15",14920,15509.8069109784,4345405,80.1334635232887,"Latin America & Caribbean","Panama City","-79.5188","8.99427","High income","IBRD",13205,1715,1,1.715
+"Panama","PA","PAN",2018,"","2025-04-15",14910,16151.3273478476,4167860,86.1309615112445,"Latin America & Caribbean","Panama City","-79.5188","8.99427","High income","IBRD",12376,2534,1,2.534
+"Panama","PA","PAN",2023,"","2025-04-15",17870,18686.4050961265,4458759,89.5330683837851,"Latin America & Caribbean","Panama City","-79.5188","8.99427","High income","IBRD",14005,3865,1,3.865
+"Panama","PA","PAN",2022,"","2025-04-15",16970,17332.4360742988,4400773,93.687178754867,"Latin America & Caribbean","Panama City","-79.5188","8.99427","High income","IBRD",13845,3125,1,3.125
+"Paraguay","PY","PRY",2020,"","2025-04-15",5550,5365.47220721191,6603739,62.7602174748561,"Latin America & Caribbean","Asuncion","-57.6362","-25.3005","Upper middle income","IBRD",12696,-7146,0,-7.146
+"Paraguay","PY","PRY",2021,"","2025-04-15",5750,5976.9317978996,6684182,69.7422730211357,"Latin America & Caribbean","Asuncion","-57.6362","-25.3005","Upper middle income","IBRD",13205,-7455,0,-7.455
+"Paraguay","PY","PRY",2018,"","2025-04-15",6060,6258.44991640954,6427382,72.069223625915,"Latin America & Caribbean","Asuncion","-57.6362","-25.3005","Upper middle income","IBRD",12376,-6316,0,-6.316
+"Paraguay","PY","PRY",2022,"","2025-04-15",5920,6205.62595379319,6760464,73.7379050218566,"Latin America & Caribbean","Asuncion","-57.6362","-25.3005","Upper middle income","IBRD",13845,-7925,0,-7.925
+"Paraguay","PY","PRY",2019,"","2025-04-15",5950,5821.18199548637,6515058,71.2221617342433,"Latin America & Caribbean","Asuncion","-57.6362","-25.3005","Upper middle income","IBRD",12536,-6586,0,-6.586
+"Paraguay","PY","PRY",2023,"","2025-04-15",6220,6276.35113919957,6844146,82.9887758742076,"Latin America & Caribbean","Asuncion","-57.6362","-25.3005","Upper middle income","IBRD",14005,-7785,0,-7.785
+"Peru","PE","PER",2019,"","2025-04-15",6850,7037.00803692604,32449303,46.9435053754409,"Latin America & Caribbean","Lima","-77.0465","-12.0931","Upper middle income","IBRD",12536,-5686,0,-5.686
+"Peru","PE","PER",2018,"","2025-04-15",6500,6978.49121548627,31897584,48.631470171736,"Latin America & Caribbean","Lima","-77.0465","-12.0931","Upper middle income","IBRD",12376,-5876,0,-5.876
+"Peru","PE","PER",2022,"","2025-04-15",6920,7363.27206939639,33475438,57.2510734358091,"Latin America & Caribbean","Lima","-77.0465","-12.0931","Upper middle income","IBRD",13845,-6925,0,-6.925
+"Peru","PE","PER",2023,"","2025-04-15",7090,7906.58502858,33845617,50.909508314535,"Latin America & Caribbean","Lima","-77.0465","-12.0931","Upper middle income","IBRD",14005,-6915,0,-6.915
+"Peru","PE","PER",2020,"","2025-04-15",6080,6133.32552410183,32838579,44.245967197744,"Latin America & Caribbean","Lima","-77.0465","-12.0931","Upper middle income","IBRD",12696,-6616,0,-6.616
+"Peru","PE","PER",2021,"","2025-04-15",6550,6826.9720069846,33155882,55.2742548782987,"Latin America & Caribbean","Lima","-77.0465","-12.0931","Upper middle income","IBRD",13205,-6655,0,-6.655
+"Philippines","PH","PHL",2022,"","2025-04-15",4010,3548.06930572116,113964338,72.4296836107599,"East Asia & Pacific","Manila","121.035","14.5515","Lower middle income","IBRD",13845,-9835,0,-9.835
+"Philippines","PH","PHL",2021,"","2025-04-15",3570,3484.38593882819,113100950,63.4846098136712,"East Asia & Pacific","Manila","121.035","14.5515","Lower middle income","IBRD",13205,-9635,0,-9.635
+"Philippines","PH","PHL",2018,"","2025-04-15",3610,3168.51036606257,109465287,72.1633982998175,"East Asia & Pacific","Manila","121.035","14.5515","Lower middle income","IBRD",12376,-8766,0,-8.766
+"Philippines","PH","PHL",2020,"","2025-04-15",3350,3227.57910235199,112081264,58.1695603022281,"East Asia & Pacific","Manila","121.035","14.5515","Lower middle income","IBRD",12696,-9346,0,-9.346
+"Philippines","PH","PHL",2023,"","2025-04-15",4320,3804.8725797521,114891199,67.3966204439887,"East Asia & Pacific","Manila","121.035","14.5515","Lower middle income","IBRD",14005,-9685,0,-9.685
+"Philippines","PH","PHL",2019,"","2025-04-15",3760,3400.78949772302,110804683,68.8418422585097,"East Asia & Pacific","Manila","121.035","14.5515","Lower middle income","IBRD",12536,-8776,0,-8.776
+"Poland","PL","POL",2020,"","2025-04-15",15480,15987.5753654045,37899070,99.2590912303436,"Europe & Central Asia","Warsaw","21.02","52.26","High income","IBRD",12696,2784,1,2.784
+"Poland","PL","POL",2018,"","2025-04-15",14310,15658.2120316794,37974750,102.442462168005,"Europe & Central Asia","Warsaw","21.02","52.26","High income","IBRD",12376,1934,1,1.934
+"Poland","PL","POL",2019,"","2025-04-15",15510,15874.5220531254,37965475,101.581033817373,"Europe & Central Asia","Warsaw","21.02","52.26","High income","IBRD",12536,2974,1,2.974
+"Poland","PL","POL",2022,"","2025-04-15",19110,18891.2121169279,36821749,123.021332860345,"Europe & Central Asia","Warsaw","21.02","52.26","High income","IBRD",13845,5265,1,5.265
+"Poland","PL","POL",2023,"","2025-04-15",19900,22056.6661704127,36687353,110.466778966431,"Europe & Central Asia","Warsaw","21.02","52.26","High income","IBRD",14005,5895,1,5.895
+"Poland","PL","POL",2021,"","2025-04-15",17470,18635.5104895754,36981559,110.874283021945,"Europe & Central Asia","Warsaw","21.02","52.26","High income","IBRD",13205,4265,1,4.265
+"Portugal","PT","PRT",2018,"","2025-04-15",22050,23541.1401075289,10283822,86.7356954918399,"Europe & Central Asia","Lisbon","-9.13552","38.7072","High income","Not classified",12376,9674,1,9.674
+"Portugal","PT","PRT",2020,"","2025-04-15",21830,22299.4044062173,10297081,76.5086407209215,"Europe & Central Asia","Lisbon","-9.13552","38.7072","High income","Not classified",12696,9134,1,9.134
+"Puerto Rico","PR","PRI",2019,"","2025-04-15",22040,32916.866800639,3193694,107.571456836722,"Latin America & Caribbean","San Juan","-66","18.23","High income","Not classified",12536,9504,1,9.504
+"Puerto Rico","PR","PRI",2020,"","2025-04-15",21200,31427.4291136799,3281557,103.509811317462,"Latin America & Caribbean","San Juan","-66","18.23","High income","Not classified",12696,8504,1,8.504
+"Puerto Rico","PR","PRI",2021,"","2025-04-15",22580,32619.250416757,3262693,96.7441410324111,"Latin America & Caribbean","San Juan","-66","18.23","High income","Not classified",13205,9375,1,9.375
+"Puerto Rico","PR","PRI",2018,"","2025-04-15",21010,31615.0667918433,3193354,106.001103428056,"Latin America & Caribbean","San Juan","-66","18.23","High income","Not classified",12376,8634,1,8.634
+"Romania","RO","ROU",2020,"","2025-04-15",12740,13082.3006559554,19265250,77.923643460062,"Europe & Central Asia","Bucharest","26.0979","44.4479","High income","IBRD",12696,44,1,0.044
+"Romania","RO","ROU",2018,"","2025-04-15",11530,12502.2624061935,19473970,86.4911990211536,"Europe & Central Asia","Bucharest","26.0979","44.4479","High income","IBRD",12376,-846,0,-0.846
+"Romania","RO","ROU",2021,"","2025-04-15",14220,14986.7854904274,19122059,86.6133494279219,"Europe & Central Asia","Bucharest","26.0979","44.4479","High income","IBRD",13205,1015,1,1.015
+"Romania","RO","ROU",2022,"","2025-04-15",15440,15557.8826247584,19048502,93.6215624887545,"Europe & Central Asia","Bucharest","26.0979","44.4479","High income","IBRD",13845,1595,1,1.595
+"Romania","RO","ROU",2023,"","2025-04-15",16660,18404.2730871704,19059479,83.0900673956751,"Europe & Central Asia","Bucharest","26.0979","44.4479","High income","IBRD",14005,2655,1,2.655
+"Romania","RO","ROU",2019,"","2025-04-15",12700,12992.0326104674,19371648,84.3677121619338,"Europe & Central Asia","Bucharest","26.0979","44.4479","High income","IBRD",12536,164,1,0.164
+"Russian Federation","RU","RUS",2018,"","2025-04-15",10180,11211.8876953125,145398106,51.5809003703964,"Europe & Central Asia","Moscow","37.6176","55.7558","High income","IBRD",12376,-2196,0,-2.196
+"Russian Federation","RU","RUS",2020,"","2025-04-15",10660,10108.3271484375,145245148,45.9669082029127,"Europe & Central Asia","Moscow","37.6176","55.7558","High income","IBRD",12696,-2036,0,-2.036
+"Russian Federation","RU","RUS",2021,"","2025-04-15",11720,12521.5224609375,144746762,50.196441103259,"Europe & Central Asia","Moscow","37.6176","55.7558","High income","IBRD",13205,-1485,0,-1.485
+"Russian Federation","RU","RUS",2019,"","2025-04-15",11190,11447.701171875,145453291,49.2287536619033,"Europe & Central Asia","Moscow","37.6176","55.7558","High income","IBRD",12536,-1346,0,-1.346
+"Russian Federation","RU","RUS",2023,"","2025-04-15",14250,13817.0458984375,143826130,41.8285251825076,"Europe & Central Asia","Moscow","37.6176","55.7558","High income","IBRD",14005,245,1,0.245
+"Russian Federation","RU","RUS",2022,"","2025-04-15",12810,15445.2421875,144236933,43.2587048229719,"Europe & Central Asia","Moscow","37.6176","55.7558","High income","IBRD",13845,-1035,0,-1.035
+"Samoa","WS","WSM",2018,"","2025-04-15",4100,4231.81409469194,207582,78.9349684295151,"East Asia & Pacific","Apia","-171.752","-13.8314","Lower middle income","IDA",12376,-8276,0,-8.276
+"Samoa","WS","WSM",2019,"","2025-04-15",4270,4351.94234943706,209780,83.3310795816457,"East Asia & Pacific","Apia","-171.752","-13.8314","Lower middle income","IDA",12536,-8266,0,-8.266
+"Samoa","WS","WSM",2020,"","2025-04-15",4060,4099.6600907147,211944,77.4835999958193,"East Asia & Pacific","Apia","-171.752","-13.8314","Lower middle income","IDA",12696,-8636,0,-8.636
+"Samoa","WS","WSM",2023,"","2025-04-15",4200,4330.17840531329,216663,90.6574805627022,"East Asia & Pacific","Apia","-171.752","-13.8314","Lower middle income","IDA",14005,-9805,0,-9.805
+"Samoa","WS","WSM",2021,"","2025-04-15",3910,3947.64517905415,213779,60.8888856520264,"East Asia & Pacific","Apia","-171.752","-13.8314","Lower middle income","IDA",13205,-9295,0,-9.295
+"Serbia","RS","SRB",2018,"","2025-04-15",6700,7559.86165747394,6982604,105.563713028559,"Europe & Central Asia","Belgrade","20.4656","44.8024","Upper middle income","IBRD",12376,-5676,0,-5.676
+"Serbia","RS","SRB",2019,"","2025-04-15",7380,7755.632986437,6945235,107.577309546092,"Europe & Central Asia","Belgrade","20.4656","44.8024","Upper middle income","IBRD",12536,-5156,0,-5.156
+"Serbia","RS","SRB",2023,"","2025-04-15",10760,12281.5058488303,6623183,114.493948658228,"Europe & Central Asia","Belgrade","20.4656","44.8024","Upper middle income","IBRD",14005,-3245,0,-3.245
+"Serbia","RS","SRB",2022,"","2025-04-15",9790,10022.9688543402,6664449,131.93764235858,"Europe & Central Asia","Belgrade","20.4656","44.8024","Upper middle income","IBRD",13845,-4055,0,-4.055
+"Serbia","RS","SRB",2020,"","2025-04-15",7790,8098.70955668849,6899126,100.324460810129,"Europe & Central Asia","Belgrade","20.4656","44.8024","Upper middle income","IBRD",12696,-4906,0,-4.906
+"Serbia","RS","SRB",2021,"","2025-04-15",8890,9680.52798074468,6834326,112.342298324945,"Europe & Central Asia","Belgrade","20.4656","44.8024","Upper middle income","IBRD",13205,-4315,0,-4.315
+"Seychelles","SC","SYC",2020,"","2025-04-15",15400,14041.4754074575,98462,153.48333156592,"Sub-Saharan Africa","Victoria","55.4466","-4.6309","High income","IBRD",12696,2704,1,2.704
+"Seychelles","SC","SYC",2021,"","2025-04-15",14950,14982.9111487767,99258,183.77081501466,"Sub-Saharan Africa","Victoria","55.4466","-4.6309","High income","IBRD",13205,1745,1,1.745
+"Seychelles","SC","SYC",2019,"","2025-04-15",18700,19141.5118743615,97625,173.407846880196,"Sub-Saharan Africa","Victoria","55.4466","-4.6309","High income","IBRD",12536,6164,1,6.164
+"Seychelles","SC","SYC",2022,"","2025-04-15",15000,17167.1909760833,119878,186.172111653646,"Sub-Saharan Africa","Victoria","55.4466","-4.6309","High income","IBRD",13845,1155,1,1.155
+"Seychelles","SC","SYC",2023,"","2025-04-15",16940,17879.2396545075,119773,183.066894954317,"Sub-Saharan Africa","Victoria","55.4466","-4.6309","High income","IBRD",14005,2935,1,2.935
+"Seychelles","SC","SYC",2018,"","2025-04-15",17620,18440.2340460932,96762,185.7075372109,"Sub-Saharan Africa","Victoria","55.4466","-4.6309","High income","IBRD",12376,5244,1,5.244
+"Slovak Republic","SK","SVK",2022,"","2025-04-15",22090,21342.7666714692,5431752,203.850946665515,"Europe & Central Asia","Bratislava","17.1073","48.1484","High income","Not classified",13845,8245,1,8.245
+"Slovak Republic","SK","SVK",2023,"","2025-04-15",22790,24491.3771867262,5426740,182.314394044261,"Europe & Central Asia","Bratislava","17.1073","48.1484","High income","Not classified",14005,8785,1,8.785
+"Slovak Republic","SK","SVK",2019,"","2025-04-15",19210,19406.0589683582,5454147,183.722608631236,"Europe & Central Asia","Bratislava","17.1073","48.1484","High income","Not classified",12536,6674,1,6.674
+"Slovak Republic","SK","SVK",2020,"","2025-04-15",19250,19735.4858280801,5458827,167.534173320366,"Europe & Central Asia","Bratislava","17.1073","48.1484","High income","Not classified",12696,6554,1,6.554
+"Slovak Republic","SK","SVK",2018,"","2025-04-15",18390,19573.3717031314,5446771,188.732964699496,"Europe & Central Asia","Bratislava","17.1073","48.1484","High income","Not classified",12376,6014,1,6.014
+"Slovak Republic","SK","SVK",2021,"","2025-04-15",20660,22138.1949833348,5447247,181.857446230979,"Europe & Central Asia","Bratislava","17.1073","48.1484","High income","Not classified",13205,7455,1,7.455
+"South Africa","ZA","ZAF",2020,"","2025-04-15",5930,5580.60383075189,60562381,50.7596590804177,"Sub-Saharan Africa","Pretoria","28.1871","-25.746","Upper middle income","IBRD",12696,-6766,0,-6.766
+"South Africa","ZA","ZAF",2023,"","2025-04-15",6480,6022.5425418935,63212384,65.1800955487645,"Sub-Saharan Africa","Pretoria","28.1871","-25.746","Upper middle income","IBRD",14005,-7525,0,-7.525
+"South Africa","ZA","ZAF",2019,"","2025-04-15",6570,6533.71121032856,59587885,53.8979964081406,"Sub-Saharan Africa","Pretoria","28.1871","-25.746","Upper middle income","IBRD",12536,-5966,0,-5.966
+"South Africa","ZA","ZAF",2021,"","2025-04-15",6330,6843.39941886204,61502603,56.0347138372399,"Sub-Saharan Africa","Pretoria","28.1871","-25.746","Upper middle income","IBRD",13205,-6875,0,-6.875
+"South Africa","ZA","ZAF",2022,"","2025-04-15",6530,6523.41097815853,62378410,64.7830021330108,"Sub-Saharan Africa","Pretoria","28.1871","-25.746","Upper middle income","IBRD",13845,-7315,0,-7.315
+"South Africa","ZA","ZAF",2018,"","2025-04-15",6250,6914.1780318076,58613001,54.4855451276341,"Sub-Saharan Africa","Pretoria","28.1871","-25.746","Upper middle income","IBRD",12376,-6126,0,-6.126
+"Sri Lanka","LK","LKA",2018,"","2025-04-15",4360,4360.58473469252,21670000,49.8093967507459,"South Asia","Colombo","79.8528","6.92148","Lower middle income","IDA",12376,-8016,0,-8.016
+"Sri Lanka","LK","LKA",2019,"","2025-04-15",4220,4082.69404871533,21803000,49.4255258543722,"South Asia","Colombo","79.8528","6.92148","Lower middle income","IDA",12536,-8316,0,-8.316
+"Sri Lanka","LK","LKA",2020,"","2025-04-15",3880,3846.17449566736,21919000,37.0891205013034,"South Asia","Colombo","79.8528","6.92148","Lower middle income","IDA",12696,-8816,0,-8.816
+"Sri Lanka","LK","LKA",2021,"","2025-04-15",4020,3999.33764677637,22156000,41.2299754068976,"South Asia","Colombo","79.8528","6.92148","Lower middle income","IDA",13205,-9185,0,-9.185
+"St. Kitts and Nevis","KN","KNA",2023,"","2025-04-15",21520,22573.6724791004,46758,NA,"Latin America & Caribbean","Basseterre","-62.7309","17.3","High income","IBRD",14005,7515,1,7.515
+"St. Kitts and Nevis","KN","KNA",2022,"","2025-04-15",21090,21011.5744209816,46709,NA,"Latin America & Caribbean","Basseterre","-62.7309","17.3","High income","IBRD",13845,7245,1,7.245
+"St. Kitts and Nevis","KN","KNA",2018,"","2025-04-15",21930,22901.3816403197,47008,NA,"Latin America & Caribbean","Basseterre","-62.7309","17.3","High income","IBRD",12376,9554,1,9.554
+"St. Kitts and Nevis","KN","KNA",2020,"","2025-04-15",19330,18859.0190361046,46870,NA,"Latin America & Caribbean","Basseterre","-62.7309","17.3","High income","IBRD",12696,6634,1,6.634
+"St. Kitts and Nevis","KN","KNA",2021,"","2025-04-15",18990,18361.1449697886,46763,NA,"Latin America & Caribbean","Basseterre","-62.7309","17.3","High income","IBRD",13205,5785,1,5.785
+"St. Lucia","LC","LCA",2018,"","2025-04-15",11060,11642.7403185172,177017,NA,"Latin America & Caribbean","Castries","-60.9832","14","Upper middle income","Blend",12376,-1316,0,-1.316
+"St. Lucia","LC","LCA",2019,"","2025-04-15",11100,11794.2056521711,177661,NA,"Latin America & Caribbean","Castries","-60.9832","14","Upper middle income","Blend",12536,-1436,0,-1.436
+"St. Lucia","LC","LCA",2020,"","2025-04-15",8560,8411.19941821204,178250,NA,"Latin America & Caribbean","Castries","-60.9832","14","Upper middle income","Blend",12696,-4136,0,-4.136
+"St. Lucia","LC","LCA",2021,"","2025-04-15",9790,10459.1321248092,178522,NA,"Latin America & Caribbean","Castries","-60.9832","14","Upper middle income","Blend",13205,-3415,0,-3.415
+"St. Lucia","LC","LCA",2022,"","2025-04-15",11770,13103.7621654634,178781,NA,"Latin America & Caribbean","Castries","-60.9832","14","Upper middle income","Blend",13845,-2075,0,-2.075
+"St. Lucia","LC","LCA",2023,"","2025-04-15",12350,13554.6651875402,179285,NA,"Latin America & Caribbean","Castries","-60.9832","14","Upper middle income","Blend",14005,-1655,0,-1.655
+"St. Vincent and the Grenadines","VC","VCT",2019,"","2025-04-15",8700,8743.33202133753,104167,NA,"Latin America & Caribbean","Kingstown","-61.2653","13.2035","Upper middle income","Blend",12536,-3836,0,-3.836
+"St. Vincent and the Grenadines","VC","VCT",2023,"","2025-04-15",10300,10520.4441534791,101323,NA,"Latin America & Caribbean","Kingstown","-61.2653","13.2035","Upper middle income","Blend",14005,-3705,0,-3.705
+"St. Vincent and the Grenadines","VC","VCT",2020,"","2025-04-15",8410,8395.09988902412,103526,NA,"Latin America & Caribbean","Kingstown","-61.2653","13.2035","Upper middle income","Blend",12696,-4286,0,-4.286
+"St. Vincent and the Grenadines","VC","VCT",2021,"","2025-04-15",8620,8481.30537359541,102841,NA,"Latin America & Caribbean","Kingstown","-61.2653","13.2035","Upper middle income","Blend",13205,-4585,0,-4.585
+"St. Vincent and the Grenadines","VC","VCT",2022,"","2025-04-15",9620,9471.14627317673,102046,NA,"Latin America & Caribbean","Kingstown","-61.2653","13.2035","Upper middle income","Blend",13845,-4225,0,-4.225
+"St. Vincent and the Grenadines","VC","VCT",2018,"","2025-04-15",8370,8428.12677153069,104926,NA,"Latin America & Caribbean","Kingstown","-61.2653","13.2035","Upper middle income","Blend",12376,-4006,0,-4.006
+"Suriname","SR","SUR",2018,"","2025-04-15",5730,6665.74180472239,599513,NA,"Latin America & Caribbean","Paramaribo","-55.1679","5.8232","Upper middle income","Blend",12376,-6646,0,-6.646
+"Suriname","SR","SUR",2021,"","2025-04-15",4470,5029.84838543953,617896,NA,"Latin America & Caribbean","Paramaribo","-55.1679","5.8232","Upper middle income","Blend",13205,-8735,0,-8.735
+"Suriname","SR","SUR",2022,"","2025-04-15",5040,6084.43876736445,623164,NA,"Latin America & Caribbean","Paramaribo","-55.1679","5.8232","Upper middle income","Blend",13845,-8805,0,-8.805
+"Suriname","SR","SUR",2019,"","2025-04-15",5960,6629.66775248603,605768,NA,"Latin America & Caribbean","Paramaribo","-55.1679","5.8232","Upper middle income","Blend",12536,-6576,0,-6.576
+"Suriname","SR","SUR",2020,"","2025-04-15",4460,4755.39221710693,612317,NA,"Latin America & Caribbean","Paramaribo","-55.1679","5.8232","Upper middle income","Blend",12696,-8236,0,-8.236
+"Suriname","SR","SUR",2023,"","2025-04-15",5200,5494.07409425517,628886,NA,"Latin America & Caribbean","Paramaribo","-55.1679","5.8232","Upper middle income","Blend",14005,-8805,0,-8.805
+"Thailand","TH","THA",2023,"","2025-04-15",7200,7182.02525812415,71702435,129.136262293384,"East Asia & Pacific","Bangkok","100.521","13.7308","Upper middle income","IBRD",14005,-6805,0,-6.805
+"Thailand","TH","THA",2021,"","2025-04-15",7090,7058.0694998852,71727332,117.144503626655,"East Asia & Pacific","Bangkok","100.521","13.7308","Upper middle income","IBRD",13205,-6115,0,-6.115
+"Thailand","TH","THA",2022,"","2025-04-15",7230,6909.35997481451,71735329,132.856382043634,"East Asia & Pacific","Bangkok","100.521","13.7308","Upper middle income","IBRD",13845,-6615,0,-6.615
+"Thailand","TH","THA",2018,"","2025-04-15",6430,7099.77650081458,71376079,120.841864730984,"East Asia & Pacific","Bangkok","100.521","13.7308","Upper middle income","IBRD",12376,-5946,0,-5.946
+"Thailand","TH","THA",2019,"","2025-04-15",7060,7605.69657797759,71522271,109.689514715166,"East Asia & Pacific","Bangkok","100.521","13.7308","Upper middle income","IBRD",12536,-5476,0,-5.476
+"Thailand","TH","THA",2020,"","2025-04-15",6900,6985.64393892574,71641484,97.8007432465178,"East Asia & Pacific","Bangkok","100.521","13.7308","Upper middle income","IBRD",12696,-5796,0,-5.796
+"Tonga","TO","TON",2018,"","2025-04-15",4650,4638.89774268789,105567,87.4503114003387,"East Asia & Pacific","Nuku'alofa","-175.216","-21.136","Upper middle income","IDA",12376,-7726,0,-7.726
+"Tonga","TO","TON",2019,"","2025-04-15",4940,4676.84790348236,105669,90.3147767761719,"East Asia & Pacific","Nuku'alofa","-175.216","-21.136","Upper middle income","IDA",12536,-7596,0,-7.596
+"Tonga","TO","TON",2022,"","2025-04-15",5260,4933.07479143113,105042,75.3152309447865,"East Asia & Pacific","Nuku'alofa","-175.216","-21.136","Upper middle income","IDA",13845,-8585,0,-8.585
+"Tonga","TO","TON",2020,"","2025-04-15",5130,4700.44932800575,105704,83.4579911695786,"East Asia & Pacific","Nuku'alofa","-175.216","-21.136","Upper middle income","IDA",12696,-7566,0,-7.566
+"Tonga","TO","TON",2021,"","2025-04-15",5240,4912.57950603175,105490,66.1742943253212,"East Asia & Pacific","Nuku'alofa","-175.216","-21.136","Upper middle income","IDA",13205,-7965,0,-7.965
+"Trinidad and Tobago","TT","TTO",2019,"","2025-04-15",17540,17431.0269266696,1363985,NA,"Latin America & Caribbean","Port-of-Spain","-61.4789","10.6596","High income","IBRD",12536,5004,1,5.004
+"Trinidad and Tobago","TT","TTO",2020,"","2025-04-15",15180,15224.5083495616,1366725,NA,"Latin America & Caribbean","Port-of-Spain","-61.4789","10.6596","High income","IBRD",12696,2484,1,2.484
+"Trinidad and Tobago","TT","TTO",2021,"","2025-04-15",16370,17912.5106245714,1367558,NA,"Latin America & Caribbean","Port-of-Spain","-61.4789","10.6596","High income","IBRD",13205,3165,1,3.165
+"Trinidad and Tobago","TT","TTO",2018,"","2025-04-15",17090,18076.3565550233,1359193,NA,"Latin America & Caribbean","Port-of-Spain","-61.4789","10.6596","High income","IBRD",12376,4714,1,4.714
+"Trinidad and Tobago","TT","TTO",2023,"","2025-04-15",21000,20016.1503008736,1367510,NA,"Latin America & Caribbean","Port-of-Spain","-61.4789","10.6596","High income","IBRD",14005,6995,1,6.995
+"Trinidad and Tobago","TT","TTO",2022,"","2025-04-15",17930,22004.1997884125,1365805,NA,"Latin America & Caribbean","Port-of-Spain","-61.4789","10.6596","High income","IBRD",13845,4085,1,4.085
+"Tunisia","TN","TUN",2019,"","2025-04-15",3590,3528.87213306798,11875081,102.334485111325,"Middle East & North Africa","Tunis","10.21","36.7899","Lower middle income","IBRD",12536,-8946,0,-8.946
+"Tunisia","TN","TUN",2020,"","2025-04-15",3270,3548.65363663803,11974057,84.3315724158822,"Middle East & North Africa","Tunis","10.21","36.7899","Lower middle income","IBRD",12696,-9426,0,-9.426
+"Tunisia","TN","TUN",2018,"","2025-04-15",3700,3628.10366464236,11765514,103.875276030995,"Middle East & North Africa","Tunis","10.21","36.7899","Lower middle income","IBRD",12376,-8676,0,-8.676
+"Tunisia","TN","TUN",2021,"","2025-04-15",3630,3885.28166485296,12048622,94.0959550633947,"Middle East & North Africa","Tunis","10.21","36.7899","Lower middle income","IBRD",13205,-9575,0,-9.575
+"Tunisia","TN","TUN",2022,"","2025-04-15",3880,3678.40023411347,12119334,112.441001996161,"Middle East & North Africa","Tunis","10.21","36.7899","Lower middle income","IBRD",13845,-9965,0,-9.965
+"Turkiye","TR","TUR",2018,"","2025-04-15",10650,9568.83506330228,81407204,62.6142185426845,"Europe & Central Asia","Ankara","32.3606","39.7153","Upper middle income","IBRD",12376,-1726,0,-1.726
+"Turkiye","TR","TUR",2020,"","2025-04-15",9160,8638.73903848102,83384680,61.3437557667653,"Europe & Central Asia","Ankara","32.3606","39.7153","Upper middle income","IBRD",12696,-3536,0,-3.536
+"Turkiye","TR","TUR",2021,"","2025-04-15",10010,9743.21277804855,84147318,71.0824439613318,"Europe & Central Asia","Ankara","32.3606","39.7153","Upper middle income","IBRD",13205,-3195,0,-3.195
+"Turkiye","TR","TUR",2022,"","2025-04-15",10640,10674.504157865,84979913,81.170129694525,"Europe & Central Asia","Ankara","32.3606","39.7153","Upper middle income","IBRD",13845,-3205,0,-3.205
+"Turkiye","TR","TUR",2019,"","2025-04-15",9800,9215.44049888114,82579440,63.1932929004145,"Europe & Central Asia","Ankara","32.3606","39.7153","Upper middle income","IBRD",12536,-2736,0,-2.736
+"Turkiye","TR","TUR",2023,"","2025-04-15",11730,13105.6585678319,85325965,66.2766047093165,"Europe & Central Asia","Ankara","32.3606","39.7153","Upper middle income","IBRD",14005,-2275,0,-2.275
+"Turkmenistan","TM","TKM",2019,"","2025-04-15",6450,6648.0348960628,6803944,44.2857594037204,"Europe & Central Asia","Ashgabat","58.3794","37.9509","Upper middle income","IBRD",12536,-6086,0,-6.086
+"Turkmenistan","TM","TKM",2020,"","2025-04-15",6740,6592.60146027748,6949912,35.9365938526967,"Europe & Central Asia","Ashgabat","58.3794","37.9509","Upper middle income","IBRD",12696,-5956,0,-5.956
+"Turkmenistan","TM","TKM",2021,"","2025-04-15",7200,7051.20211079213,7092043,33.0581170797482,"Europe & Central Asia","Ashgabat","58.3794","37.9509","Upper middle income","IBRD",13205,-6005,0,-6.005
+"Turkmenistan","TM","TKM",2023,"","2025-04-15",8250,8232.65225980002,7364438,34.0992738017257,"Europe & Central Asia","Ashgabat","58.3794","37.9509","Upper middle income","IBRD",14005,-5755,0,-5.755
+"Turkmenistan","TM","TKM",2022,"","2025-04-15",7780,8156.35211950774,7230193,37.3609509597775,"Europe & Central Asia","Ashgabat","58.3794","37.9509","Upper middle income","IBRD",13845,-6065,0,-6.065
+"Turkmenistan","TM","TKM",2018,"","2025-04-15",5930,6125.05169712085,6655524,50.9002726399821,"Europe & Central Asia","Ashgabat","58.3794","37.9509","Upper middle income","IBRD",12376,-6446,0,-6.446
+"Turks and Caicos Islands","TC","TCA",2020,"","2025-04-15",19010,17452.6578046047,44386,NA,"Latin America & Caribbean","Grand Turk","-71.141389","21.4602778","High income","Not classified",12696,6314,1,6.314
+"Turks and Caicos Islands","TC","TCA",2021,"","2025-04-15",21460,23114.7902123091,45243,NA,"Latin America & Caribbean","Grand Turk","-71.141389","21.4602778","High income","Not classified",13205,8255,1,8.255
+"Tuvalu","TV","TUV",2020,"","2025-04-15",6880,4976.11254109571,10399,NA,"East Asia & Pacific","Funafuti","179.089567","-8.6314877","Upper middle income","IDA",12696,-5816,0,-5.816
+"Tuvalu","TV","TUV",2021,"","2025-04-15",7510,5905.08198095343,10194,NA,"East Asia & Pacific","Funafuti","179.089567","-8.6314877","Upper middle income","IDA",13205,-5695,0,-5.695
+"Tuvalu","TV","TUV",2022,"","2025-04-15",8100,5911.32727055301,9992,NA,"East Asia & Pacific","Funafuti","179.089567","-8.6314877","Upper middle income","IDA",13845,-5745,0,-5.745
+"Tuvalu","TV","TUV",2023,"","2025-04-15",8770,6344.7750188689,9816,NA,"East Asia & Pacific","Funafuti","179.089567","-8.6314877","Upper middle income","IDA",14005,-5235,0,-5.235
+"Tuvalu","TV","TUV",2018,"","2025-04-15",6230,4466.12034928245,10751,NA,"East Asia & Pacific","Funafuti","179.089567","-8.6314877","Upper middle income","IDA",12376,-6146,0,-6.146
+"Tuvalu","TV","TUV",2019,"","2025-04-15",6880,5115.13075950206,10581,NA,"East Asia & Pacific","Funafuti","179.089567","-8.6314877","Upper middle income","IDA",12536,-5656,0,-5.656
+"Ukraine","UA","UKR",2023,"","2025-04-15",4950,5069.703125,37732836,78.0981136693013,"Europe & Central Asia","Kiev","30.5038","50.4536","Upper middle income","IBRD",14005,-9055,0,-9.055
+"Ukraine","UA","UKR",2019,"","2025-04-15",3270,3619.86157226563,44957458,90.5112342910763,"Europe & Central Asia","Kiev","30.5038","50.4536","Upper middle income","IBRD",12536,-9266,0,-9.266
+"Ukraine","UA","UKR",2022,"","2025-04-15",3930,4199.6708984375,41048766,87.3965139907244,"Europe & Central Asia","Kiev","30.5038","50.4536","Upper middle income","IBRD",13845,-9915,0,-9.915
+"Ukraine","UA","UKR",2018,"","2025-04-15",2720,3059.0517578125,45208907,99.1998150718675,"Europe & Central Asia","Kiev","30.5038","50.4536","Upper middle income","IBRD",12376,-9656,0,-9.656
+"Ukraine","UA","UKR",2020,"","2025-04-15",3530,3709.76928710938,44680014,79.1564523761815,"Europe & Central Asia","Kiev","30.5038","50.4536","Upper middle income","IBRD",12696,-9166,0,-9.166
+"Ukraine","UA","UKR",2021,"","2025-04-15",4060,4775.94580078125,44298640,82.69796136345,"Europe & Central Asia","Kiev","30.5038","50.4536","Upper middle income","IBRD",13205,-9145,0,-9.145
+"Uruguay","UY","URY",2018,"","2025-04-15",17700,19249.9401532664,3394534,47.7913610689275,"Latin America & Caribbean","Montevideo","-56.0675","-34.8941","High income","IBRD",12376,5324,1,5.324
+"Uruguay","UY","URY",2019,"","2025-04-15",18390,18315.7352857194,3397206,49.7448699575412,"Latin America & Caribbean","Montevideo","-56.0675","-34.8941","High income","IBRD",12536,5854,1,5.854
+"Uruguay","UY","URY",2020,"","2025-04-15",16140,15789.6857422214,3398968,46.6861478026171,"Latin America & Caribbean","Montevideo","-56.0675","-34.8941","High income","IBRD",12696,3444,1,3.444
+"Uruguay","UY","URY",2021,"","2025-04-15",16200,17888.211510172,3396695,56.823738109386,"Latin America & Caribbean","Montevideo","-56.0675","-34.8941","High income","IBRD",13205,2995,1,2.995
+"Uruguay","UY","URY",2022,"","2025-04-15",17830,20691.9738991763,3390913,58.8336177106898,"Latin America & Caribbean","Montevideo","-56.0675","-34.8941","High income","IBRD",13845,3985,1,3.985
+"Uruguay","UY","URY",2023,"","2025-04-15",19700,22797.8111731861,3388081,51.7334881614305,"Latin America & Caribbean","Montevideo","-56.0675","-34.8941","High income","IBRD",14005,5695,1,5.695
+"Vanuatu","VU","VUT",2018,"","2025-04-15",3250,3206.68930842127,285259,98.3408089548684,"East Asia & Pacific","Port-Vila","168.321","-17.7404","Lower middle income","IDA",12376,-9126,0,-9.126
+"Vanuatu","VU","VUT",2019,"","2025-04-15",3740,3207.44650452083,291985,99.3829688227082,"East Asia & Pacific","Port-Vila","168.321","-17.7404","Lower middle income","IDA",12536,-8796,0,-8.796
+"Vanuatu","VU","VUT",2020,"","2025-04-15",3390,3042.98711598286,298858,62.9663867948803,"East Asia & Pacific","Port-Vila","168.321","-17.7404","Lower middle income","IDA",12696,-9306,0,-9.306
+"Vanuatu","VU","VUT",2021,"","2025-04-15",3500,3107.20312858002,305868,61.8209434451996,"East Asia & Pacific","Port-Vila","168.321","-17.7404","Lower middle income","IDA",13205,-9705,0,-9.705
+"Viet Nam","VN","VNM",2018,"","2025-04-15",3020,3222.31003125366,96237319,164.663936775892,"East Asia & Pacific","Hanoi","105.825","21.0069","Lower middle income","IBRD",12376,-9356,0,-9.356
+"Viet Nam","VN","VNM",2019,"","2025-04-15",3290,3440.90025375434,97173776,164.704215031408,"East Asia & Pacific","Hanoi","105.825","21.0069","Lower middle income","IBRD",12536,-9246,0,-9.246
+"Viet Nam","VN","VNM",2020,"","2025-04-15",3400,3534.03953482647,98079191,163.245862814935,"East Asia & Pacific","Hanoi","105.825","21.0069","Lower middle income","IBRD",12696,-9296,0,-9.296
+"Viet Nam","VN","VNM",2021,"","2025-04-15",3540,3704.1935590038,98935098,186.675832836814,"East Asia & Pacific","Hanoi","105.825","21.0069","Lower middle income","IBRD",13205,-9665,0,-9.665
+"Viet Nam","VN","VNM",2022,"","2025-04-15",3960,4116.38576094153,99680655,183.789541097223,"East Asia & Pacific","Hanoi","105.825","21.0069","Lower middle income","IBRD",13845,-9885,0,-9.885
+"Viet Nam","VN","VNM",2023,"","2025-04-15",4110,4282.08851724506,100352192,166.323605042338,"East Asia & Pacific","Hanoi","105.825","21.0069","Lower middle income","IBRD",14005,-9895,0,-9.895
+"West Bank and Gaza","PS","PSE",2018,"","2025-04-15",4190,3562.33094270256,4569087,71.4012754506469,"Middle East & North Africa","","","","Lower middle income","Not classified",12376,-8186,0,-8.186
+"West Bank and Gaza","PS","PSE",2019,"","2025-04-15",4200,3656.85827137011,4685306,68.9934922812035,"Middle East & North Africa","","","","Lower middle income","Not classified",12536,-8336,0,-8.336
+"West Bank and Gaza","PS","PSE",2020,"","2025-04-15",3700,3233.56863835858,4803269,67.2881912475775,"Middle East & North Africa","","","","Lower middle income","Not classified",12696,-8996,0,-8.996
+"West Bank and Gaza","PS","PSE",2021,"","2025-04-15",4270,3678.63565662194,4922749,73.0835496162129,"Middle East & North Africa","","","","Lower middle income","Not classified",13205,-8935,0,-8.935
+"West Bank and Gaza","PS","PSE",2022,"","2025-04-15",4720,3799.95527015163,5043612,82.3949283869453,"Middle East & North Africa","","","","Lower middle income","Not classified",13845,-9125,0,-9.125
+"West Bank and Gaza","PS","PSE",2023,"","2025-04-15",4180,3372.34974423005,5165775,86.3938510286554,"Middle East & North Africa","","","","Lower middle income","Not classified",14005,-9825,0,-9.825
