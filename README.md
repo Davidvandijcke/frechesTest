@@ -127,7 +127,7 @@ The function returns a list with:
 If you use this package in your research, please cite:
 
 ```
-Van Dijcke, D. (2023). "A Test for Jumps in Metric-Space Conditional Means." 
+Van Dijcke, D. (2025). "A Test for Jumps in Metric-Space Conditional Means." 
 Working Paper, University of Michigan.
 ```
 
