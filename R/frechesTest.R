@@ -16,7 +16,7 @@
 #' @param X_scalar A numeric vector of scalar covariates, corresponding to \code{Y_obj}.
 #'   Must have the same length as \code{Y_obj}.
 #' @param c_val The scalar cutoff point in \code{X_scalar} where the discontinuity 
-#'   is tested.
+#'   is tested, splitting the data into \code{X_scalar >= c} and \code{X_scalar < c}.
 #' @param metric_space_type A character string specifying the type of metric space.
 #'   Supported types: \code{"density"} (for probability distributions using 
 #'   Wasserstein-2 distance), \code{"covariance"} (for SPD matrices), 
@@ -47,11 +47,16 @@
 #'       }
 #'     \item For \code{"network"}:
 #'       \itemize{
-#'         \item \code{network_directed}: Logical, whether graphs are directed
+#'         \item \code{network_directed}: Logical, whether graphs are directed. Default FALSE.
 #'         \item \code{W_laplacian_bound}: Upper bound for edge weights
 #'         \item \code{osqp_model_for_laplacian_proj}: Cached OSQP model
 #'       }
-#'   }
+#'      \item For \code{"sphere"}:
+#'      \itemize{
+#'      \item \code{enforce_positive}: Logical, whether to force Frechet mean into
+#'      positive orthant. Default FALSE. 
+#'      }
+#'      }
 #' @param h_fx Numeric scalar, bandwidth for estimating the density of \code{X_scalar} 
 #'   at \code{c_val}. If \code{NULL}, uses \code{stats::bw.nrd0(X_scalar)}.
 #' @param kernel_fx_char Character string, kernel for density estimation of X. 
@@ -168,7 +173,7 @@
 #'
 #' @importFrom Matrix Matrix nearPD sparseMatrix
 #' @importFrom fdadensity dens2quantile
-#' @importFrom frechet CreateDensity SpheGeoDist SpheGeoGrad SpheGeoHess dist4cov kerFctn
+#' @importFrom frechet CreateDensity SpheGeoDist SpheGeoGrad SpheGeoHess dist4cov 
 #' @importFrom osqp osqp osqpSettings
 #' @importFrom pracma trapz
 #' @importFrom stats IQR approx bw.nrd0 cov density integrate pchisq sd
@@ -203,6 +208,12 @@ frechesTest <- function(Y_obj, X_scalar, c_val, metric_space_type,
     stop("Y_obj and X_scalar must have the same length. Y_obj has ", 
          length(Y_obj), " elements, X_scalar has ", length(X_scalar), " elements.")
   }
+  if (metric_space_type == "sphere" && isTRUE(frechet_optns$enforce_positive)) {
+    any_neg <- any(sapply(Y_obj, function(v) any(v < 0)))
+    if (any_neg)
+      warning("enforce_positive = TRUE but some input vectors have negative coordinates.")
+  }
+  
   
   if (length(Y_obj) == 0) {
     stop("Y_obj and X_scalar cannot be empty.")

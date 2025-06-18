@@ -2,154 +2,210 @@
 % Please edit documentation in R/frechesTest.R
 \name{frechesTest}
 \alias{frechesTest}
-\title{frechesTest}
+\title{Test for Jumps in Metric-Space Conditional Frechet Means}
 \usage{
 frechesTest(
   Y_obj,
   X_scalar,
   c_val,
   metric_space_type,
-  h_frechet,
+  h_frechet = "CV",
   kernel_frechet_char = "epan",
   frechet_optns = list(),
   h_fx = NULL,
-  kernel_fx_char = "gauss"
+  kernel_fx_char = "gauss",
+  cv_K_folds = 5,
+  cv_n_bw_candidates = 10,
+  undersmooth_factor = 0.9,
+  min_eff_points_cv_fold = 5,
+  min_bw_cv_factor = 0.001,
+  verbose = FALSE
 )
 }
 \arguments{
-\item{Y_obj}{A list of observed metric objects. Each element of the list
-corresponds to one observation. For `metric_space_type = "density"`,
-elements can be raw numeric vectors, histogram objects, or specific
-quantile lists (see Details). For `"covariance"` or `"correlation"`,
-elements should be matrices. For `"sphere"`, elements should be numeric
-unit vectors.}
+\item{Y_obj}{A list of observed metric objects. Each element corresponds to one
+observation. For \code{metric_space_type = "density"}, elements can be raw 
+numeric vectors, histogram objects, or specific quantile lists. For 
+\code{"covariance"} or \code{"correlation"}, elements should be matrices. 
+For \code{"sphere"}, elements should be numeric unit vectors. For 
+\code{"network"}, elements should be graph Laplacian matrices.}
 
-\item{X_scalar}{A numeric vector of scalar covariates, corresponding to `Y_obj`.}
+\item{X_scalar}{A numeric vector of scalar covariates, corresponding to \code{Y_obj}.
+Must have the same length as \code{Y_obj}.}
 
-\item{c_val}{The scalar cutoff point in `X_scalar` where the discontinuity is tested.}
+\item{c_val}{The scalar cutoff point in \code{X_scalar} where the discontinuity 
+is tested, splitting the data into \code{X_scalar >= c} and \code{X_scalar < c}.}
 
 \item{metric_space_type}{A character string specifying the type of metric space.
-Supported types: `"density"` (for 1D distributions, uses Wasserstein-2 distance),
-`"covariance"` (for SPD matrices), `"correlation"` (for correlation matrices),
-`"sphere"` (for unit vectors on a hypersphere).}
+Supported types: \code{"density"} (for probability distributions using 
+Wasserstein-2 distance), \code{"covariance"} (for SPD matrices), 
+\code{"correlation"} (for correlation matrices), \code{"sphere"} (for unit 
+vectors on hypersphere), \code{"network"} (for graph Laplacians).}
 
-\item{h_frechet}{Numeric scalar, the bandwidth for local Frechet regression.}
-
-\item{kernel_frechet_char}{Character string, the kernel function to use for local
-Frechet regression weights. See `frechet:::kerFctn` for choices
-(e.g., `"gauss"`, `"epan"`, `"rect"`, `"quar"`). Default is `"epan"`.}
-
-\item{frechet_optns}{A list of options specific to the `metric_space_type` for
-Frechet mean and distance calculations:
+\item{h_frechet}{Bandwidth for local Frechet regression. Can be:
 \itemize{
-  \item For `"density"`:
-    \itemize{
-      \item `qSup`: (Required) Numeric vector, the common probability grid (0 to 1) for quantile functions.
-      \item `den_opts_for_create_density`: (Optional) List of options for `frechet::CreateDensity`
-            (e.g., `kernelDen`, `bwDen`/`userBwMu`). If `NULL`, `CreateDensity` defaults are used.
-      \item `lower`, `upper`: (Optional) Scalars for lower/upper bounds of quantile function support
-            during projection in Frechet mean estimation.
-    }
-  \item For `"covariance"` or `"correlation"`:
-    \itemize{
-      \item `metric`: (Optional) Character, metric for distances (e.g., `"frobenius"`, `"power"`, `"log_cholesky"`, `"cholesky"`).
-            Defaults to `"frobenius"`.
-      \item `alpha`: (Optional) Numeric, power for the `"power"` metric. Defaults to 1.
-    }
-  \item For `"sphere"`: (Currently no specific options beyond `h_frechet` and `kernel_frechet_char`).
+  \item Numeric scalar: Fixed bandwidth value
+  \item \code{"CV"}: Use K-fold cross-validation for automatic selection
 }}
 
-\item{h_fx}{Numeric scalar, bandwidth for estimating the density of `X_scalar` at `c_val`, \eqn{f_X(c)}.
-If `NULL` (default), `stats::bw.nrd0(X_scalar)` is used.}
+\item{kernel_frechet_char}{Character string specifying the kernel function for 
+local Frechet regression weights. Options include \code{"gauss"}, \code{"epan"}, 
+\code{"rect"}, \code{"quar"}. Default is \code{"epan"}.}
 
-\item{kernel_fx_char}{Character string, kernel for \eqn{f_X(c)} estimation. Default is `"gauss"`.}
+\item{frechet_optns}{A list of options specific to the \code{metric_space_type}:
+\itemize{
+  \item For \code{"density"}:
+    \itemize{
+      \item \code{qSup}: (Required) Numeric vector spanning [0,1] for quantile grid
+      \item \code{den_opts_for_create_density}: Options for \code{frechet::CreateDensity}
+      \item \code{lower}, \code{upper}: Bounds for quantile function support
+      \item \code{osqp_model_for_density_proj}: Cached OSQP model for optimization
+    }
+  \item For \code{"covariance"} or \code{"correlation"}:
+    \itemize{
+      \item \code{metric}: Distance metric (\code{"frobenius"}, \code{"power"}, 
+            \code{"log_cholesky"}, \code{"cholesky"})
+      \item \code{alpha}: Power parameter for \code{"power"} metric
+    }
+  \item For \code{"network"}:
+    \itemize{
+      \item \code{network_directed}: Logical, whether graphs are directed. Default FALSE.
+      \item \code{W_laplacian_bound}: Upper bound for edge weights
+      \item \code{osqp_model_for_laplacian_proj}: Cached OSQP model
+    }
+   \item For \code{"sphere"}:
+   \itemize{
+   \item \code{enforce_positive}: Logical, whether to force Frechet mean into
+   positive orthant. Default FALSE. 
+   }
+   }}
+
+\item{h_fx}{Numeric scalar, bandwidth for estimating the density of \code{X_scalar} 
+at \code{c_val}. If \code{NULL}, uses \code{stats::bw.nrd0(X_scalar)}.}
+
+\item{kernel_fx_char}{Character string, kernel for density estimation of X. 
+Default is \code{"gauss"}.}
+
+\item{cv_K_folds}{Integer, number of folds for cross-validation when 
+\code{h_frechet = "CV"}. Default is 5.}
+
+\item{cv_n_bw_candidates}{Integer, number of bandwidth candidates to test 
+during cross-validation. Default is 10.}
+
+\item{undersmooth_factor}{Numeric, factor for undersmoothing the selected 
+bandwidth for variance estimation. Default is 0.9.}
+
+\item{min_eff_points_cv_fold}{Integer, minimum effective sample size required 
+in each CV fold. Default is 5.}
+
+\item{min_bw_cv_factor}{Numeric, minimum bandwidth as fraction of data range. 
+Default is 0.001.}
+
+\item{verbose}{Logical, whether to print progress messages. Default is \code{FALSE}.}
 }
 \value{
 A list containing:
-\item{Tn}{The value of the test statistic \eqn{T_n}.}
-\item{p_value}{The p-value of the test, based on a Chi-squared distribution with 1 degree of freedom.}
-\item{V_hat_plus}{Estimated conditional Frechet variance from the right of `c_val`.}
-\item{V_hat_minus}{Estimated conditional Frechet variance from the left of `c_val`.}
-\item{V_hat_pooled}{Estimated pooled conditional Frechet variance around `c_val`.}
-\item{sigma_V_sq_hat_plus}{Estimated variance of \eqn{d^2(Y, \hat{l}_{+, \oplus})} from the right.}
-\item{sigma_V_sq_hat_minus}{Estimated variance of \eqn{d^2(Y, \hat{l}_{-, \oplus})} from the left.}
-\item{f_X_hat_c}{Estimated density \eqn{\hat{f}_X(c)}.}
-\item{S_K}{The kernel constant \eqn{S_K}.}
-\item{F_n}{The component of \eqn{T_n} related to mean differences.}
-\item{U_n}{The component of \eqn{T_n} related to variance differences.}
-\item{l_hat_plus}{Estimated Frechet mean from the right.}
-\item{l_hat_minus}{Estimated Frechet mean from the left.}
-\item{l_hat_pooled}{Estimated pooled Frechet mean.}
-\item{kernel_constants}{A list of integrated kernel moments used for \eqn{S_K}.}
-\item{error}{A string containing an error message if estimation failed, otherwise NULL.}
+  \item{Tn}{The test statistic value}
+  \item{p_value}{P-value based on Chi-squared distribution with 1 df}
+  \item{V_hat_plus}{Estimated conditional Frechet variance from the right of \code{c_val}}
+  \item{V_hat_minus}{Estimated conditional Frechet variance from the left of \code{c_val}}
+  \item{V_hat_pooled}{Estimated pooled conditional Frechet variance around \code{c_val}}
+  \item{sigma_V_sq_hat_plus}{Estimated variance of squared distances from the right}
+  \item{sigma_V_sq_hat_minus}{Estimated variance of squared distances from the left}
+  \item{f_X_hat_c}{Estimated density of X at cutoff point}
+  \item{S_K}{Kernel constant for asymptotic distribution}
+  \item{lambda_hat}{Estimated mixing proportion}
+  \item{F_n}{Mean difference component of test statistic}
+  \item{U_n}{Variance difference component of test statistic}
+  \item{l_hat_plus}{Estimated Frechet mean from the right}
+  \item{l_hat_minus}{Estimated Frechet mean from the left}
+  \item{l_hat_pooled}{Estimated pooled Frechet mean}
+  \item{kernel_constants}{List of computed kernel moments}
+  \item{num_active_plus}{Number of observations with non-zero weights (right side)}
+  \item{num_active_minus}{Number of observations with non-zero weights (left side)}
+  \item{num_active_pooled}{Number of observations with non-zero pooled weights}
+  \item{h_mean_cv_selected}{Selected bandwidth (if CV was used)}
+  \item{h_variance_used}{Bandwidth used for variance estimation}
+  \item{D_n_U_denominator}{Denominator of U component}
+  \item{D_n_F_denominator}{Denominator of F component}
+  \item{error}{Error message if computation failed, otherwise NULL}
 }
 \description{
-Test for Jumps in Metric-Space Conditional Frechet Means
+Implements an ANOVA-style test for detecting discontinuities (jumps) in the 
+conditional Frechet mean of random objects valued in arbitrary metric spaces.
+The test is based on the methodology described in "A Test for Jumps in 
+Metric-Space Conditional Means" by David Van Dijcke.
 }
 \details{
-Implements the ANOVA-style test for discontinuity in conditional Frechet means
-based on the working paper "A Test for Jumps in Metric-Space Conditional Means"
-by David Van Dijcke.
+The test combines differences in estimated Frechet means and variances from both 
+sides of the cutoff. The test statistic follows a Chi-squared distribution with 
+1 degree of freedom under the null hypothesis of no jump.
 
-The test statistic is constructed as described in Section 4.2 of the paper
-"A Test for Jumps in Metric-Space Conditional Means" by David Van Dijcke.
-It combines differences in estimated Frechet means (via \eqn{F_n}) and
-Frechet variances (via \eqn{U_n}) from both sides of the cutoff `c_val`.
+For \code{metric_space_type = "density"}, observations can be:
+\itemize{
+  \item Numeric vectors (raw data)
+  \item Lists with \code{q} (quantile values), \code{qSup} (support), and \code{type="quantile"}
+  \item Histogram objects with \code{mids}, \code{counts}, \code{breaks}
+}
 
-For `metric_space_type = "density"`:
-Observations in `Y_obj` can be:
-1. Numeric vectors (raw data). `frechet::CreateDensity` will be used.
-2. Lists with `q` (quantile values) and `qSup` (support) and `type="quantile"`.
-3. Histogram objects (lists with `mids`, `counts`, `breaks`) compatible with `frechet::CreateDensity(histogram=...)`.
-`frechet_optns$qSup` is essential for defining the common grid for L2-Wasserstein computations.
+The \code{frechet_optns$qSup} parameter is essential for density space computations
+as it defines the common grid for L2-Wasserstein distance calculations.
 }
 \examples{
 \dontrun{
-# --- Example for Density Space (Wasserstein) ---
+# Example 1: Density space with jump in mean
 set.seed(123)
-n1 <- 50; n2 <- 50; n_total <- n1 + n2
-X_scalar <- c(runif(n1, 0, 0.5-0.01), runif(n2, 0.5+0.01, 1))
-Y_obj_density <- vector("list", n_total)
-for(i in 1:n_total) {
-  if (X_scalar[i] < 0.5) {
-    Y_obj_density[[i]] <- rnorm(100, mean = 0, sd = 1)
-  } else {
-    Y_obj_density[[i]] <- rnorm(100, mean = 0.5, sd = 1) # Jump in mean
-  }
-}
-frechet_options_density <- list(
-  qSup = seq(0.01, 0.99, length.out = 51), # Fewer points for faster example
-  den_opts_for_create_density = list(kernelDen = "gauss")
-)
-test_result_density <- FrechetJumpTest(
-  Y_obj = Y_obj_density, X_scalar = X_scalar, c_val = 0.5,
-  metric_space_type = "density",
-  h_frechet = 0.15, kernel_frechet_char = "epan",
-  frechet_optns = frechet_options_density,
-  h_fx = NULL, kernel_fx_char = "gauss"
-)
-print(test_result_density)
+n <- 100
+X <- runif(n)
+Y <- vector("list", n)
 
-# --- Example for Covariance Space (Frobenius) ---
-if (requireNamespace("MASS", quietly = TRUE)) {
-  set.seed(456)
-  p_cov <- 3 # Dimension of covariance matrices
-  Y_obj_cov <- vector("list", n_total)
-  true_mean_cov1 <- diag(p_cov)
-  true_mean_cov2 <- diag(p_cov) * 2.0 # Jump in scale
-  for(i in 1:n_total) {
-    base_cov <- if (X_scalar[i] < 0.5) true_mean_cov1 else true_mean_cov2
-    sample_data <- MASS::mvrnorm(30, mu = rep(0, p_cov), Sigma = base_cov)
-    Y_obj_cov[[i]] <- stats::cov(sample_data)
+for(i in 1:n) {
+  if (X[i] < 0.5) {
+    Y[[i]] <- rnorm(50, mean = 0, sd = 1)
+  } else {
+    Y[[i]] <- rnorm(50, mean = 2, sd = 1)  # Jump in mean
   }
-  frechet_options_cov <- list(metric = "frobenius")
-  test_result_cov <- FrechetJumpTest(
-    Y_obj = Y_obj_cov, X_scalar = X_scalar, c_val = 0.5,
+}
+
+result_density <- frechesTest(
+  Y_obj = Y,
+  X_scalar = X,
+  c_val = 0.5,
+  metric_space_type = "density",
+  h_frechet = "CV",
+  frechet_optns = list(qSup = seq(0.01, 0.99, length.out = 99))
+)
+
+print(paste("P-value:", result_density$p_value))
+
+# Example 2: Covariance space
+if (requireNamespace("MASS", quietly = TRUE)) {
+  Y_cov <- vector("list", n)
+  for(i in 1:n) {
+    if (X[i] < 0.5) {
+      Sigma <- diag(3)
+    } else {
+      Sigma <- diag(c(2, 2, 2))  # Jump in scale
+    }
+    data <- MASS::mvrnorm(30, mu = rep(0, 3), Sigma = Sigma)
+    Y_cov[[i]] <- cov(data)
+  }
+  
+  result_cov <- frechesTest(
+    Y_obj = Y_cov,
+    X_scalar = X,
+    c_val = 0.5,
     metric_space_type = "covariance",
-    h_frechet = 0.15, kernel_frechet_char = "epan",
-    frechet_optns = frechet_options_cov
+    h_frechet = 0.2,
+    frechet_optns = list(metric = "frobenius")
   )
-  print(test_result_cov)
+  
+  print(paste("P-value:", result_cov$p_value))
 }
 }
+
+}
+\references{
+Van Dijcke, D. (2023). "A Test for Jumps in Metric-Space Conditional Means." 
+Working Paper, University of Michigan.
 }

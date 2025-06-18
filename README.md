@@ -1,4 +1,4 @@
-# frechesTest
+# frechesTest <img src="man/figures/logo.png" align="right" height="120" alt="" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/dvdijcke/frechesTest/workflows/R-CMD-check/badge.svg)](https://github.com/dvdijcke/frechesTest/actions)
